@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2020 Graylog, Inc.
  *
- * This program is free software: you can redistribute it and/or modify
+ 
  * it under the terms of the Server Side Public License, version 1,
  * as published by MongoDB, Inc.
  *
@@ -32,7 +32,7 @@ public class MongoDbConfiguration {
     private int threadsAllowedToBlockMultiplier = 5;
 
     @Parameter(value = "mongodb_uri", required = true, validator = StringNotBlankValidator.class)
-    private String uri = "mongodb://localhost/graylog";
+    private String uri = "mongodb://localhost/alertmanager";
 
 
     public int getMaxConnections() {

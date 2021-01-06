@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package org.graylog.plugins.netflow.v9;
+package com.synectiks.process.common.plugins.netflow.v9;
 
 // to regenerate:
 // install protobuf compiler (this was generated with 3.0.0)

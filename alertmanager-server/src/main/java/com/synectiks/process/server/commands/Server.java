@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2020 Graylog, Inc.
  *
- * This program is free software: you can redistribute it and/or modify
+ 
  * it under the terms of the Server Side Public License, version 1,
  * as published by MongoDB, Inc.
  *
@@ -98,7 +98,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.synectiks.process.server.audit.AuditEventTypes.NODE_SHUTDOWN_INITIATE;
 
-@Command(name = "server", description = "Start the Graylog server")
+@Command(name = "server", description = "Start the AlertManager server")
 public class Server extends ServerBootstrap {
     private static final Logger LOG = LoggerFactory.getLogger(Server.class);
 

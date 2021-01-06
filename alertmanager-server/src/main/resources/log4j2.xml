@@ -10,7 +10,7 @@
     </Appenders>
     <Loggers>
         <!-- Application Loggers -->
-        <Logger name="org.alertmanager2" level="info"/>
+        <Logger name="com.synectiks.process.server" level="debug"/>
         <Logger name="com.github.joschi.jadconfig" level="warn"/>
         <!-- Prevent DEBUG message about Lucene Expressions not found. -->
         <Logger name="org.elasticsearch.script" level="warn"/>

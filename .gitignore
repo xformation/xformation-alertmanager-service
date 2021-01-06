@@ -21,6 +21,9 @@ local.properties
 .loadpath
 .factorypath
 /src/main/resources/rebel.xml
+alertmanager-server/target/
+distribution/target/
+elasticsearch6/target/
 
 # External tool builders
 .externalToolBuilders/**

@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2020 Graylog, Inc.
  *
- * This program is free software: you can redistribute it and/or modify
+ 
  * it under the terms of the Server Side Public License, version 1,
  * as published by MongoDB, Inc.
  *
@@ -45,7 +45,7 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 
 public class VersionCheckThread extends Periodical {
     private static final Logger LOG = LoggerFactory.getLogger(VersionCheckThread.class);
-    private static final String USER_AGENT = String.format(Locale.ENGLISH, "graylog2-server (%s, %s, %s, %s)",
+    private static final String USER_AGENT = String.format(Locale.ENGLISH, "alertmanager-server (%s, %s, %s, %s)",
             System.getProperty("java.vendor"), System.getProperty("java.version"),
             System.getProperty("os.name"), System.getProperty("os.version"));
 
