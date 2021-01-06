@@ -264,8 +264,8 @@ public class JerseyService extends AbstractIdleService {
                         NodeIdResponseFilter.class,
                         RequestIdFilter.class,
                         XHRFilter.class,
-                        NotAuthorizedResponseFilter.class,
-                        WebAppNotFoundResponseFilter.class)
+                        NotAuthorizedResponseFilter.class)//,
+                        //WebAppNotFoundResponseFilter.class)
                 .register(new ContextResolver<ObjectMapper>() {
                     @Override
                     public ObjectMapper getContext(Class<?> type) {
