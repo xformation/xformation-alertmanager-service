@@ -67,8 +67,8 @@ public abstract class ServerBootstrap extends CmdLineTool {
         this.commandName = commandName;
     }
 
-    @Option(name = {"-p", "--pidfile"}, description = "File containing the PID of Graylog")
-    private String pidFile = TMPDIR + FILE_SEPARATOR + "graylog.pid";
+    @Option(name = {"-p", "--pidfile"}, description = "File containing the PID of AlertManager")
+    private String pidFile = TMPDIR + FILE_SEPARATOR + "alertmanager.pid";
 
     @Option(name = {"-np", "--no-pid-file"}, description = "Do not write a PID file (overrides -p/--pidfile)")
     private boolean noPidFile = false;
@@ -120,7 +120,7 @@ public abstract class ServerBootstrap extends CmdLineTool {
 
         final OS os = OS.getOs();
 
-        LOG.info("Graylog {} {} starting up", commandName, version);
+        LOG.info("AlertManager {} {} starting up", commandName, version);
         LOG.info("JRE: {}", systemInformation);
         LOG.info("Deployment: {}", configuration.getInstallationSource());
         LOG.info("OS: {}", os.getPlatformName());
@@ -172,7 +172,7 @@ public abstract class ServerBootstrap extends CmdLineTool {
         LOG.info("Services started, startup times in ms: {}", serviceManager.startupTimes());
 
         activityWriter.write(new Activity("Started up.", Main.class));
-        LOG.info("Graylog " + commandName + " up and running.");
+        LOG.info("AlertManager " + commandName + " up and running.");
         auditEventSender.success(AuditActor.system(nodeId), NODE_STARTUP_COMPLETE, auditEventContext);
 
         // Block forever.
