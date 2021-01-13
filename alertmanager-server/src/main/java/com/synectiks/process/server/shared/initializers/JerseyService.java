@@ -200,7 +200,8 @@ public class JerseyService extends AbstractIdleService {
                 configuration.isHttpEnableGzip(),
                 configuration.isHttpEnableCors(),
                 pluginResources,
-                resourcePackages.toArray(new String[0]));
+                resourcePackages.toArray(new String[0]),
+                configuration.isEnableWebFramework());
 
         apiHttpServer.start();
 
@@ -235,7 +236,8 @@ public class JerseyService extends AbstractIdleService {
 
     private ResourceConfig buildResourceConfig(final boolean enableCors,
                                                final Set<Resource> additionalResources,
-                                               final String[] controllerPackages) {
+                                               final String[] controllerPackages,
+                                               boolean enableWebFramework) {
         final Map<String, String> packagePrefixes = new HashMap<>();
         for (String resourcePackage : controllerPackages) {
             packagePrefixes.put(resourcePackage, HttpConfiguration.PATH_API);
@@ -282,6 +284,11 @@ public class JerseyService extends AbstractIdleService {
         containerResponseFilters.forEach(rc::registerClasses);
         additionalComponents.forEach(rc::registerClasses);
 
+        if (enableWebFramework) {
+            LOG.info("Enabling WEB framework");
+            rc.registerClasses(WebAppNotFoundResponseFilter.class);
+        }
+        
         if (enableCors) {
             LOG.info("Enabling CORS for HTTP endpoint");
             rc.registerClasses(CORSFilter.class);
@@ -302,12 +309,14 @@ public class JerseyService extends AbstractIdleService {
                              boolean enableGzip,
                              boolean enableCors,
                              Set<Resource> additionalResources,
-                             String[] controllerPackages)
+                             String[] controllerPackages,
+                             boolean enableWebFramework)
             throws GeneralSecurityException, IOException {
         final ResourceConfig resourceConfig = buildResourceConfig(
                 enableCors,
                 additionalResources,
-                controllerPackages
+                controllerPackages,
+                enableWebFramework
         );
 
         final HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(

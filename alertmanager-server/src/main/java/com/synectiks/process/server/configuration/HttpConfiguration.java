@@ -83,7 +83,10 @@ public class HttpConfiguration {
     @Parameter(value = "http_external_uri")
     private URI httpExternalUri;
 
-    public HostAndPort getHttpBindAddress() {
+    @Parameter(value = "enable_web_framework")
+    private boolean enableWebFramework = false;
+    
+	public HostAndPort getHttpBindAddress() {
         return httpBindAddress
                 .requireBracketsForIPv6()
                 .withDefaultPort(GRAYLOG_DEFAULT_PORT);
@@ -261,4 +264,9 @@ public class HttpConfiguration {
     private boolean isRegularFileAndReadable(Path path) {
         return path != null && Files.isRegularFile(path) && Files.isReadable(path);
     }
+    
+    public boolean isEnableWebFramework() {
+		return enableWebFramework;
+	}
+    
 }
