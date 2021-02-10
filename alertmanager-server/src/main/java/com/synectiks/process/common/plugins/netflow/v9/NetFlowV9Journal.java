@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.netflow.v9;
 
 import javax.annotation.Generated;
@@ -31,7 +17,7 @@ public final class NetFlowV9Journal {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   public interface RawNetflowV9OrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.synectiks.process.common.plugins.netflow.v9.RawNetflowV9)
+      // @@protoc_insertion_point(interface_extends:org.graylog.plugins.netflow.v9.RawNetflowV9)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -174,11 +160,11 @@ public final class NetFlowV9Journal {
     com.google.protobuf.ByteString getPackets(int index);
   }
   /**
-   * Protobuf type {@code com.synectiks.process.common.plugins.netflow.v9.RawNetflowV9}
+   * Protobuf type {@code org.graylog.plugins.netflow.v9.RawNetflowV9}
    */
   public  static final class RawNetflowV9 extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:com.synectiks.process.common.plugins.netflow.v9.RawNetflowV9)
+      // @@protoc_insertion_point(message_implements:org.graylog.plugins.netflow.v9.RawNetflowV9)
       RawNetflowV9OrBuilder {
     // Use RawNetflowV9.newBuilder() to construct.
     private RawNetflowV9(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
@@ -711,11 +697,11 @@ public final class NetFlowV9Journal {
       return builder;
     }
     /**
-     * Protobuf type {@code com.synectiks.process.common.plugins.netflow.v9.RawNetflowV9}
+     * Protobuf type {@code org.graylog.plugins.netflow.v9.RawNetflowV9}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.synectiks.process.common.plugins.netflow.v9.RawNetflowV9)
+        // @@protoc_insertion_point(builder_implements:org.graylog.plugins.netflow.v9.RawNetflowV9)
         com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Journal.RawNetflowV9OrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -755,7 +741,7 @@ public final class NetFlowV9Journal {
                 com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Journal.RawNetflowV9.class, com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Journal.RawNetflowV9.Builder.class);
       }
 
-      // Construct using com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Journal.RawNetflowV9.newBuilder()
+      // Construct using org.graylog.plugins.netflow.v9.NetFlowV9Journal.RawNetflowV9.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1309,10 +1295,10 @@ public final class NetFlowV9Journal {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:com.synectiks.process.common.plugins.netflow.v9.RawNetflowV9)
+      // @@protoc_insertion_point(builder_scope:org.graylog.plugins.netflow.v9.RawNetflowV9)
     }
 
-    // @@protoc_insertion_point(class_scope:com.synectiks.process.common.plugins.netflow.v9.RawNetflowV9)
+    // @@protoc_insertion_point(class_scope:org.graylog.plugins.netflow.v9.RawNetflowV9)
     private static final com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Journal.RawNetflowV9 DEFAULT_INSTANCE;
     static {
       DEFAULT_INSTANCE = new com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Journal.RawNetflowV9();

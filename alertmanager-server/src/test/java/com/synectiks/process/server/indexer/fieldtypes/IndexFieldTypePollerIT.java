@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.fieldtypes;
 
 import com.codahale.metrics.MetricRegistry;
@@ -24,6 +10,10 @@ import com.synectiks.process.server.audit.NullAuditEventSender;
 import com.synectiks.process.server.indexer.IndexMappingFactory;
 import com.synectiks.process.server.indexer.TestIndexSet;
 import com.synectiks.process.server.indexer.cluster.Node;
+import com.synectiks.process.server.indexer.fieldtypes.FieldTypeDTO;
+import com.synectiks.process.server.indexer.fieldtypes.IndexFieldTypePoller;
+import com.synectiks.process.server.indexer.fieldtypes.IndexFieldTypePollerAdapter;
+import com.synectiks.process.server.indexer.fieldtypes.IndexFieldTypesDTO;
 import com.synectiks.process.server.indexer.indexset.IndexSetConfig;
 import com.synectiks.process.server.indexer.indices.Indices;
 import com.synectiks.process.server.indexer.indices.IndicesAdapter;
@@ -32,6 +22,7 @@ import com.synectiks.process.server.indexer.retention.strategies.DeletionRetenti
 import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategy;
 import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategyConfig;
 import com.synectiks.process.server.plugin.system.NodeId;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -114,9 +105,9 @@ public abstract class IndexFieldTypePollerIT extends ElasticsearchBaseTest {
                 FieldTypeDTO.create("http_status", "keyword"),
                 FieldTypeDTO.create("http_response_time", "long"),
                 FieldTypeDTO.create("timestamp", "date"),
-                FieldTypeDTO.create("gl2_receive_timestamp", "date"),
-                FieldTypeDTO.create("gl2_processing_timestamp", "date"),
-                FieldTypeDTO.create("gl2_accounted_message_size", "long"),
+                FieldTypeDTO.create("xfperf_receive_timestamp", "date"),
+                FieldTypeDTO.create("xfperf_processing_timestamp", "date"),
+                FieldTypeDTO.create("xfperf_accounted_message_size", "long"),
                 FieldTypeDTO.create("streams", "keyword")
         );
     }
@@ -138,9 +129,9 @@ public abstract class IndexFieldTypePollerIT extends ElasticsearchBaseTest {
                 FieldTypeDTO.create("http_status", "keyword"),
                 FieldTypeDTO.create("http_response_time", "long"),
                 FieldTypeDTO.create("timestamp", "date"),
-                FieldTypeDTO.create("gl2_receive_timestamp", "date"),
-                FieldTypeDTO.create("gl2_processing_timestamp", "date"),
-                FieldTypeDTO.create("gl2_accounted_message_size", "long"),
+                FieldTypeDTO.create("xfperf_receive_timestamp", "date"),
+                FieldTypeDTO.create("xfperf_processing_timestamp", "date"),
+                FieldTypeDTO.create("xfperf_accounted_message_size", "long"),
                 FieldTypeDTO.create("streams", "keyword")
         );
     }

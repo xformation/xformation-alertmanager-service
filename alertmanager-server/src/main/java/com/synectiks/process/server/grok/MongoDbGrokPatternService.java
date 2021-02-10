@@ -1,23 +1,30 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.grok;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.mongodb.client.model.IndexOptions;
+import com.mongodb.client.model.Indexes;
+import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
+import com.synectiks.process.server.database.MongoConnection;
+import com.synectiks.process.server.database.NotFoundException;
+import com.synectiks.process.server.events.ClusterEventBus;
+import com.synectiks.process.server.plugin.database.ValidationException;
 
+import com.synectiks.process.server.grok.krakens.Grok;
+import com.synectiks.process.server.grok.krakens.GrokCompiler;
+import com.synectiks.process.server.grok.krakens.exception.GrokException;
+import org.bson.types.ObjectId;
+import org.mongojack.DBCursor;
+import org.mongojack.DBQuery;
+import org.mongojack.JacksonDBCollection;
+import org.mongojack.WriteResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -27,29 +34,7 @@ import java.util.Set;
 import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-
-import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
-import com.synectiks.process.server.database.MongoConnection;
-import com.synectiks.process.server.database.NotFoundException;
-import com.synectiks.process.server.events.ClusterEventBus;
-import com.synectiks.process.server.grok.krakens.Grok;
-import com.synectiks.process.server.grok.krakens.GrokCompiler;
-import com.synectiks.process.server.grok.krakens.exception.GrokException;
-import com.synectiks.process.server.plugin.database.ValidationException;
-import org.bson.types.ObjectId;
-import org.mongojack.DBCursor;
-import org.mongojack.DBQuery;
-import org.mongojack.JacksonDBCollection;
-import org.mongojack.WriteResult;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSet;
-import com.mongodb.client.model.IndexOptions;
-import com.mongodb.client.model.Indexes;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MongoDbGrokPatternService implements GrokPatternService {
     public static final String COLLECTION_NAME = "grok_patterns";
@@ -72,8 +57,7 @@ public class MongoDbGrokPatternService implements GrokPatternService {
                 mapper.get());
         this.clusterBus = clusterBus;
 
-        // TODO: Uncomment once there are no Graylog clusters with duplicate Grok patterns out there,
-        //       probably around Graylog 4.0.0.
+        // TODO: Uncomment once there are no perfmanager clusters with duplicate Grok patterns out there,
         // createIndex(mongoConnection);
     }
 

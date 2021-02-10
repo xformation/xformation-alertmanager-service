@@ -1,24 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.search;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableSet;
-import org.apache.shiro.subject.Subject;
 import com.synectiks.process.common.events.event.EventDto;
 import com.synectiks.process.common.events.processor.DBEventDefinitionService;
 import com.synectiks.process.common.events.processor.EventDefinitionDto;
@@ -28,7 +13,13 @@ import com.synectiks.process.server.plugin.database.Persisted;
 import com.synectiks.process.server.shared.security.RestPermissions;
 import com.synectiks.process.server.streams.StreamService;
 
+import org.apache.shiro.subject.Subject;
+
 import javax.inject.Inject;
+
+import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_EVENTS_STREAM_ID;
+import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_SYSTEM_EVENTS_STREAM_ID;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -37,9 +28,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_EVENTS_STREAM_ID;
-import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_SYSTEM_EVENTS_STREAM_ID;
 
 public class EventsSearchService {
     private final MoreSearch moreSearch;

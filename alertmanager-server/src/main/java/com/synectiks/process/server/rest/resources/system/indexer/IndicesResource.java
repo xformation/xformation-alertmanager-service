@@ -1,30 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system.indexer;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.ImmutableMap;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.synectiks.process.server.audit.AuditEventTypes;
 import com.synectiks.process.server.audit.jersey.AuditEvent;
 import com.synectiks.process.server.audit.jersey.NoAuditEvent;
@@ -42,6 +21,14 @@ import com.synectiks.process.server.rest.models.system.indexer.responses.OpenInd
 import com.synectiks.process.server.rest.models.system.indexer.responses.ShardRouting;
 import com.synectiks.process.server.shared.rest.resources.RestResource;
 import com.synectiks.process.server.shared.security.RestPermissions;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,7 +77,7 @@ public class IndicesResource extends RestResource {
         checkPermission(RestPermissions.INDICES_READ, index);
 
         if (!indexSetRegistry.isManagedIndex(index)) {
-            final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
+            final String msg = "Index [" + index + "] doesn't look like an index managed by perfmanager.";
             LOG.info(msg);
             throw new NotFoundException(msg);
         }
@@ -122,7 +109,7 @@ public class IndicesResource extends RestResource {
     @GET
     @Path("/open")
     @Timed
-    @ApiOperation(value = "Get information of all open indices managed by Graylog and their shards.")
+    @ApiOperation(value = "Get information of all open indices managed by perfmanager and their shards.")
     @RequiresPermissions(RestPermissions.INDICES_READ)
     @Produces(MediaType.APPLICATION_JSON)
     public OpenIndicesInfo open() {
@@ -187,7 +174,7 @@ public class IndicesResource extends RestResource {
         checkPermission(RestPermissions.INDICES_CHANGESTATE, index);
 
         if (!indexSetRegistry.isManagedIndex(index)) {
-            final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
+            final String msg = "Index [" + index + "] doesn't look like an index managed by perfmanager.";
             LOG.info(msg);
             throw new NotFoundException(msg);
         }
@@ -208,7 +195,7 @@ public class IndicesResource extends RestResource {
         checkPermission(RestPermissions.INDICES_CHANGESTATE, index);
 
         if (!indexSetRegistry.isManagedIndex(index)) {
-            final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
+            final String msg = "Index [" + index + "] doesn't look like an index managed by perfmanager.";
             LOG.info(msg);
             throw new NotFoundException(msg);
         }
@@ -233,7 +220,7 @@ public class IndicesResource extends RestResource {
         checkPermission(RestPermissions.INDICES_DELETE, index);
 
         if (!indexSetRegistry.isManagedIndex(index)) {
-            final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
+            final String msg = "Index [" + index + "] doesn't look like an index managed by perfmanager.";
             LOG.info(msg);
             throw new NotFoundException(msg);
         }
@@ -259,7 +246,7 @@ public class IndicesResource extends RestResource {
     @GET
     @Path("/{indexSetId}/open")
     @Timed
-    @ApiOperation(value = "Get information of all open indices managed by Graylog and their shards.")
+    @ApiOperation(value = "Get information of all open indices managed by perfmanager and their shards.")
     @RequiresPermissions(RestPermissions.INDICES_READ)
     @Produces(MediaType.APPLICATION_JSON)
     public OpenIndicesInfo indexSetOpen(@ApiParam(name = "indexSetId") @PathParam("indexSetId") String indexSetId) {

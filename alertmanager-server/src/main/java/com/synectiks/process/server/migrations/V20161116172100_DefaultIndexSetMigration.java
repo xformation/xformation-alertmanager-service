@@ -1,20 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.synectiks.process.server.configuration.ElasticsearchConfiguration;
 import com.synectiks.process.server.indexer.indexset.DefaultIndexSetConfig;
@@ -27,8 +16,6 @@ import com.synectiks.process.server.plugin.indexer.retention.RetentionStrategy;
 import com.synectiks.process.server.plugin.indexer.retention.RetentionStrategyConfig;
 import com.synectiks.process.server.plugin.indexer.rotation.RotationStrategy;
 import com.synectiks.process.server.plugin.indexer.rotation.RotationStrategyConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -82,7 +69,7 @@ public class V20161116172100_DefaultIndexSetMigration extends Migration {
 
         final IndexSetConfig config = IndexSetConfig.builder()
                 .title("Default index set")
-                .description("The Graylog default index set")
+                .description("The perfmanager default index set")
                 .indexPrefix(elasticsearchConfiguration.getIndexPrefix())
                 .shards(elasticsearchConfiguration.getShards())
                 .replicas(elasticsearchConfiguration.getReplicas())

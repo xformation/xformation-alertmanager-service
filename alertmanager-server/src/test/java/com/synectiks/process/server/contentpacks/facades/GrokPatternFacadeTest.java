@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.facades;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -22,6 +8,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.graph.Graph;
 import com.synectiks.process.server.contentpacks.EntityDescriptorIds;
 import com.synectiks.process.server.contentpacks.exceptions.DivergingEntityConfigurationException;
+import com.synectiks.process.server.contentpacks.facades.GrokPatternFacade;
 import com.synectiks.process.server.contentpacks.model.ModelId;
 import com.synectiks.process.server.contentpacks.model.ModelTypes;
 import com.synectiks.process.server.contentpacks.model.entities.Entity;
@@ -39,6 +26,7 @@ import com.synectiks.process.server.grok.InMemoryGrokPatternService;
 import com.synectiks.process.server.plugin.database.ValidationException;
 import com.synectiks.process.server.shared.SuppressForbidden;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+
 import org.junit.Before;
 import org.junit.Test;
 

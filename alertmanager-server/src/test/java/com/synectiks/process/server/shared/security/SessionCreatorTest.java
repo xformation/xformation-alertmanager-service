@@ -1,22 +1,17 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.security;
 
 import com.google.common.collect.ImmutableList;
+import com.synectiks.process.server.audit.AuditActor;
+import com.synectiks.process.server.audit.AuditEventSender;
+import com.synectiks.process.server.plugin.database.users.User;
+import com.synectiks.process.server.shared.security.ActorAwareUsernamePasswordToken;
+import com.synectiks.process.server.shared.security.AuthenticationServiceUnavailableException;
+import com.synectiks.process.server.shared.security.SessionCreator;
+import com.synectiks.process.server.shared.security.ThrowingFirstSuccessfulStrategy;
+import com.synectiks.process.server.shared.users.UserService;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -32,10 +27,6 @@ import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.session.mgt.SimpleSession;
 import org.apache.shiro.util.LifecycleUtils;
 import org.apache.shiro.util.ThreadContext;
-import com.synectiks.process.server.audit.AuditActor;
-import com.synectiks.process.server.audit.AuditEventSender;
-import com.synectiks.process.server.plugin.database.users.User;
-import com.synectiks.process.server.shared.users.UserService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

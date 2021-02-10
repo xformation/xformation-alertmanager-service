@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.rest;
 
 import com.google.common.collect.ImmutableList;
@@ -23,7 +9,11 @@ import com.synectiks.process.common.plugins.pipelineprocessor.ast.Stage;
 import com.synectiks.process.common.plugins.pipelineprocessor.db.PipelineService;
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.ParseException;
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.PipelineRuleParser;
+import com.synectiks.process.common.plugins.pipelineprocessor.rest.PipelineResource;
+import com.synectiks.process.common.plugins.pipelineprocessor.rest.PipelineSource;
+import com.synectiks.process.common.plugins.pipelineprocessor.rest.StageSource;
 import com.synectiks.process.server.shared.bindings.GuiceInjectorHolder;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -65,10 +55,10 @@ public class PipelineResourceTest {
     @Test
     public void shouldParseAPipelineSuccessfully() {
         final PipelineSource pipelineSource = PipelineSource.builder()
-                .source("pipeline \"Graylog Git Pipline\"\nstage 0 match either\n" +
+                .source("pipeline \"perfmanager Git Pipline\"\nstage 0 match either\n" +
                         "rule \"geo loc of dev\"\nrule \"open source dev\"\nend")
                 .stages(Collections.emptyList())
-                .title("Graylog Git Pipeline")
+                .title("perfmanager Git Pipeline")
                 .build();
         final SortedSet stages = ImmutableSortedSet.of(
                 Stage.builder()
@@ -83,7 +73,7 @@ public class PipelineResourceTest {
                 ))
         );
         final Pipeline pipeline = Pipeline.builder()
-                .name("Graylog Git Pipeline")
+                .name("perfmanager Git Pipeline")
                 .stages(stages)
                 .build();
 
@@ -101,7 +91,7 @@ public class PipelineResourceTest {
         final PipelineSource pipelineSource = PipelineSource.builder()
                 .source("foo")
                 .stages(Collections.emptyList())
-                .title("Graylog Git Pipeline")
+                .title("perfmanager Git Pipeline")
                 .build();
 
         when(pipelineRuleParser.parsePipeline(pipelineSource.id(), pipelineSource.source()))

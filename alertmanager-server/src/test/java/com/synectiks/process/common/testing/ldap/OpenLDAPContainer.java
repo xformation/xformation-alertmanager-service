@@ -1,28 +1,15 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.testing.ldap;
 
-import com.synectiks.process.common.security.authservice.ldap.LDAPConnectorConfig;
-import com.synectiks.process.common.security.authservice.ldap.LDAPTransportSecurity;
-import com.synectiks.process.server.security.encryption.EncryptedValueService;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.containers.wait.strategy.Wait;
+
+import com.synectiks.process.common.security.authservice.ldap.LDAPConnectorConfig;
+import com.synectiks.process.common.security.authservice.ldap.LDAPTransportSecurity;
+import com.synectiks.process.server.security.encryption.EncryptedValueService;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -52,7 +39,10 @@ public class OpenLDAPContainer extends GenericContainer<OpenLDAPContainer> {
                 .withEnv("LDAP_TLS_KEY_FILENAME", "server-key.pem")
                 .withEnv("LDAP_TLS_CA_CRT_FILENAME", "CA-cert.pem")
                 .withEnv("LDAP_TLS_DH_PARAM_FILENAME", "dhparam.pem")
-                .withFileSystemBind(LDAPTestUtils.testTLSCertsPath(), CONTAINER_CERTS_PATH, BindMode.READ_ONLY);
+                .withFileSystemBind(LDAPTestUtils.testTLSCertsPath("server-cert.pem"), CONTAINER_CERTS_PATH + "/server-cert.pem", BindMode.READ_ONLY)
+                .withFileSystemBind(LDAPTestUtils.testTLSCertsPath("server-key.pem"), CONTAINER_CERTS_PATH + "/server-key.pem", BindMode.READ_ONLY)
+                .withFileSystemBind(LDAPTestUtils.testTLSCertsPath("CA-cert.pem"), CONTAINER_CERTS_PATH + "/CA-cert.pem", BindMode.READ_ONLY)
+                .withFileSystemBind(LDAPTestUtils.testTLSCertsPath("dhparam.pem"), CONTAINER_CERTS_PATH + "/dhparam.pem", BindMode.READ_ONLY);
     }
 
     public OpenLDAPContainer() {

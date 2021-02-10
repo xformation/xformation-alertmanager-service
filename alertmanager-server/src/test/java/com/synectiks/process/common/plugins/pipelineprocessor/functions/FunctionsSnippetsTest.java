@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.functions;
 
 import com.codahale.metrics.MetricRegistry;
@@ -28,6 +14,9 @@ import com.synectiks.process.common.plugins.pipelineprocessor.BaseParserTest;
 import com.synectiks.process.common.plugins.pipelineprocessor.EvaluationContext;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.Rule;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.functions.Function;
+import com.synectiks.process.common.plugins.pipelineprocessor.functions.GrokExists;
+import com.synectiks.process.common.plugins.pipelineprocessor.functions.IsNotNull;
+import com.synectiks.process.common.plugins.pipelineprocessor.functions.IsNull;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.conversion.BooleanConversion;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.conversion.DoubleConversion;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.conversion.IsBoolean;
@@ -144,6 +133,7 @@ import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.shared.SuppressForbidden;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
 import com.synectiks.process.server.streams.StreamService;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.Duration;
@@ -707,7 +697,7 @@ public class FunctionsSnippetsTest extends BaseParserTest {
         assertThat(clonedMessage.getSource()).isEqualTo(origMessage.getSource());
         assertThat(clonedMessage.getStreams()).isEqualTo(origMessage.getStreams());
         assertThat(clonedMessage.getTimestamp()).isNotNull();
-        assertThat(clonedMessage.getField("gl2_original_timestamp")).isEqualTo(origMessage.getField("timestamp"));
+        assertThat(clonedMessage.getField("xfperf_original_timestamp")).isEqualTo(origMessage.getField("timestamp"));
     }
 
     @Test
@@ -739,12 +729,12 @@ public class FunctionsSnippetsTest extends BaseParserTest {
         assertThat(message.getField("host")).isEqualTo("some.host.with.lots.of.subdomains.com");
         assertThat(message.getField("port")).isEqualTo(9999);
         assertThat(message.getField("file")).isEqualTo(
-                "/path1/path2/three?q1=something&with_spaces=hello%20graylog&equal=can=containanotherone");
+                "/path1/path2/three?q1=something&with_spaces=hello%20perfmanager&equal=can=containanotherone");
         assertThat(message.getField("fragment")).isEqualTo("anchorstuff");
         assertThat(message.getField("query")).isEqualTo(
-                "q1=something&with_spaces=hello%20graylog&equal=can=containanotherone");
+                "q1=something&with_spaces=hello%20perfmanager&equal=can=containanotherone");
         assertThat(message.getField("q1")).isEqualTo("something");
-        assertThat(message.getField("with_spaces")).isEqualTo("hello graylog");
+        assertThat(message.getField("with_spaces")).isEqualTo("hello perfmanager");
         assertThat(message.getField("equal")).isEqualTo("can=containanotherone");
         assertThat(message.getField("authority")).isEqualTo("admin:s3cr31@some.host.with.lots.of.subdomains.com:9999");
     }
@@ -804,7 +794,7 @@ public class FunctionsSnippetsTest extends BaseParserTest {
     @Test
     public void ipMatchingIssue28() {
         final Rule rule = parser.parseRule(ruleForTest(), false);
-        final Message in = new Message("some message", "somehost.graylog.org", Tools.nowUTC());
+        final Message in = new Message("some message", "somehost.perfmanager.org", Tools.nowUTC());
         evaluateRule(rule, in);
 
         assertThat(actionsTriggered.get()).isFalse();
@@ -814,7 +804,7 @@ public class FunctionsSnippetsTest extends BaseParserTest {
     public void fieldRenaming() {
         final Rule rule = parser.parseRule(ruleForTest(), false);
 
-        final Message in = new Message("some message", "somehost.graylog.org", Tools.nowUTC());
+        final Message in = new Message("some message", "somehost.perfmanager.org", Tools.nowUTC());
         in.addField("field_a", "fieldAContent");
         in.addField("field_b", "not deleted");
 
@@ -1067,7 +1057,7 @@ public class FunctionsSnippetsTest extends BaseParserTest {
         final Rule rule = parser.parseRule(ruleForTest(), true);
         evaluateRule(rule);
 
-        assertThat(metricRegistry.getCounters().get("org.graylog.rulemetrics.foo").getCount()).isEqualTo(42);
+        assertThat(metricRegistry.getCounters().get("org.perfmanager.rulemetrics.foo").getCount()).isEqualTo(42);
     }
 
     @Test

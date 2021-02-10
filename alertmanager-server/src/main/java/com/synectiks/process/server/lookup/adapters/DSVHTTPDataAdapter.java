@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.lookup.adapters;
 
 import com.codahale.metrics.MetricRegistry;
@@ -26,8 +12,6 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.primitives.Ints;
 import com.google.inject.assistedinject.Assisted;
-import okhttp3.HttpUrl;
-import org.graylog.autovalue.WithBeanGetter;
 import com.synectiks.process.server.lookup.adapters.dsvhttp.DSVParser;
 import com.synectiks.process.server.lookup.adapters.dsvhttp.HTTPFileRetriever;
 import com.synectiks.process.server.plugin.lookup.LookupCachePurge;
@@ -37,6 +21,9 @@ import com.synectiks.process.server.plugin.lookup.LookupResult;
 import com.synectiks.process.server.system.urlwhitelist.UrlNotWhitelistedException;
 import com.synectiks.process.server.system.urlwhitelist.UrlWhitelistNotificationService;
 import com.synectiks.process.server.system.urlwhitelist.UrlWhitelistService;
+
+import okhttp3.HttpUrl;
+import org.graylog.autovalue.WithBeanGetter;
 import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

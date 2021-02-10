@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system.contentpacks;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -34,7 +20,9 @@ import com.synectiks.process.server.contentpacks.model.entities.EntityV1;
 import com.synectiks.process.server.rest.models.system.contentpacks.responses.CatalogIndexResponse;
 import com.synectiks.process.server.rest.models.system.contentpacks.responses.CatalogResolveRequest;
 import com.synectiks.process.server.rest.models.system.contentpacks.responses.CatalogResolveResponse;
+import com.synectiks.process.server.rest.resources.system.contentpacks.CatalogResource;
 import com.synectiks.process.server.shared.bindings.GuiceInjectorHolder;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

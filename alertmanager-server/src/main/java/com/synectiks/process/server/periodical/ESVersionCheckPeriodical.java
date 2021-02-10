@@ -1,20 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.periodical;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.synectiks.process.server.notifications.Notification;
 import com.synectiks.process.server.notifications.NotificationService;
@@ -22,8 +11,6 @@ import com.synectiks.process.server.plugin.Version;
 import com.synectiks.process.server.plugin.periodical.Periodical;
 import com.synectiks.process.server.storage.ElasticsearchVersion;
 import com.synectiks.process.server.storage.versionprobe.VersionProbe;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
@@ -106,7 +93,7 @@ public class ESVersionCheckPeriodical extends Periodical {
             if (compatible(this.initialElasticsearchVersion, version)) {
                 notificationService.fixed(Notification.Type.ES_VERSION_MISMATCH);
             } else {
-                LOG.warn("Elasticsearch version currently running ({}) is incompatible with the one Graylog was started " +
+                LOG.warn("Elasticsearch version currently running ({}) is incompatible with the one perfmanager was started " +
                         "with ({}) - a restart is required!", version, initialElasticsearchVersion);
                 final Notification notification = notificationService.buildNow()
                         .addType(Notification.Type.ES_VERSION_MISMATCH)

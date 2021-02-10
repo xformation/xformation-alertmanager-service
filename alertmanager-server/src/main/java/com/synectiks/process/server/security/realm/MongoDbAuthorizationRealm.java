@@ -1,33 +1,11 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.security.realm;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.Permission;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.subject.PrincipalCollection;
 import com.synectiks.process.common.grn.GRN;
 import com.synectiks.process.common.grn.GRNRegistry;
 import com.synectiks.process.common.grn.GRNTypes;
@@ -37,6 +15,15 @@ import com.synectiks.process.server.security.MongoDbAuthorizationCacheManager;
 import com.synectiks.process.server.shared.security.ShiroRequestHeadersBinder;
 import com.synectiks.process.server.shared.users.UserService;
 import com.synectiks.process.server.users.events.UserChangedEvent;
+
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.Permission;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,8 +31,8 @@ import javax.inject.Inject;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static com.synectiks.process.server.shared.rest.RequestIdFilter.X_REQUEST_ID;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class MongoDbAuthorizationRealm extends AuthorizingRealm {
 

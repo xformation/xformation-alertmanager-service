@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.export;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -26,9 +12,6 @@ import com.synectiks.process.server.plugin.indexer.searches.timeranges.TimeRange
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
-import java.util.LinkedHashSet;
-import java.util.OptionalInt;
-import java.util.Set;
 
 import static com.synectiks.process.common.plugins.views.search.export.ExportMessagesCommand.DEFAULT_CHUNK_SIZE;
 import static com.synectiks.process.common.plugins.views.search.export.ExportMessagesCommand.DEFAULT_FIELDS;
@@ -36,6 +19,10 @@ import static com.synectiks.process.common.plugins.views.search.export.ExportMes
 import static com.synectiks.process.common.plugins.views.search.export.ExportMessagesCommand.DEFAULT_STREAMS;
 import static com.synectiks.process.common.plugins.views.search.export.ExportMessagesCommand.defaultTimeRange;
 import static com.synectiks.process.common.plugins.views.search.export.LinkedHashSetUtil.linkedHashSetOf;
+
+import java.util.LinkedHashSet;
+import java.util.OptionalInt;
+import java.util.Set;
 
 @JsonAutoDetect
 @AutoValue

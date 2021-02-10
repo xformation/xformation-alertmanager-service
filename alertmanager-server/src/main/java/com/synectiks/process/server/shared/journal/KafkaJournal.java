@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.journal;
 
 import com.codahale.metrics.Gauge;
@@ -28,6 +14,13 @@ import com.google.common.io.Files;
 import com.google.common.primitives.Ints;
 import com.google.common.util.concurrent.AbstractIdleService;
 import com.google.common.util.concurrent.Uninterruptibles;
+import com.synectiks.process.server.plugin.GlobalMetricNames;
+import com.synectiks.process.server.plugin.ServerStatus;
+import com.synectiks.process.server.plugin.ThrottleState;
+import com.synectiks.process.server.plugin.lifecycles.LoadBalancerStatus;
+import com.synectiks.process.server.shared.metrics.HdrTimer;
+import com.synectiks.process.server.shared.utilities.ByteBufferUtils;
+
 import kafka.common.KafkaException;
 import kafka.common.OffsetOutOfRangeException;
 import kafka.common.TopicAndPartition;
@@ -45,12 +38,7 @@ import kafka.server.BrokerState;
 import kafka.server.RunningAsBroker;
 import kafka.utils.KafkaScheduler;
 import kafka.utils.Time;
-import com.synectiks.process.server.plugin.GlobalMetricNames;
-import com.synectiks.process.server.plugin.ServerStatus;
-import com.synectiks.process.server.plugin.ThrottleState;
-import com.synectiks.process.server.plugin.lifecycles.LoadBalancerStatus;
-import com.synectiks.process.server.shared.metrics.HdrTimer;
-import com.synectiks.process.server.shared.utilities.ByteBufferUtils;
+
 import org.joda.time.DateTimeUtils;
 import org.joda.time.Duration;
 import org.slf4j.Logger;
@@ -90,12 +78,12 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.codahale.metrics.MetricRegistry.name;
+import static com.synectiks.process.server.plugin.Tools.bytesToHex;
 import static java.util.concurrent.TimeUnit.DAYS;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
-import static com.synectiks.process.server.plugin.Tools.bytesToHex;
 
 @Singleton
 public class KafkaJournal extends AbstractIdleService implements Journal {
@@ -294,11 +282,11 @@ public class KafkaJournal extends AbstractIdleService implements Journal {
         }
 
         // TODO add check for directory, etc
-        committedReadOffsetFile = new File(journalDirectory.toFile(), "graylog2-committed-read-offset");
+        committedReadOffsetFile = new File(journalDirectory.toFile(), "perfmanager2-committed-read-offset");
         try {
             if (!committedReadOffsetFile.createNewFile()) {
                 final String line = Files.asCharSource(committedReadOffsetFile, StandardCharsets.UTF_8).readFirstLine();
-                // the file contains the last offset graylog2 has successfully processed.
+                // the file contains the last offset Logmanager2 has successfully processed.
                 // thus the nextReadOffset is one beyond that number
                 if (line != null) {
                     committedOffset.set(Long.parseLong(line.trim()));
@@ -365,7 +353,7 @@ public class KafkaJournal extends AbstractIdleService implements Journal {
             logRetentionCleaner = new LogRetentionCleaner();
         } catch (KafkaException e) {
             // most likely failed to grab lock
-            LOG.error("Unable to start logmanager.", e);
+            LOG.error("Unable to start perfmanager.", e);
             throw new RuntimeException(e);
         }
 
@@ -789,10 +777,10 @@ public class KafkaJournal extends AbstractIdleService implements Journal {
     }
 
     /**
-     * Returns the highest journal offset that has been writting to persistent storage by Graylog.
+     * Returns the highest journal offset that has been writting to persistent storage by perfmanager.
      * <p>
      * Every message at an offset prior to this one can be considered as processed and does not need to be held in
-     * the journal any longer. By default Graylog will try to aggressively flush the journal to consume a smaller
+     * the journal any longer. By default perfmanager will try to aggressively flush the journal to consume a smaller
      * amount of disk space.
      * </p>
      *

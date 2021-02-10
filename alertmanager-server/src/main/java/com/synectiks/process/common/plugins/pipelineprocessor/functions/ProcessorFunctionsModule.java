@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.functions;
 
 import com.google.inject.Binder;
@@ -81,9 +67,9 @@ import com.synectiks.process.common.plugins.pipelineprocessor.functions.lookup.L
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.lookup.LookupAddStringList;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.lookup.LookupClearKey;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.lookup.LookupRemoveStringList;
+import com.synectiks.process.common.plugins.pipelineprocessor.functions.lookup.LookupSetStringList;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.lookup.LookupSetValue;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.lookup.LookupStringList;
-import com.synectiks.process.common.plugins.pipelineprocessor.functions.lookup.LookupSetStringList;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.lookup.LookupValue;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.messages.CloneMessage;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.messages.CreateMessage;

@@ -1,25 +1,13 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.commands.journal;
 
 import com.github.rvesse.airline.annotations.Command;
 import com.github.rvesse.airline.annotations.Option;
-import kafka.log.LogSegment;
 import com.synectiks.process.server.shared.journal.KafkaJournal;
+
+import kafka.log.LogSegment;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
@@ -44,7 +32,7 @@ public class JournalShow extends AbstractJournalCommand {
         final long startOffset = journal.getLogStartOffset();
         final long lastOffset = journal.getLogEndOffset() - 1;
 
-        sb.append("Graylog message journal in directory: ").append(kafkaJournalConfiguration.getMessageJournalDir().toAbsolutePath()).append(
+        sb.append("perfmanager message journal in directory: ").append(kafkaJournalConfiguration.getMessageJournalDir().toAbsolutePath()).append(
                 "\n");
         sb.append("\t").append("Total size in bytes: ").append(sizeInBytes).append("\n");
         sb.append("\t").append("Number of segments: ").append(numSegments).append("\n");

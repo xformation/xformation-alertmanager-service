@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.fieldtypes;
 
 import com.google.common.collect.ImmutableSet;
@@ -33,6 +19,7 @@ import com.synectiks.process.server.indexer.indices.events.IndicesDeletedEvent;
 import com.synectiks.process.server.plugin.ServerStatus;
 import com.synectiks.process.server.plugin.lifecycles.Lifecycle;
 import com.synectiks.process.server.plugin.periodical.Periodical;
+
 import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,7 +56,6 @@ public class IndexFieldTypePollerPeriodical extends Periodical {
     @Inject
     public IndexFieldTypePollerPeriodical(final IndexFieldTypePoller poller,
                                           final IndexFieldTypesService dbService,
-                                          // We are NOT using IndexSetRegistry here because of this: https://github.com/Graylog2/graylog2-server/issues/4625
                                           final IndexSetService indexSetService,
                                           final Indices indices,
                                           final MongoIndexSet.Factory mongoIndexSetFactory,
@@ -114,7 +100,6 @@ public class IndexFieldTypePollerPeriodical extends Periodical {
             }
         }
 
-        // We are NOT using IndexSetRegistry#getAll() here because of this: https://github.com/Graylog2/graylog2-server/issues/4625
         indexSetService.findAll().forEach(indexSetConfig -> {
             final String indexSetId = indexSetConfig.id();
             final String indexSetTitle = indexSetConfig.title();
@@ -150,7 +135,6 @@ public class IndexFieldTypePollerPeriodical extends Periodical {
     @Subscribe
     public void handleIndexSetCreation(final IndexSetCreatedEvent event) {
         final String indexSetId = event.indexSet().id();
-        // We are NOT using IndexSetRegistry#get(String) here because of this: https://github.com/Graylog2/graylog2-server/issues/4625
         final Optional<IndexSetConfig> optionalIndexSet = indexSetService.get(indexSetId);
 
         if (optionalIndexSet.isPresent()) {

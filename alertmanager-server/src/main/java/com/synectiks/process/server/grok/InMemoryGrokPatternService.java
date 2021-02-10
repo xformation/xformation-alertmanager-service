@@ -1,21 +1,19 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.grok;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
+import com.synectiks.process.server.database.NotFoundException;
+import com.synectiks.process.server.events.ClusterEventBus;
+import com.synectiks.process.server.plugin.database.ValidationException;
+
+import com.synectiks.process.server.grok.krakens.Grok;
+import com.synectiks.process.server.grok.krakens.GrokCompiler;
+import com.synectiks.process.server.grok.krakens.exception.GrokException;
+
+import javax.inject.Inject;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -27,19 +25,6 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
-
-import javax.inject.Inject;
-
-import com.synectiks.process.server.database.NotFoundException;
-import com.synectiks.process.server.events.ClusterEventBus;
-import com.synectiks.process.server.grok.krakens.Grok;
-import com.synectiks.process.server.grok.krakens.GrokCompiler;
-import com.synectiks.process.server.grok.krakens.exception.GrokException;
-import com.synectiks.process.server.plugin.database.ValidationException;
-
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 
 public class InMemoryGrokPatternService implements GrokPatternService {
     // poor man's id generator

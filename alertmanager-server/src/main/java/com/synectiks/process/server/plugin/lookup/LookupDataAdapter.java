@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin.lookup;
 
 import com.codahale.metrics.MetricRegistry;
@@ -22,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.util.concurrent.AbstractIdleService;
 import com.google.inject.assistedinject.Assisted;
 import com.synectiks.process.server.lookup.dto.DataAdapterDto;
+
 import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -206,8 +193,8 @@ public abstract class LookupDataAdapter extends AbstractIdleService {
         return config;
     }
 
-    // This factory is implemented by LookupDataAdapter plugins that have been built before Graylog 3.2.
-    // We have to keep it around to make sure older plugins still load with Graylog >=3.2.
+    // This factory is implemented by LookupDataAdapter plugins that have been built before perfmanager 3.2.
+    // We have to keep it around to make sure older plugins still load with perfmanager >=3.2.
     // It can be removed once we decide to stop supporting old plugins.
     public interface Factory<T extends LookupDataAdapter> {
         T create(@Assisted("id") String id, @Assisted("name") String name, LookupDataAdapterConfiguration configuration);
@@ -215,7 +202,7 @@ public abstract class LookupDataAdapter extends AbstractIdleService {
         Descriptor getDescriptor();
     }
 
-    // This is the factory that should be implemented by LookupDataAdapter plugins which target Graylog 3.2 and later.
+    // This is the factory that should be implemented by LookupDataAdapter plugins which target perfmanager 3.2 and later.
     public interface Factory2<T extends LookupDataAdapter> {
         T create(@Assisted("dto") DataAdapterDto dto);
 

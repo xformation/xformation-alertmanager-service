@@ -1,27 +1,15 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.beats;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Resources;
+import com.synectiks.process.common.plugins.beats.Beats2Codec;
 import com.synectiks.process.server.plugin.Message;
 import com.synectiks.process.server.plugin.configuration.Configuration;
 import com.synectiks.process.server.plugin.journal.RawMessage;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Before;
@@ -70,8 +58,8 @@ public class Beats2CodecTest {
         assertThat(message.getField("input_type")).isEqualTo("log");
         assertThat(message.getField("count")).isEqualTo(1);
         assertThat(message.getField("offset")).isEqualTo(0);
-        assertThat(message.getField(Message.FIELD_GL2_SOURCE_COLLECTOR)).isEqualTo("1234-5678-1234-5678");
-        assertThat(message.getField("filebeat_" + Message.FIELD_GL2_SOURCE_COLLECTOR)).isNull();
+        assertThat(message.getField(Message.FIELD_XFPERF_SOURCE_COLLECTOR)).isEqualTo("1234-5678-1234-5678");
+        assertThat(message.getField("filebeat_" + Message.FIELD_XFPERF_SOURCE_COLLECTOR)).isNull();
         @SuppressWarnings("unchecked") final List<String> tags = (List<String>) message.getField("tags");
         assertThat(tags).containsOnly("foobar", "test");
     }
@@ -88,9 +76,9 @@ public class Beats2CodecTest {
         assertThat(message.getField("filebeat_input_type")).isEqualTo("log");
         assertThat(message.getField("filebeat_count")).isEqualTo(1);
         assertThat(message.getField("filebeat_offset")).isEqualTo(0);
-        assertThat(message.getField(Message.FIELD_GL2_SOURCE_COLLECTOR)).isEqualTo("1234-5678-1234-5678");
+        assertThat(message.getField(Message.FIELD_XFPERF_SOURCE_COLLECTOR)).isEqualTo("1234-5678-1234-5678");
         assertThat(message.getField("filebeat_message")).isNull(); //should not be duplicated from "message"
-        assertThat(message.getField("filebeat_" + Message.FIELD_GL2_SOURCE_COLLECTOR)).isNull();
+        assertThat(message.getField("filebeat_" + Message.FIELD_XFPERF_SOURCE_COLLECTOR)).isNull();
         @SuppressWarnings("unchecked") final List<String> tags = (List<String>) message.getField("filebeat_tags");
         assertThat(tags).containsOnly("foobar", "test");
     }

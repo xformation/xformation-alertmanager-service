@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations;
 
 import com.mongodb.DuplicateKeyException;
@@ -24,6 +10,7 @@ import com.synectiks.process.server.shared.users.Role;
 import com.synectiks.process.server.shared.users.UserService;
 import com.synectiks.process.server.users.RoleImpl;
 import com.synectiks.process.server.users.RoleService;
+
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,12 +58,12 @@ public class MigrationHelpers {
                 final Role savedRole = roleService.save(fixedRole);
                 return savedRole.getId();
             } catch (DuplicateKeyException | ValidationException e) {
-                LOG.error("Unable to save fixed '" + roleName + "' role, please restart Graylog to fix this.", e);
+                LOG.error("Unable to save fixed '" + roleName + "' role, please restart perfmanager to fix this.", e);
             }
         }
 
         if (previousRole == null) {
-            LOG.error("Unable to access fixed '" + roleName + "' role, please restart Graylog to fix this.");
+            LOG.error("Unable to access fixed '" + roleName + "' role, please restart perfmanager to fix this.");
             return null;
         }
 
@@ -112,12 +99,12 @@ public class MigrationHelpers {
             try {
                 return userService.save(fixedUser);
             } catch (ValidationException e) {
-                LOG.error("Unable to save fixed '" + userName + "' user, please restart Graylog to fix this.", e);
+                LOG.error("Unable to save fixed '" + userName + "' user, please restart perfmanager to fix this.", e);
             }
         }
 
         if (previousUser == null) {
-            LOG.error("Unable to access fixed '" + userName + "' user, please restart Graylog to fix this.");
+            LOG.error("Unable to access fixed '" + userName + "' user, please restart perfmanager to fix this.");
             return null;
         }
 

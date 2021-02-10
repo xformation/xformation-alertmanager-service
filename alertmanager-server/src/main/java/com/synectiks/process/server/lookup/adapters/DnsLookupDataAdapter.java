@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.lookup.adapters;
 
 
@@ -31,9 +17,6 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
 import com.google.inject.assistedinject.Assisted;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.graylog.autovalue.WithBeanGetter;
 import com.synectiks.process.server.lookup.adapters.dnslookup.ADnsAnswer;
 import com.synectiks.process.server.lookup.adapters.dnslookup.DnsAnswer;
 import com.synectiks.process.server.lookup.adapters.dnslookup.DnsClient;
@@ -46,6 +29,10 @@ import com.synectiks.process.server.plugin.lookup.LookupDataAdapter;
 import com.synectiks.process.server.plugin.lookup.LookupDataAdapterConfiguration;
 import com.synectiks.process.server.plugin.lookup.LookupResult;
 import com.synectiks.process.server.shared.utilities.ExceptionUtils;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.graylog.autovalue.WithBeanGetter;
 import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

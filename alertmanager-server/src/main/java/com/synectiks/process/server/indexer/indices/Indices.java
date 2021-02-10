@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.indices;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -35,6 +21,7 @@ import com.synectiks.process.server.indexer.indices.events.IndicesReopenedEvent;
 import com.synectiks.process.server.indexer.indices.stats.IndexStatistics;
 import com.synectiks.process.server.indexer.searches.IndexRangeStats;
 import com.synectiks.process.server.plugin.system.NodeId;
+
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +29,9 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.validation.constraints.NotNull;
+
+import static com.synectiks.process.server.audit.AuditEventTypes.ES_INDEX_CREATE;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,8 +42,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static com.synectiks.process.server.audit.AuditEventTypes.ES_INDEX_CREATE;
 
 @Singleton
 public class Indices {

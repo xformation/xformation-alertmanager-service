@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.documentation.generator;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,6 +7,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.synectiks.process.server.shared.ServerVersion;
 import com.synectiks.process.server.shared.rest.documentation.generator.Generator;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -47,7 +34,7 @@ public class GeneratorTest {
 
     @Test
     public void testGenerateOverview() throws Exception {
-        Generator generator = new Generator("com.synectiks.process.server.rest.resources", objectMapper);
+        Generator generator = new Generator("org.graylog2.rest.resources", objectMapper);
         Map<String, Object> result = generator.generateOverview();
 
         assertEquals(ServerVersion.VERSION.toString(), result.get("apiVersion"));
@@ -59,7 +46,7 @@ public class GeneratorTest {
 
     @Test
     public void testGenerateForRoute() throws Exception {
-        Generator generator = new Generator("com.synectiks.process.server.rest.resources", objectMapper);
+        Generator generator = new Generator("org.graylog2.rest.resources", objectMapper);
         Map<String, Object> result = generator.generateForRoute("/system", "http://localhost:12900/");
     }
 

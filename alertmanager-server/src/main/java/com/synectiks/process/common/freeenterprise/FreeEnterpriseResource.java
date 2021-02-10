@@ -1,29 +1,16 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.freeenterprise;
 
 import com.codahale.metrics.annotation.Timed;
+import com.synectiks.process.server.audit.jersey.NoAuditEvent;
+import com.synectiks.process.server.shared.rest.resources.RestResource;
+import com.synectiks.process.server.shared.security.RestPermissions;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import com.synectiks.process.server.audit.jersey.NoAuditEvent;
-import com.synectiks.process.server.shared.rest.resources.RestResource;
-import com.synectiks.process.server.shared.security.RestPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +43,7 @@ public class FreeEnterpriseResource extends RestResource {
 
     @GET
     @Timed
-    @ApiOperation(value = "Get Graylog Enterprise license info")
+    @ApiOperation(value = "Get perfmanager Enterprise license info")
     @Path("/license/info")
     @RequiresPermissions(RestPermissions.LICENSEINFOS_READ)
     public Response licenseInfo() {
@@ -65,7 +52,7 @@ public class FreeEnterpriseResource extends RestResource {
 
     @POST
     @Timed
-    @ApiOperation(value = "Request free Graylog Enterprise license")
+    @ApiOperation(value = "Request free perfmanager Enterprise license")
     @Path("/license")
     @RequiresPermissions(RestPermissions.FREELICENSES_CREATE)
     @NoAuditEvent("This will be used to get a license. Without license triggering an audit event doesn't make sense.")
@@ -78,6 +65,6 @@ public class FreeEnterpriseResource extends RestResource {
             }
             return Response.accepted().build();
         }
-        throw new BadRequestException("Free Graylog Enterprise license already requested or license already installed");
+        throw new BadRequestException("Free Logmanger Enterprise license already requested or license already installed");
     }
 }

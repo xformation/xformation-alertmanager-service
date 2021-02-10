@@ -1,22 +1,7 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.testing.graylognode;
 
-import com.synectiks.process.common.testing.PropertyLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.BindMode;
@@ -24,15 +9,17 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.images.builder.ImageFromDockerfile;
 
+import com.synectiks.process.common.testing.PropertyLoader;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
 
-import static java.time.temporal.ChronoUnit.SECONDS;
+import static com.synectiks.process.common.testing.ResourceUtil.resourceToTmpFile;
 import static com.synectiks.process.common.testing.graylognode.NodeContainerConfig.API_PORT;
 import static com.synectiks.process.common.testing.graylognode.NodeContainerConfig.DEBUG_PORT;
-import static com.synectiks.process.common.testing.graylognode.ResourceUtil.resourceToTmpFile;
+import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class NodeContainerFactory {
     private static final Logger LOG = LoggerFactory.getLogger(NodeContainerFactory.class);
@@ -55,13 +42,13 @@ public class NodeContainerFactory {
 
     private static ImageFromDockerfile createImage(NodeContainerConfig config) {
         // testcontainers only allows passing permissions if you pass a `File`
-        File entrypointScript = resourceToTmpFile("org/graylog/testing/graylognode/docker-entrypoint.sh");
+        File entrypointScript = resourceToTmpFile("com/synectiks/process/common/testing/graylognode/docker-entrypoint.sh");
 
         ImageFromDockerfile image = new ImageFromDockerfile()
-                .withFileFromClasspath("Dockerfile", "org/graylog/testing/graylognode/Dockerfile")
+                .withFileFromClasspath("Dockerfile", "com/synectiks/process/common/testing/graylognode/Dockerfile")
                 // set mode here explicitly, because file system permissions can get lost when executing from maven
                 .withFileFromFile("docker-entrypoint.sh", entrypointScript, EXECUTABLE_MODE)
-                .withFileFromPath("graylog.conf", pathTo("graylog_config"))
+                .withFileFromPath("server.conf", pathTo("perfmanager_config"))
                 .withFileFromClasspath("log4j2.xml", "log4j2.xml")
                 .withFileFromPath("sigar", pathTo("sigar_dir"));
         if (config.enableDebugging) {
@@ -71,7 +58,7 @@ public class NodeContainerFactory {
     }
 
     private static GenericContainer<?> createRunningContainer(NodeContainerConfig config, ImageFromDockerfile image) {
-        String graylogHome = "/usr/share/graylog";
+        String graylogHome = "/opt/perfmanager";
 
         GenericContainer<?> container = new GenericContainer<>(image)
                 .withFileSystemBind(property("server_jar"), graylogHome + "/graylog.jar", BindMode.READ_ONLY)

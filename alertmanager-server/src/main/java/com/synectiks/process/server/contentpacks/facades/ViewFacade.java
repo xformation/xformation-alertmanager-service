@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.facades;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -43,11 +29,12 @@ import com.synectiks.process.server.contentpacks.model.entities.ViewStateEntity;
 import com.synectiks.process.server.contentpacks.model.entities.references.ValueReference;
 import com.synectiks.process.server.plugin.database.users.User;
 import com.synectiks.process.server.shared.users.UserService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -126,7 +113,7 @@ public abstract class ViewFacade implements EntityFacade<ViewDTO> {
                                          Map<String, ValueReference> parameters,
                                          Map<EntityDescriptor, Object> nativeEntities, User user) {
         final ViewEntity viewEntity = objectMapper.convertValue(entityV1.data(), ViewEntity.class);
-        final Map<String, ViewStateDTO> viewStateMap = new HashMap<>(viewEntity.state().size());
+        final Map<String, ViewStateDTO> viewStateMap = new LinkedHashMap<>(viewEntity.state().size());
         for (Map.Entry<String, ViewStateEntity> entry : viewEntity.state().entrySet()) {
             final ViewStateEntity entity = entry.getValue();
             viewStateMap.put(entry.getKey(), entity.toNativeEntity(parameters, nativeEntities));

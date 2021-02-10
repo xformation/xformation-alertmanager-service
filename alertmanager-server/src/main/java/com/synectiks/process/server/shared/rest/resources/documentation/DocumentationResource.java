@@ -1,27 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.rest.resources.documentation;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableSet;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import com.synectiks.process.server.configuration.HttpConfiguration;
 import com.synectiks.process.server.plugin.inject.RestControllerPackage;
 import com.synectiks.process.server.plugin.rest.PluginRestResource;
@@ -29,6 +12,10 @@ import com.synectiks.process.server.rest.RestTools;
 import com.synectiks.process.server.shared.plugins.PluginRestResourceClasses;
 import com.synectiks.process.server.shared.rest.documentation.generator.Generator;
 import com.synectiks.process.server.shared.rest.resources.RestResource;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -45,8 +32,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
 import static com.synectiks.process.server.shared.initializers.JerseyService.PLUGIN_PREFIX;
+import static java.util.Objects.requireNonNull;
 
 @Api(value = "Documentation", description = "Documentation of this API in JSON format.")
 @Path("/api-docs")

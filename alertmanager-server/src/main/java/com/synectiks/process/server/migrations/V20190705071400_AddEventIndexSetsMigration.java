@@ -1,24 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations;
 
 import com.google.common.collect.ImmutableMap;
 import com.mongodb.DuplicateKeyException;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.configuration.ElasticsearchConfiguration;
 import com.synectiks.process.server.database.NotFoundException;
 import com.synectiks.process.server.indexer.IndexSet;
@@ -34,6 +19,8 @@ import com.synectiks.process.server.plugin.database.ValidationException;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.streams.StreamImpl;
 import com.synectiks.process.server.streams.StreamService;
+
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
@@ -82,22 +69,22 @@ public class V20190705071400_AddEventIndexSetsMigration extends Migration {
     @Override
     public void upgrade() {
         ensureEventsStreamAndIndexSet(
-                "Graylog Events",
-                "Stores Graylog events.",
+                "perfmanager Events",
+                "Stores perfmanager events.",
                 elasticsearchConfiguration.getDefaultEventsIndexPrefix(),
                 ElasticsearchConfiguration.DEFAULT_EVENTS_INDEX_PREFIX,
                 Stream.DEFAULT_EVENTS_STREAM_ID,
                 "All events",
-                "Stream containing all events created by Graylog"
+                "Stream containing all events created by perfmanager"
         );
         ensureEventsStreamAndIndexSet(
-                "Graylog System Events",
-                "Stores Graylog system events.",
+                "perfmanager System Events",
+                "Stores perfmanager system events.",
                 elasticsearchConfiguration.getDefaultSystemEventsIndexPrefix(),
                 ElasticsearchConfiguration.DEFAULT_SYSTEM_EVENTS_INDEX_PREFIX,
                 Stream.DEFAULT_SYSTEM_EVENTS_STREAM_ID,
                 "All system events",
-                "Stream containing all system events created by Graylog"
+                "Stream containing all system events created by perfmanager"
         );
     }
 

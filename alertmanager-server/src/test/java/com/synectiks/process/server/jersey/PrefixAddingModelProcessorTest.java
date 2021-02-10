@@ -1,22 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.jersey;
 
 import com.google.common.collect.ImmutableMap;
+import com.synectiks.process.server.jersey.PrefixAddingModelProcessor;
+
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.model.Resource;
 import org.glassfish.jersey.server.model.ResourceModel;
@@ -31,7 +19,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PrefixAddingModelProcessorTest {
-    private static final String PACKAGE_NAME = "com.synectiks.process.server.jersey";
+    private static final String PACKAGE_NAME = "org.graylog2.jersey";
 
     @Test
     public void processResourceModelAddsPrefixToResourceClassInCorrectPackage() throws Exception {
@@ -53,7 +41,7 @@ public class PrefixAddingModelProcessorTest {
         final ImmutableMap<String, String> packagePrefixes = ImmutableMap.of(
                 "org", "/generic",
                 "org.graylog2", "/test/prefix",
-                "com.synectiks.process.server.wrong", "/wrong"
+                "org.graylog2.wrong", "/wrong"
         );
         final PrefixAddingModelProcessor modelProcessor = new PrefixAddingModelProcessor(packagePrefixes);
         final ResourceModel originalResourceModel = new ResourceModel.Builder(false)

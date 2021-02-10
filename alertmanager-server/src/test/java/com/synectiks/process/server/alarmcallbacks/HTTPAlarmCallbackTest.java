@@ -1,29 +1,12 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.alarmcallbacks;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import okhttp3.OkHttpClient;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import okhttp3.mockwebserver.RecordedRequest;
+import com.synectiks.process.server.alarmcallbacks.HTTPAlarmCallback;
 import com.synectiks.process.server.alerts.AbstractAlertCondition;
 import com.synectiks.process.server.alerts.types.DummyAlertCondition;
 import com.synectiks.process.server.plugin.Message;
@@ -38,6 +21,12 @@ import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
 import com.synectiks.process.server.streams.StreamMock;
 import com.synectiks.process.server.system.urlwhitelist.UrlWhitelistService;
+
+import okhttp3.OkHttpClient;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.After;

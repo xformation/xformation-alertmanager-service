@@ -17,7 +17,7 @@ import com.synectiks.process.server.syslog4j.impl.AbstractSyslogWriter;
  *
  * @author &lt;syslog4j@productivity.org&gt;
  * @version $Id: AbstractSyslogPoolFactory.java,v 1.5 2008/12/10 04:15:11 cvs Exp $
- * @see org.graylog2.syslog4j.impl.pool.generic.GenericSyslogPoolFactory
+ * @see com.synectiks.process.server.syslog4j.impl.pool.generic.GenericSyslogPoolFactory
  */
 public abstract class AbstractSyslogPoolFactory extends BasePoolableObjectFactory {
     private static final long serialVersionUID = -7441569603980981508L;

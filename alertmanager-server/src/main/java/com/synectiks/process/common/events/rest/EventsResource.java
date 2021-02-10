@@ -1,25 +1,12 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.rest;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+
 import com.synectiks.process.common.events.search.EventsSearchParameters;
 import com.synectiks.process.common.events.search.EventsSearchResult;
 import com.synectiks.process.common.events.search.EventsSearchService;
@@ -33,6 +20,8 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import static com.google.common.base.MoreObjects.firstNonNull;
 
 @Api(value = "Events", description = "Events overview and search")
 @Path("/events")
@@ -52,6 +41,6 @@ public class EventsResource extends RestResource implements PluginRestResource {
     @ApiOperation("Search events")
     @NoAuditEvent("Doesn't change any data, only searches for events")
     public EventsSearchResult search(@ApiParam(name = "JSON body") EventsSearchParameters request) {
-        return searchService.search(request, getSubject());
+        return searchService.search(firstNonNull(request, EventsSearchParameters.empty()), getSubject());
     }
 }

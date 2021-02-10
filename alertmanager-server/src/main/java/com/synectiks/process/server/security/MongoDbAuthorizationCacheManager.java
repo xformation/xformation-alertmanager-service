@@ -1,30 +1,17 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.security;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.primitives.Ints;
 import com.google.inject.Singleton;
+import com.synectiks.process.server.metrics.CacheStatsSet;
+import com.synectiks.process.server.shared.metrics.MetricUtils;
+
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
-import com.synectiks.process.server.metrics.CacheStatsSet;
-import com.synectiks.process.server.shared.metrics.MetricUtils;
 
 import javax.inject.Inject;
 import java.util.Collection;

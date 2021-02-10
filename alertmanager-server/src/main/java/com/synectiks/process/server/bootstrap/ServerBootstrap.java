@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.bootstrap;
 
 import com.github.rvesse.airline.annotations.Option;
@@ -40,7 +26,8 @@ import com.synectiks.process.server.shared.security.SecurityBindings;
 import com.synectiks.process.server.shared.system.activities.Activity;
 import com.synectiks.process.server.shared.system.activities.ActivityWriter;
 import com.synectiks.process.server.shared.system.stats.SystemStatsModule;
-import org.jsoftbiz.utils.OS;
+
+import com.synectiks.process.server.osfinder.utils.OS;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,8 +54,8 @@ public abstract class ServerBootstrap extends CmdLineTool {
         this.commandName = commandName;
     }
 
-    @Option(name = {"-p", "--pidfile"}, description = "File containing the PID of AlertManager")
-    private String pidFile = TMPDIR + FILE_SEPARATOR + "alertmanager.pid";
+    @Option(name = {"-p", "--pidfile"}, description = "File containing the PID of perfmanager")
+    private String pidFile = TMPDIR + FILE_SEPARATOR + "perfmanager.pid";
 
     @Option(name = {"-np", "--no-pid-file"}, description = "Do not write a PID file (overrides -p/--pidfile)")
     private boolean noPidFile = false;
@@ -120,7 +107,7 @@ public abstract class ServerBootstrap extends CmdLineTool {
 
         final OS os = OS.getOs();
 
-        LOG.info("AlertManager {} {} starting up", commandName, version);
+        LOG.info("perfmanager {} {} starting up", commandName, version);
         LOG.info("JRE: {}", systemInformation);
         LOG.info("Deployment: {}", configuration.getInstallationSource());
         LOG.info("OS: {}", os.getPlatformName());
@@ -165,14 +152,14 @@ public abstract class ServerBootstrap extends CmdLineTool {
             } catch (TimeoutException timeoutException) {
                 LOG.error("Unable to shutdown properly on time. {}", serviceManager.servicesByState());
             }
-            LOG.error("Graylog startup failed. Exiting. Exception was:", e);
+            LOG.error("perfmanager startup failed. Exiting. Exception was:", e);
             auditEventSender.failure(AuditActor.system(nodeId), NODE_STARTUP_INITIATE, auditEventContext);
             System.exit(-1);
         }
         LOG.info("Services started, startup times in ms: {}", serviceManager.startupTimes());
 
         activityWriter.write(new Activity("Started up.", Main.class));
-        LOG.info("AlertManager " + commandName + " up and running.");
+        LOG.info("perfmanager " + commandName + " up and running.");
         auditEventSender.success(AuditActor.system(nodeId), NODE_STARTUP_COMPLETE, auditEventContext);
 
         // Block forever.

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.processors;
 
 import com.codahale.metrics.Gauge;
@@ -24,14 +10,14 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.name.Names;
-import org.assertj.core.api.Assertions;
-import org.bson.types.ObjectId;
 import com.synectiks.process.common.plugins.pipelineprocessor.codegen.PipelineClassloader;
 import com.synectiks.process.common.plugins.pipelineprocessor.db.RuleDao;
 import com.synectiks.process.common.plugins.pipelineprocessor.db.RuleService;
 import com.synectiks.process.common.plugins.pipelineprocessor.db.memory.InMemoryServicesModule;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.ProcessorFunctionsModule;
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.FunctionRegistry;
+import com.synectiks.process.common.plugins.pipelineprocessor.processors.ConfigurationStateUpdater;
+import com.synectiks.process.common.plugins.pipelineprocessor.processors.PipelineInterpreter;
 import com.synectiks.process.server.database.NotFoundException;
 import com.synectiks.process.server.events.ClusterEventBus;
 import com.synectiks.process.server.grok.GrokPatternService;
@@ -52,6 +38,9 @@ import com.synectiks.process.server.shared.bindings.SchedulerBindings;
 import com.synectiks.process.server.shared.bindings.providers.MetricRegistryProvider;
 import com.synectiks.process.server.streams.StreamImpl;
 import com.synectiks.process.server.streams.StreamService;
+
+import org.assertj.core.api.Assertions;
+import org.bson.types.ObjectId;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;

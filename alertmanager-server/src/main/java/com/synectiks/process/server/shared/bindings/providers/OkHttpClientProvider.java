@@ -1,24 +1,12 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.bindings.providers;
 
 import com.github.joschi.jadconfig.util.Duration;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.synectiks.process.server.utilities.ProxyHostsPattern;
+
 import okhttp3.Authenticator;
 import okhttp3.Challenge;
 import okhttp3.Credentials;
@@ -26,7 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
-import com.synectiks.process.server.utilities.ProxyHostsPattern;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -155,7 +143,7 @@ public class OkHttpClientProvider implements Provider<OkHttpClient> {
                     .collect(Collectors.toSet());
 
             if (!authenticationMethods.contains(AUTH_BASIC)) {
-                LOG.warn("Graylog only supports the \"{}\" authentication scheme but the proxy server asks for one of the following: {}",
+                LOG.warn("perfmanager only supports the \"{}\" authentication scheme but the proxy server asks for one of the following: {}",
                         AUTH_BASIC, authenticationMethods);
                 return null;
             }

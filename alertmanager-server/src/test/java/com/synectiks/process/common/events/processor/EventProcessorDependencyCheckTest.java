@@ -1,27 +1,16 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.processor;
 
 import com.google.common.collect.ImmutableSet;
-
+import com.synectiks.process.common.events.processor.DBEventProcessorStateService;
+import com.synectiks.process.common.events.processor.EventProcessorDependencyCheck;
+import com.synectiks.process.common.events.processor.EventProcessorStateDto;
 import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
 import com.synectiks.process.server.system.processing.DBProcessingStatusService;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Before;

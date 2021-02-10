@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin;
 
 import com.fasterxml.jackson.core.JsonParser;
@@ -25,6 +11,7 @@ import com.google.common.io.ByteStreams;
 import com.google.common.primitives.Doubles;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteRange;
 import com.synectiks.process.server.shared.SuppressForbidden;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;

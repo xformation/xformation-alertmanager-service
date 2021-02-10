@@ -1,2 +1,2 @@
 # xformation-alertmanager-service
-services for alert managaement
+Backend module for Alert Manager

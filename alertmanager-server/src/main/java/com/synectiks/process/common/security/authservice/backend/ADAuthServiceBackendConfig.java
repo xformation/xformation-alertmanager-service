@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.security.authservice.backend;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -22,15 +8,15 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableList;
-import com.unboundid.ldap.sdk.Filter;
-import com.unboundid.ldap.sdk.LDAPException;
-import org.apache.commons.lang3.StringUtils;
 import com.synectiks.process.common.security.authservice.AuthServiceBackendConfig;
 import com.synectiks.process.common.security.authservice.ldap.LDAPConnectorConfig;
 import com.synectiks.process.common.security.authservice.ldap.LDAPConnectorConfigProvider;
 import com.synectiks.process.common.security.authservice.ldap.LDAPTransportSecurity;
 import com.synectiks.process.server.plugin.rest.ValidationResult;
 import com.synectiks.process.server.security.encryption.EncryptedValue;
+import com.unboundid.ldap.sdk.Filter;
+import com.unboundid.ldap.sdk.LDAPException;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,8 +66,8 @@ public abstract class ADAuthServiceBackendConfig implements AuthServiceBackendCo
 
     @Override
     public void validate(ValidationResult result) {
-        if (servers().size() > 1) {
-            result.addError(FIELD_SERVERS, "Currently only a single server URL is supported.");
+        if (servers().isEmpty()) {
+            result.addError(FIELD_SERVERS, "Server list cannot be empty.");
         }
         if (isBlank(userSearchBase())) {
             result.addError(FIELD_USER_SEARCH_BASE, "User search base cannot be empty.");

@@ -1,29 +1,17 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.security;
 
 import com.google.common.collect.ImmutableList;
-import org.apache.shiro.realm.AuthenticatingRealm;
-import org.apache.shiro.realm.Realm;
 import com.synectiks.process.server.security.realm.AccessTokenAuthenticator;
-import com.synectiks.process.server.security.realm.AuthServiceRealm;
+import com.synectiks.process.server.security.realm.BearerTokenRealm;
 import com.synectiks.process.server.security.realm.HTTPHeaderAuthenticationRealm;
 import com.synectiks.process.server.security.realm.RootAccountRealm;
 import com.synectiks.process.server.security.realm.SessionAuthenticator;
+import com.synectiks.process.server.security.realm.UsernamePasswordRealm;
+
+import org.apache.shiro.realm.AuthenticatingRealm;
+import org.apache.shiro.realm.Realm;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -45,7 +33,8 @@ public class StaticOrderedAuthenticatingRealms extends AbstractCollection<Realm>
             SessionAuthenticator.NAME,
             AccessTokenAuthenticator.NAME,
             HTTPHeaderAuthenticationRealm.NAME,
-            AuthServiceRealm.NAME,
+            UsernamePasswordRealm.NAME,
+            BearerTokenRealm.NAME,
             RootAccountRealm.NAME // Should come last because it's (hopefully) not used that often
     );
 

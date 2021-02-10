@@ -1,30 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system.jobs;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import com.synectiks.process.server.audit.AuditEventTypes;
 import com.synectiks.process.server.audit.jersey.AuditEvent;
 import com.synectiks.process.server.plugin.system.NodeId;
@@ -37,6 +17,13 @@ import com.synectiks.process.server.system.jobs.SystemJob;
 import com.synectiks.process.server.system.jobs.SystemJobConcurrencyException;
 import com.synectiks.process.server.system.jobs.SystemJobFactory;
 import com.synectiks.process.server.system.jobs.SystemJobManager;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

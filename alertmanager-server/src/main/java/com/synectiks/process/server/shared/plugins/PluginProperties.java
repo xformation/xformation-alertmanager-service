@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.plugins;
 
 import org.slf4j.Logger;
@@ -31,8 +17,8 @@ import static java.util.Objects.requireNonNull;
 public class PluginProperties {
     private static final Logger LOG = LoggerFactory.getLogger(PluginProperties.class);
 
-    private static final String MANIFEST_ATTRIBUTE = "Graylog-Plugin-Properties-Path";
-    private static final String GRAYLOG_PLUGIN_PROPERTIES = "graylog-plugin.properties";
+    private static final String MANIFEST_ATTRIBUTE = "perfmanager-Plugin-Properties-Path";
+    private static final String GRAYLOG_PLUGIN_PROPERTIES = "perfmanager-plugin.properties";
 
     private static final String PROPERTY_ISOLATED = "isolated";
     private static final String PROPERTY_ISOLATED_DEFAULT = "true";
@@ -44,10 +30,10 @@ public class PluginProperties {
     }
 
     /**
-     * Loads the Graylog plugin properties file from the given JAR file.
+     * Loads the perfmanager plugin properties file from the given JAR file.
      *
-     * The path to the properties file resource inside the JAR file is stored in the "Graylog-Plugin-Properties-Path"
-     * attribute of the JAR manifest. (Example: {@code com.synectiks.process.common.plugins.graylog-plugin-map-widget})
+     * The path to the properties file resource inside the JAR file is stored in the "perfmanager-Plugin-Properties-Path"
+     * attribute of the JAR manifest. (Example: {@code org.perfmanager.plugins.perfmanager-plugin-map-widget})
      *
      * If the plugin properties file does not exist or cannot be found (like in older plugins) a default
      * {@link PluginProperties} object will be returned.

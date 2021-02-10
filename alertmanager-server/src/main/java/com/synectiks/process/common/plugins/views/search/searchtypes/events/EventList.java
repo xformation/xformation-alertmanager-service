@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.searchtypes.events;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -33,12 +19,13 @@ import com.synectiks.process.server.contentpacks.model.entities.EventListEntity;
 import com.synectiks.process.server.contentpacks.model.entities.SearchTypeEntity;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 
 import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_EVENTS_STREAM_ID;
 import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_SYSTEM_EVENTS_STREAM_ID;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 @AutoValue
 @JsonTypeName(EventList.NAME)

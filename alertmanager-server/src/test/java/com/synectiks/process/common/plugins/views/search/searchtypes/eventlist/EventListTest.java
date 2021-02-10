@@ -1,29 +1,15 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.searchtypes.eventlist;
 
 import com.google.common.collect.ImmutableSet;
 import com.synectiks.process.common.plugins.views.search.searchtypes.events.EventList;
-import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_EVENTS_STREAM_ID;
 import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_SYSTEM_EVENTS_STREAM_ID;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class EventListTest {
 

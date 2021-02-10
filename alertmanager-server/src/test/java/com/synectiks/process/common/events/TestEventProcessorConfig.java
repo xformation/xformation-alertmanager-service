@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -23,13 +9,14 @@ import com.google.auto.value.AutoValue;
 import com.synectiks.process.common.events.contentpack.entities.EventProcessorConfigEntity;
 import com.synectiks.process.common.events.processor.EventDefinition;
 import com.synectiks.process.common.events.processor.EventProcessorConfig;
+import com.synectiks.process.common.events.processor.EventProcessorExecutionJob;
 import com.synectiks.process.common.events.processor.EventProcessorSchedulerConfig;
 import com.synectiks.process.common.scheduler.clock.JobSchedulerClock;
-import com.synectiks.process.common.events.processor.EventProcessorExecutionJob;
 import com.synectiks.process.common.scheduler.schedule.IntervalJobSchedule;
 import com.synectiks.process.server.contentpacks.EntityDescriptorIds;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteRange;
 import com.synectiks.process.server.plugin.rest.ValidationResult;
+
 import org.joda.time.DateTime;
 
 import java.util.Optional;

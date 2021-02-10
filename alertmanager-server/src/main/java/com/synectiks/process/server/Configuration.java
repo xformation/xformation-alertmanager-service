@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server;
 
 import com.github.joschi.jadconfig.Parameter;
@@ -32,6 +18,7 @@ import com.synectiks.process.server.security.realm.RootAccountRealm;
 import com.synectiks.process.server.shared.security.tls.DefaultTLSProtocolProvider;
 import com.synectiks.process.server.utilities.IPSubnetConverter;
 import com.synectiks.process.server.utilities.IpSubnet;
+
 import org.joda.time.DateTimeZone;
 
 import java.io.File;
@@ -41,7 +28,7 @@ import java.util.Collections;
 import java.util.Set;
 
 /**
- * Helper class to hold configuration of Graylog
+ * Helper class to hold configuration of perfmanager
  */
 @SuppressWarnings("FieldMayBeFinal")
 public class Configuration extends BaseConfiguration {
@@ -70,7 +57,7 @@ public class Configuration extends BaseConfiguration {
     private int outputBufferProcessorKeepAliveTime = 5000;
 
     @Parameter(value = "node_id_file", validator = NodeIdFileValidator.class)
-    private String nodeIdFile = "/etc/graylog/server/node-id";
+    private String nodeIdFile = "/opt/perfmanager/node/node-id";
 
     @Parameter(value = "root_username")
     private String rootUsername = "admin";

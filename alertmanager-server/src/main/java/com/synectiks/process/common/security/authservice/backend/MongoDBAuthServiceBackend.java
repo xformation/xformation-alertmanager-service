@@ -1,25 +1,11 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.security.authservice.backend;
 
-import com.unboundid.util.Base64;
 import com.synectiks.process.common.security.authservice.AuthServiceBackend;
 import com.synectiks.process.common.security.authservice.AuthServiceBackendDTO;
 import com.synectiks.process.common.security.authservice.AuthServiceCredentials;
+import com.synectiks.process.common.security.authservice.AuthenticationDetails;
 import com.synectiks.process.common.security.authservice.ProvisionerService;
 import com.synectiks.process.common.security.authservice.UserDetails;
 import com.synectiks.process.common.security.authservice.test.AuthServiceBackendTestResult;
@@ -29,6 +15,8 @@ import com.synectiks.process.server.security.PasswordAlgorithmFactory;
 import com.synectiks.process.server.security.encryption.EncryptedValue;
 import com.synectiks.process.server.security.encryption.EncryptedValueService;
 import com.synectiks.process.server.shared.users.UserService;
+import com.unboundid.util.Base64;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,14 +43,14 @@ public class MongoDBAuthServiceBackend implements AuthServiceBackend {
     }
 
     @Override
-    public Optional<UserDetails> authenticateAndProvision(AuthServiceCredentials authCredentials,
+    public Optional<AuthenticationDetails> authenticateAndProvision(AuthServiceCredentials authCredentials,
                                                           ProvisionerService provisionerService) {
         final String username = authCredentials.username();
 
         LOG.debug("Trying to load user <{}> from database", username);
         final User user = userService.load(username);
         if (user == null) {
-            LOG.warn("User <{}> not found in database", username);
+            LOG.debug("User <{}> not found in database", username);
             return Optional.empty();
         }
         if (user.isLocalAdmin()) {
@@ -98,7 +86,7 @@ public class MongoDBAuthServiceBackend implements AuthServiceBackend {
                 .base64AuthServiceUid(Base64.encode(user.getId()))
                 .build());
 
-        return Optional.of(userDetails);
+        return Optional.of(AuthenticationDetails.builder().userDetails(userDetails).build());
     }
 
     private boolean isValidPassword(User user, EncryptedValue password) {

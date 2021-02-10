@@ -1,27 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.engine;
 
 import com.google.common.base.Stopwatch;
-import com.google.common.collect.ImmutableSet;
 import com.synectiks.process.common.plugins.views.search.GlobalOverride;
-import com.synectiks.process.common.plugins.views.search.Parameter;
 import com.synectiks.process.common.plugins.views.search.Query;
-import com.synectiks.process.common.plugins.views.search.QueryMetadata;
 import com.synectiks.process.common.plugins.views.search.QueryResult;
 import com.synectiks.process.common.plugins.views.search.SearchJob;
 import com.synectiks.process.common.plugins.views.search.errors.QueryError;
@@ -29,6 +12,7 @@ import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.Pivot
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteRange;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.RelativeRange;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.TimeRange;
+
 import org.joda.time.DateTime;
 
 import java.util.Optional;
@@ -46,14 +30,14 @@ public interface QueryBackend<T extends GeneratedQueryContext> {
      * Generate a backend-specific query out of the logical query structure.
      *
      * @param job                currently executing job
-     * @param query              the graylog query structure
+     * @param query              the perfmanager query structure
      * @param predecessorResults the query result of the preceding queries
      * @return a backend specific generated query
      */
     T generate(SearchJob job, Query query, Set<QueryResult> predecessorResults);
 
     default boolean isAllMessages(TimeRange timeRange) {
-        return timeRange instanceof RelativeRange && ((RelativeRange)timeRange).range() == 0;
+        return timeRange instanceof RelativeRange && ((RelativeRange)timeRange).isAllMessages();
     }
 
     default AbsoluteRange effectiveTimeRangeForResult(Query query, QueryResult queryResult) {
@@ -113,12 +97,4 @@ public interface QueryBackend<T extends GeneratedQueryContext> {
      * @throws RuntimeException if the query could not be executed for some reason
      */
     QueryResult doRun(SearchJob job, Query query, T queryContext, Set<QueryResult> predecessorResults);
-
-    /**
-     * Parse the query and return structural information about it.
-     * <p>
-     * This method decomposes the backend-specific query and returns information about used parameters, optionally the
-     * AST for syntax highlight and other information the UI can use to offer help.
-     */
-    QueryMetadata parse(ImmutableSet<Parameter> parameters, Query query);
 }

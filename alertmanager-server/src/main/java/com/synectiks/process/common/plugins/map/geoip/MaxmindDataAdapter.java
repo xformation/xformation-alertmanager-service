@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.map.geoip;
 
 import com.codahale.metrics.MetricRegistry;
@@ -35,13 +21,14 @@ import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.model.CountryResponse;
 import com.maxmind.geoip2.record.Country;
 import com.maxmind.geoip2.record.Location;
-import org.graylog.autovalue.WithBeanGetter;
 import com.synectiks.process.common.plugins.map.config.DatabaseType;
 import com.synectiks.process.server.plugin.lookup.LookupCachePurge;
 import com.synectiks.process.server.plugin.lookup.LookupDataAdapter;
 import com.synectiks.process.server.plugin.lookup.LookupDataAdapterConfiguration;
 import com.synectiks.process.server.plugin.lookup.LookupResult;
 import com.synectiks.process.server.plugin.utilities.FileInfo;
+
+import org.graylog.autovalue.WithBeanGetter;
 import org.joda.time.Duration;
 import org.slf4j.Logger;
 
@@ -286,7 +273,7 @@ public class MaxmindDataAdapter extends LookupDataAdapter {
                     .type(NAME)
                     .checkInterval(1)
                     .checkIntervalUnit(TimeUnit.MINUTES)
-                    .path("/etc/graylog/server/GeoLite2-City.mmdb")
+                    .path("/opt/perfmanager/GeoLite2-City.mmdb")
                     .dbType(DatabaseType.MAXMIND_CITY)
                     .build();
         }

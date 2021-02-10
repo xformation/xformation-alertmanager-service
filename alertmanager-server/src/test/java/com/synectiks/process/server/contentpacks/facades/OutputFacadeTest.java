@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.facades;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,6 +10,7 @@ import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
 import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.contentpacks.EntityDescriptorIds;
+import com.synectiks.process.server.contentpacks.facades.OutputFacade;
 import com.synectiks.process.server.contentpacks.model.ModelId;
 import com.synectiks.process.server.contentpacks.model.ModelTypes;
 import com.synectiks.process.server.contentpacks.model.entities.Entity;
@@ -45,6 +32,7 @@ import com.synectiks.process.server.streams.OutputImpl;
 import com.synectiks.process.server.streams.OutputService;
 import com.synectiks.process.server.streams.OutputServiceImpl;
 import com.synectiks.process.server.streams.StreamService;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -93,7 +81,7 @@ public class OutputFacadeTest {
         final LoggingOutput.Factory factory = mock(LoggingOutput.Factory.class);
         final LoggingOutput.Descriptor descriptor = mock(LoggingOutput.Descriptor.class);
         when(factory.getDescriptor()).thenReturn(descriptor);
-        outputFactories.put("com.synectiks.process.server.outputs.LoggingOutput", factory);
+        outputFactories.put("org.graylog2.outputs.LoggingOutput", factory);
 
         facade = new OutputFacade(objectMapper, outputService, pluginMetaData, outputFactories, outputFactories2);
     }
@@ -106,7 +94,7 @@ public class OutputFacadeTest {
         final OutputImpl output = OutputImpl.create(
                 "01234567890",
                 "Output Title",
-                "com.synectiks.process.server.outputs.LoggingOutput",
+                "org.graylog2.outputs.LoggingOutput",
                 "admin",
                 configuration,
                 new Date(0L),
@@ -123,7 +111,7 @@ public class OutputFacadeTest {
         final EntityV1 entityV1 = (EntityV1) entity;
         final OutputEntity outputEntity = objectMapper.convertValue(entityV1.data(), OutputEntity.class);
         assertThat(outputEntity.title()).isEqualTo(ValueReference.of("Output Title"));
-        assertThat(outputEntity.type()).isEqualTo(ValueReference.of("com.synectiks.process.server.outputs.LoggingOutput"));
+        assertThat(outputEntity.type()).isEqualTo(ValueReference.of("org.graylog2.outputs.LoggingOutput"));
         assertThat(outputEntity.configuration()).containsEntry("some-setting", ValueReference.of("foobar"));
     }
 
@@ -143,7 +131,7 @@ public class OutputFacadeTest {
         final EntityV1 entityV1 = (EntityV1) entity;
         final OutputEntity outputEntity = objectMapper.convertValue(entityV1.data(), OutputEntity.class);
         assertThat(outputEntity.title()).isEqualTo(ValueReference.of("STDOUT"));
-        assertThat(outputEntity.type()).isEqualTo(ValueReference.of("com.synectiks.process.server.outputs.LoggingOutput"));
+        assertThat(outputEntity.type()).isEqualTo(ValueReference.of("org.graylog2.outputs.LoggingOutput"));
         assertThat(outputEntity.configuration()).containsEntry("prefix", ValueReference.of("Writing message: "));
     }
 
@@ -154,7 +142,7 @@ public class OutputFacadeTest {
                 .type(ModelTypes.OUTPUT_V1)
                 .data(objectMapper.convertValue(OutputEntity.create(
                         ValueReference.of("STDOUT"),
-                        ValueReference.of("com.synectiks.process.server.outputs.LoggingOutput"),
+                        ValueReference.of("org.graylog2.outputs.LoggingOutput"),
                         ReferenceMapUtils.toReferenceMap(ImmutableMap.of("prefix", "Writing message: "))
                 ), JsonNode.class))
                 .build();
@@ -163,7 +151,7 @@ public class OutputFacadeTest {
 
         assertThat(nativeEntity.descriptor().type()).isEqualTo(ModelTypes.OUTPUT_V1);
         assertThat(nativeEntity.entity().getTitle()).isEqualTo("STDOUT");
-        assertThat(nativeEntity.entity().getType()).isEqualTo("com.synectiks.process.server.outputs.LoggingOutput");
+        assertThat(nativeEntity.entity().getType()).isEqualTo("org.graylog2.outputs.LoggingOutput");
         assertThat(nativeEntity.entity().getCreatorUserId()).isEqualTo("username");
         assertThat(nativeEntity.entity().getConfiguration()).containsEntry("prefix", "Writing message: ");
     }
@@ -176,7 +164,7 @@ public class OutputFacadeTest {
                 .type(ModelTypes.OUTPUT_V1)
                 .data(objectMapper.convertValue(OutputEntity.create(
                         ValueReference.of("STDOUT"),
-                        ValueReference.of("com.synectiks.process.server.outputs.LoggingOutput"),
+                        ValueReference.of("org.graylog2.outputs.LoggingOutput"),
                         ReferenceMapUtils.toReferenceMap(ImmutableMap.of("prefix", "Writing message: "))
                 ), JsonNode.class))
                 .build();
@@ -192,7 +180,7 @@ public class OutputFacadeTest {
                 .type(ModelTypes.OUTPUT_V1)
                 .data(objectMapper.convertValue(OutputEntity.create(
                         ValueReference.of("STDOUT"),
-                        ValueReference.of("com.synectiks.process.server.outputs.LoggingOutput"),
+                        ValueReference.of("org.graylog2.outputs.LoggingOutput"),
                         ReferenceMapUtils.toReferenceMap(ImmutableMap.of("prefix", "Writing message: "))
                 ), JsonNode.class))
                 .build();
@@ -225,7 +213,7 @@ public class OutputFacadeTest {
         final OutputImpl output = OutputImpl.create(
                 "01234567890",
                 "Output Title",
-                "com.synectiks.process.server.output.SomeOutputClass",
+                "org.graylog2.output.SomeOutputClass",
                 "admin",
                 configuration,
                 new Date(0L),
@@ -266,7 +254,7 @@ public class OutputFacadeTest {
         assertThat(entity.type()).isEqualTo(ModelTypes.OUTPUT_V1);
         final OutputEntity outputEntity = objectMapper.convertValue(entity.data(), OutputEntity.class);
         assertThat(outputEntity.title()).isEqualTo(ValueReference.of("STDOUT"));
-        assertThat(outputEntity.type()).isEqualTo(ValueReference.of("com.synectiks.process.server.outputs.LoggingOutput"));
+        assertThat(outputEntity.type()).isEqualTo(ValueReference.of("org.graylog2.outputs.LoggingOutput"));
         assertThat(outputEntity.configuration()).isNotEmpty();
     }
 }

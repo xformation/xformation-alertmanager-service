@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.rotation.strategies;
 
 import com.google.common.base.MoreObjects;
@@ -24,6 +10,7 @@ import com.synectiks.process.server.indexer.indices.Indices;
 import com.synectiks.process.server.plugin.Tools;
 import com.synectiks.process.server.plugin.indexer.rotation.RotationStrategyConfig;
 import com.synectiks.process.server.plugin.system.NodeId;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeField;
 import org.joda.time.DateTimeFieldType;
@@ -122,13 +109,11 @@ public class TimeBasedRotationStrategy extends AbstractRotationStrategy {
         final DateTime anchorTime = anchorTimeFrom(lastAnchor);
 
         final DateTimeField field = largestStrideType.getField(anchorTime.getChronology());
-        // use normalized here to make sure we actually have the largestStride type available! see https://github.com/Graylog2/graylog2-server/issues/836
         int periodValue = normalized.get(largestStrideType.getDurationType());
         final long fieldValue = field.roundFloor(anchorTime.getMillis());
 
         final int fieldValueInUnit = field.get(fieldValue);
         if (periodValue == 0) {
-            // https://github.com/Graylog2/graylog2-server/issues/836
             log.warn("Determining stride length failed because of a 0 period. Defaulting back to 1 period to avoid crashing, but this is a bug!");
             periodValue = 1;
         }

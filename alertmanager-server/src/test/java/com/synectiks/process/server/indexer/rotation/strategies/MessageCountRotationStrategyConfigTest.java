@@ -1,27 +1,15 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.rotation.strategies;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
+import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategyConfig;
 import com.synectiks.process.server.plugin.indexer.rotation.RotationStrategyConfig;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+
 import org.junit.Test;
 
 import java.io.IOException;
@@ -42,14 +30,14 @@ public class MessageCountRotationStrategyConfigTest {
         final String json = objectMapper.writeValueAsString(config);
 
         final Object document = Configuration.defaultConfiguration().jsonProvider().parse(json);
-        assertThat((String) JsonPath.read(document, "$.type")).isEqualTo("com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategyConfig");
+        assertThat((String) JsonPath.read(document, "$.type")).isEqualTo("org.graylog2.indexer.rotation.strategies.MessageCountRotationStrategyConfig");
         assertThat((Integer) JsonPath.read(document, "$.max_docs_per_index")).isEqualTo(1000);
     }
 
     @Test
     public void testDeserialization() throws IOException {
         final ObjectMapper objectMapper = new ObjectMapperProvider().get();
-        final String json = "{ \"type\": \"com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategyConfig\", \"max_docs_per_index\": 1000 }";
+        final String json = "{ \"type\": \"org.graylog2.indexer.rotation.strategies.MessageCountRotationStrategyConfig\", \"max_docs_per_index\": 1000 }";
         final RotationStrategyConfig config = objectMapper.readValue(json, RotationStrategyConfig.class);
 
         assertThat(config).isInstanceOf(MessageCountRotationStrategyConfig.class);

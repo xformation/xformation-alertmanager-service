@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.rest.documentation.generator;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -30,12 +16,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.primitives.Primitives;
+import com.synectiks.process.server.shared.ServerVersion;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import com.synectiks.process.server.shared.ServerVersion;
+
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -147,7 +135,7 @@ public class Generator {
         }
         Collections.sort(apis, (o1, o2) -> ComparisonChain.start().compare(o1.get("name").toString(), o2.get("name").toString()).result());
         Map<String, String> info = Maps.newHashMap();
-        info.put("title", "Graylog REST API");
+        info.put("title", "perfmanager REST API");
 
         overviewResult.put("apiVersion", ServerVersion.VERSION.toString());
         overviewResult.put("swaggerVersion", EMULATED_SWAGGER_VERSION);

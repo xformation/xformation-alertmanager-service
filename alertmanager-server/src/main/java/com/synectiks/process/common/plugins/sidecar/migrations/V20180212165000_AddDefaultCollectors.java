@@ -1,30 +1,17 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.sidecar.migrations;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.UpdateResult;
-import org.bson.Document;
-import org.bson.types.ObjectId;
 import com.synectiks.process.common.plugins.sidecar.rest.models.Collector;
 import com.synectiks.process.common.plugins.sidecar.services.CollectorService;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.migrations.Migration;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,10 +45,10 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
         removeConfigPath();
 
         final String beatsPreambel =
-                "# Needed for Graylog\n" +
+                "# Needed for perfmanager\n" +
                 "fields_under_root: true\n" +
                 "fields.collector_node_id: ${sidecar.nodeName}\n" +
-                "fields.gl2_source_collector: ${sidecar.nodeId}\n\n";
+                "fields.xfperf_source_collector: ${sidecar.nodeId}\n\n";
 
         ensureCollector(
                 "filebeat",
@@ -79,22 +66,22 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
                         "output.logstash:\n" +
                         "   hosts: [\"192.168.1.1:5044\"]\n" +
                         "path:\n" +
-                        "  data: /var/lib/graylog-sidecar/collectors/filebeat/data\n" +
-                        "  logs: /var/lib/graylog-sidecar/collectors/filebeat/log"
+                        "  data: /var/lib/perfmanager-sidecar/collectors/filebeat/data\n" +
+                        "  logs: /var/lib/perfmanager-sidecar/collectors/filebeat/log"
         );
         ensureCollector(
                 "winlogbeat",
                 "svc",
                 "windows",
-                "C:\\Program Files\\Graylog\\sidecar\\winlogbeat.exe",
+                "C:\\Program Files\\perfmanager\\sidecar\\winlogbeat.exe",
                 "-c \"%s\"",
                 "test config -c \"%s\"",
                 beatsPreambel +
                         "output.logstash:\n" +
                         "   hosts: [\"192.168.1.1:5044\"]\n" +
                         "path:\n" +
-                        "  data: C:\\Program Files\\Graylog\\sidecar\\cache\\winlogbeat\\data\n" +
-                        "  logs: C:\\Program Files\\Graylog\\sidecar\\logs\n" +
+                        "  data: C:\\Program Files\\perfmanager\\sidecar\\cache\\winlogbeat\\data\n" +
+                        "  logs: C:\\Program Files\\perfmanager\\sidecar\\logs\n" +
                         "tags:\n" +
                         " - windows\n" +
                         "winlogbeat:\n" +
@@ -156,8 +143,8 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
                         "\tPort 12201\n" +
                         "\tOutputType  GELF_TCP\n" +
                         "\t<Exec>\n" +
-                        "\t  # These fields are needed for Graylog\n" +
-                        "\t  $gl2_source_collector = '${sidecar.nodeId}';\n" +
+                        "\t  # These fields are needed for perfmanager\n" +
+                        "\t  $xfperf_source_collector = '${sidecar.nodeId}';\n" +
                         "\t  $collector_node_id = '${sidecar.nodeName}';\n" +
                         "\t</Exec>\n" +
                         "</Output>\n" +
@@ -238,8 +225,8 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
                         "\tPort 12201\n" +
                         "\tOutputType  GELF_TCP\n" +
                         "\t<Exec>\n" +
-                        "\t  # These fields are needed for Graylog\n" +
-                        "\t  $gl2_source_collector = '${sidecar.nodeId}';\n" +
+                        "\t  # These fields are needed for perfmanager\n" +
+                        "\t  $xfperf_source_collector = '${sidecar.nodeId}';\n" +
                         "\t  $collector_node_id = '${sidecar.nodeName}';\n" +
                         "\t</Exec>\n" +
                         "</Output>\n" +
@@ -257,15 +244,15 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
                 "filebeat",
                 "svc",
                 "windows",
-                "C:\\Program Files\\Graylog\\sidecar\\filebeat.exe",
+                "C:\\Program Files\\perfmanager\\sidecar\\filebeat.exe",
                 "-c \"%s\"",
                 "test config -c \"%s\"",
                 beatsPreambel +
                         "output.logstash:\n" +
                         "   hosts: [\"192.168.1.1:5044\"]\n" +
                         "path:\n" +
-                        "  data: C:\\Program Files\\Graylog\\sidecar\\cache\\filebeat\\data\n" +
-                        "  logs: C:\\Program Files\\Graylog\\sidecar\\logs\n" +
+                        "  data: C:\\Program Files\\perfmanager\\sidecar\\cache\\filebeat\\data\n" +
+                        "  logs: C:\\Program Files\\perfmanager\\sidecar\\logs\n" +
                         "tags:\n" +
                         " - windows\n" +
                         "filebeat.inputs:\n" +
@@ -322,12 +309,12 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
             try {
                 return collectorService.save(newCollector).id();
             } catch (Exception e) {
-                LOG.error("Can't save collector " + collectorName + ", please restart Graylog to fix this.", e);
+                LOG.error("Can't save collector " + collectorName + ", please restart perfmanager to fix this.", e);
             }
         }
 
         if (collector == null) {
-            LOG.error("Unable to access fixed " + collectorName + " collector, please restart Graylog to fix this.");
+            LOG.error("Unable to access fixed " + collectorName + " collector, please restart perfmanager to fix this.");
             return null;
         }
 

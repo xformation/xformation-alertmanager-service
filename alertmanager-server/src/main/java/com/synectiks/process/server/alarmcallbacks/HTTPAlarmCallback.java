@@ -1,30 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.alarmcallbacks;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Maps;
-import okhttp3.HttpUrl;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import com.synectiks.process.server.plugin.alarms.AlertCondition;
 import com.synectiks.process.server.plugin.alarms.callbacks.AlarmCallback;
 import com.synectiks.process.server.plugin.alarms.callbacks.AlarmCallbackConfigurationException;
@@ -36,6 +16,13 @@ import com.synectiks.process.server.plugin.configuration.fields.ConfigurationFie
 import com.synectiks.process.server.plugin.configuration.fields.TextField;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.system.urlwhitelist.UrlWhitelistService;
+
+import okhttp3.HttpUrl;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 import javax.inject.Inject;
 import java.io.IOException;

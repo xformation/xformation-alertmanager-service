@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.processors;
 
 import com.codahale.metrics.Meter;
@@ -50,6 +36,7 @@ import com.synectiks.process.server.shared.buffers.processors.ProcessBufferProce
 import com.synectiks.process.server.shared.journal.Journal;
 import com.synectiks.process.server.shared.metrics.MetricUtils;
 import com.synectiks.process.server.shared.utilities.ExceptionUtils;
+
 import org.jooq.lambda.tuple.Tuple2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -430,10 +417,10 @@ public class PipelineInterpreter implements MessageProcessor {
 
     private void appendProcessingError(Rule rule, Message message, String errorString) {
         final String msg = "For rule '" + rule.name() + "': " + errorString;
-        if (message.hasField(Message.FIELD_GL2_PROCESSING_ERROR)) {
-            message.addField(Message.FIELD_GL2_PROCESSING_ERROR, message.getFieldAs(String.class, Message.FIELD_GL2_PROCESSING_ERROR) + "," + msg);
+        if (message.hasField(Message.FIELD_XFPERF_PROCESSING_ERROR)) {
+            message.addField(Message.FIELD_XFPERF_PROCESSING_ERROR, message.getFieldAs(String.class, Message.FIELD_XFPERF_PROCESSING_ERROR) + "," + msg);
         } else {
-            message.addField(Message.FIELD_GL2_PROCESSING_ERROR, msg);
+            message.addField(Message.FIELD_XFPERF_PROCESSING_ERROR, msg);
         }
     }
 

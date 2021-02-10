@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin;
 
 import com.google.common.util.concurrent.Service;
@@ -34,6 +20,8 @@ import com.synectiks.process.common.scheduler.Job;
 import com.synectiks.process.common.scheduler.JobDefinitionConfig;
 import com.synectiks.process.common.scheduler.JobSchedule;
 import com.synectiks.process.common.scheduler.JobTriggerData;
+import com.synectiks.process.common.security.authservice.AuthServiceBackend;
+import com.synectiks.process.common.security.authservice.AuthServiceBackendConfig;
 import com.synectiks.process.server.audit.AuditEventType;
 import com.synectiks.process.server.audit.PluginAuditEventTypes;
 import com.synectiks.process.server.audit.formatter.AuditEventFormatter;
@@ -108,13 +96,13 @@ public abstract class PluginModule extends Graylog2Module {
         serviceBinder.addBinding().to(initializerClass);
     }
 
-    // This should only be used by plugins that have been built before Graylog 3.0.1.
+    // This should only be used by plugins that have been built before perfmanager 3.0.1.
     // See comments in MessageOutput.Factory and MessageOutput.Factory2 for details
     protected void addMessageOutput(Class<? extends MessageOutput> messageOutputClass) {
         installOutput(outputsMapBinder(), messageOutputClass);
     }
 
-    // This should only be used by plugins that have been built before Graylog 3.0.1.
+    // This should only be used by plugins that have been built before perfmanager 3.0.1.
     // See comments in MessageOutput.Factory and MessageOutput.Factory2 for details
     protected <T extends MessageOutput> void addMessageOutput(Class<T> messageOutputClass,
                                                               Class<? extends MessageOutput.Factory<T>> factory) {
@@ -303,5 +291,22 @@ public abstract class PluginModule extends Graylog2Module {
     protected void addGRNType(GRNType type, Class<? extends GRNDescriptorProvider> descriptorProvider) {
         final MapBinder<GRNType, GRNDescriptorProvider> mapBinder = MapBinder.newMapBinder(binder(), GRNType.class, GRNDescriptorProvider.class);
         mapBinder.addBinding(type).to(descriptorProvider);
+    }
+
+    protected MapBinder<String, AuthServiceBackend.Factory<? extends AuthServiceBackend>> authServiceBackendBinder() {
+        return MapBinder.newMapBinder(
+                binder(),
+                TypeLiteral.get(String.class),
+                new TypeLiteral<AuthServiceBackend.Factory<? extends AuthServiceBackend>>() {}
+        );
+    }
+
+    protected void addAuthServiceBackend(String name,
+            Class<? extends AuthServiceBackend> backendClass,
+            Class<? extends AuthServiceBackend.Factory<? extends AuthServiceBackend>> factoryClass,
+            Class<? extends AuthServiceBackendConfig> configClass) {
+        install(new FactoryModuleBuilder().implement(AuthServiceBackend.class, backendClass).build(factoryClass));
+        authServiceBackendBinder().addBinding(name).to(factoryClass);
+        registerJacksonSubtype(configClass, name);
     }
 }

@@ -1,35 +1,24 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import org.bson.Document;
 import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
 import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.cluster.ClusterConfigServiceImpl;
 import com.synectiks.process.server.events.ClusterEventBus;
 import com.synectiks.process.server.indexer.indexset.DefaultIndexSetConfig;
+import com.synectiks.process.server.migrations.Migration;
+import com.synectiks.process.server.migrations.V20161215163900_MoveIndexSetDefaultConfig;
 import com.synectiks.process.server.migrations.V20161215163900_MoveIndexSetDefaultConfig.MigrationCompleted;
 import com.synectiks.process.server.plugin.system.NodeId;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
 import com.synectiks.process.server.shared.plugins.ChainingClassLoader;
+
+import org.bson.Document;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

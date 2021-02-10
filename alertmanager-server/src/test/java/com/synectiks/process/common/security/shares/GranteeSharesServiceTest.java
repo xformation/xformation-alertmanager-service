@@ -1,20 +1,14 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.security.shares;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.synectiks.process.common.grn.GRN;
 import com.synectiks.process.common.grn.GRNDescriptor;
@@ -24,6 +18,8 @@ import com.synectiks.process.common.grn.GRNTypes;
 import com.synectiks.process.common.security.Capability;
 import com.synectiks.process.common.security.DBGrantService;
 import com.synectiks.process.common.security.entities.EntityDescriptor;
+import com.synectiks.process.common.security.shares.GranteeService;
+import com.synectiks.process.common.security.shares.GranteeSharesService;
 import com.synectiks.process.common.testing.GRNExtension;
 import com.synectiks.process.common.testing.mongodb.MongoDBExtension;
 import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
@@ -31,13 +27,6 @@ import com.synectiks.process.common.testing.mongodb.MongoDBTestService;
 import com.synectiks.process.common.testing.mongodb.MongoJackExtension;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.rest.PaginationParameters;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 

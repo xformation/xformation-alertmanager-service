@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.fieldtypes;
 
 import com.github.joschi.jadconfig.util.Duration;
@@ -21,12 +7,16 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.synectiks.process.server.indexer.MongoIndexSet;
 import com.synectiks.process.server.indexer.cluster.Cluster;
+import com.synectiks.process.server.indexer.fieldtypes.IndexFieldTypePoller;
+import com.synectiks.process.server.indexer.fieldtypes.IndexFieldTypePollerPeriodical;
+import com.synectiks.process.server.indexer.fieldtypes.IndexFieldTypesService;
 import com.synectiks.process.server.indexer.indexset.IndexSetConfig;
 import com.synectiks.process.server.indexer.indexset.IndexSetService;
 import com.synectiks.process.server.indexer.indexset.events.IndexSetCreatedEvent;
 import com.synectiks.process.server.indexer.indices.Indices;
 import com.synectiks.process.server.plugin.ServerStatus;
 import com.synectiks.process.server.plugin.lifecycles.Lifecycle;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

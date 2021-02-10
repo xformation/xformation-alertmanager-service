@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Copyright (C) 2020 Synectiks -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <modules>
-    	
         <module>../alertmanager-server</module>
-        <!-- <module>../full-backend-tests</module> -->
     </modules>
 
     <parent>
-        <groupId>org.alertmanager</groupId>
+        <groupId>com.synectiks.alertmanager</groupId>
         <artifactId>alertmanager-parent</artifactId>
         <version>4.1.0-SNAPSHOT</version>
     </parent>
@@ -19,10 +15,9 @@
     <artifactId>alertmanager-project-parent</artifactId>
     <packaging>pom</packaging>
 
-    <name>AlertManager Project Parent POM</name>
-    <description>AlertManager Project Parent POM</description>
-    <!-- <url>https://www.graylog.org/</url> -->
-
+    <name>Alertmanager Project Parent POM</name>
+    <description>Alertmanager Project Parent POM</description>
+    
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -93,11 +88,11 @@
                 <artifactId>java-semver</artifactId>
                 <version>${java-semver.version}</version>
             </dependency>
-            <dependency>
+            <!-- <dependency>
                 <groupId>org.graylog.repackaged</groupId>
                 <artifactId>semver4j</artifactId>
                 <version>${semver4j.version}</version>
-            </dependency>
+            </dependency> -->
             <dependency>
                 <groupId>com.github.ben-manes.caffeine</groupId>
                 <artifactId>caffeine</artifactId>
@@ -411,11 +406,11 @@
                 <artifactId>airline</artifactId>
                 <version>${airline.version}</version>
             </dependency>
-            <dependency>
+            <!-- <dependency>
                 <groupId>org.graylog.repackaged</groupId>
                 <artifactId>os-platform-finder</artifactId>
                 <version>${os-platform-finder.version}</version>
-            </dependency>
+            </dependency> -->
             <dependency>
                 <groupId>org.hdrhistogram</groupId>
                 <artifactId>HdrHistogram</artifactId>
@@ -489,11 +484,11 @@
                 <artifactId>geoip2</artifactId>
                 <version>${geoip2.version}</version>
             </dependency>
-            <dependency>
+            <!-- <dependency>
                 <groupId>org.graylog.cef</groupId>
                 <artifactId>cef-parser</artifactId>
                 <version>${cef-parser.version}</version>
-            </dependency>
+            </dependency> -->
             <dependency>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-runtime</artifactId>
@@ -676,7 +671,7 @@
     </dependencyManagement>
 
     <build>
-        <!-- <pluginManagement>
+        <pluginManagement>
             <plugins>
                 <plugin>
                     <groupId>com.mycila</groupId>
@@ -684,7 +679,7 @@
                     <version>${license-maven.version}</version>
                 </plugin>
             </plugins>
-        </pluginManagement> -->
+        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -721,11 +716,10 @@
                 </executions>
             </plugin>
             
-            
-            <!-- <plugin>
+			<plugin>
                 <groupId>com.mycila</groupId>
                 <artifactId>license-maven-plugin</artifactId>
-            </plugin> -->
+            </plugin>
         </plugins>
     </build>
 
@@ -740,10 +734,6 @@
                 <quiet>true</quiet>
             </properties>
         </profile>
-        
-        <!--
-             Why the strange name? Glad you've asked! It's just so that yours truly
-             is able to run `mvn -Pedantic package` on the command line. :-)
         <profile>
             <id>edantic</id>
             <build>
@@ -800,10 +790,9 @@
                 </plugins>
             </build>
         </profile>
-        -->
-        
         <profile>
             <id>dependency-check</id>
+
             <build>
                 <plugins>
                     <plugin>
@@ -828,7 +817,7 @@
                 </plugins>
             </build>
         </profile>
-        <!-- <profile>
+        <profile>
             <id>travis</id>
             <activation>
                 <property>
@@ -847,6 +836,6 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile> -->
+        </profile>
     </profiles>
 </project>

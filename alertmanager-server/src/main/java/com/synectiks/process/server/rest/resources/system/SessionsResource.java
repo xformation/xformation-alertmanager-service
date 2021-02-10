@@ -1,22 +1,29 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.synectiks.process.server.audit.AuditEventTypes;
+import com.synectiks.process.server.audit.jersey.AuditEvent;
+import com.synectiks.process.server.audit.jersey.NoAuditEvent;
+import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
+import com.synectiks.process.server.plugin.database.users.User;
+import com.synectiks.process.server.rest.RestTools;
+import com.synectiks.process.server.rest.models.system.sessions.responses.SessionResponseFactory;
+import com.synectiks.process.server.rest.models.system.sessions.responses.SessionValidationResponse;
+import com.synectiks.process.server.security.headerauth.HTTPHeaderAuthConfig;
+import com.synectiks.process.server.security.realm.HTTPHeaderAuthenticationRealm;
+import com.synectiks.process.server.shared.rest.resources.RestResource;
+import com.synectiks.process.server.shared.security.ActorAwareAuthenticationToken;
+import com.synectiks.process.server.shared.security.ActorAwareAuthenticationTokenFactory;
+import com.synectiks.process.server.shared.security.AuthenticationServiceUnavailableException;
+import com.synectiks.process.server.shared.security.SessionCreator;
+import com.synectiks.process.server.shared.security.ShiroAuthenticationFilter;
+import com.synectiks.process.server.shared.security.ShiroRequestHeadersBinder;
+import com.synectiks.process.server.shared.security.ShiroSecurityContext;
+import com.synectiks.process.server.shared.users.UserService;
+import com.synectiks.process.server.utilities.IpSubnet;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -27,22 +34,6 @@ import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.glassfish.grizzly.http.server.Request;
-import com.synectiks.process.server.audit.AuditEventTypes;
-import com.synectiks.process.server.audit.jersey.AuditEvent;
-import com.synectiks.process.server.audit.jersey.NoAuditEvent;
-import com.synectiks.process.server.plugin.database.users.User;
-import com.synectiks.process.server.rest.RestTools;
-import com.synectiks.process.server.rest.models.system.sessions.responses.SessionResponseFactory;
-import com.synectiks.process.server.rest.models.system.sessions.responses.SessionValidationResponse;
-import com.synectiks.process.server.shared.rest.resources.RestResource;
-import com.synectiks.process.server.shared.security.ActorAwareAuthenticationToken;
-import com.synectiks.process.server.shared.security.ActorAwareAuthenticationTokenFactory;
-import com.synectiks.process.server.shared.security.AuthenticationServiceUnavailableException;
-import com.synectiks.process.server.shared.security.SessionCreator;
-import com.synectiks.process.server.shared.security.ShiroAuthenticationFilter;
-import com.synectiks.process.server.shared.security.ShiroSecurityContext;
-import com.synectiks.process.server.shared.users.UserService;
-import com.synectiks.process.server.utilities.IpSubnet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,12 +73,18 @@ public class SessionsResource extends RestResource {
     private final SessionCreator sessionCreator;
     private final ActorAwareAuthenticationTokenFactory tokenFactory;
     private final SessionResponseFactory sessionResponseFactory;
+    private final ClusterConfigService clusterConfigService;
 
     @Inject
-    public SessionsResource(UserService userService, DefaultSecurityManager securityManager,
-            ShiroAuthenticationFilter authenticationFilter, @Named("trusted_proxies") Set<IpSubnet> trustedSubnets,
-            @Context Request grizzlyRequest, SessionCreator sessionCreator,
-            ActorAwareAuthenticationTokenFactory tokenFactory, SessionResponseFactory sessionResponseFactory) {
+    public SessionsResource(UserService userService,
+                            DefaultSecurityManager securityManager,
+                            ShiroAuthenticationFilter authenticationFilter,
+                            @Named("trusted_proxies") Set<IpSubnet> trustedSubnets,
+                            @Context Request grizzlyRequest,
+                            SessionCreator sessionCreator,
+                            ActorAwareAuthenticationTokenFactory tokenFactory,
+                            SessionResponseFactory sessionResponseFactory,
+                            ClusterConfigService clusterConfigService) {
         this.userService = userService;
         this.securityManager = securityManager;
         this.authenticationFilter = authenticationFilter;
@@ -96,6 +93,7 @@ public class SessionsResource extends RestResource {
         this.sessionCreator = sessionCreator;
         this.tokenFactory = tokenFactory;
         this.sessionResponseFactory = sessionResponseFactory;
+        this.clusterConfigService = clusterConfigService;
     }
 
     @POST
@@ -132,7 +130,7 @@ public class SessionsResource extends RestResource {
             if (session.isPresent()) {
                 return sessionResponseFactory.forSession(session.get());
             } else {
-                throw new NotAuthorizedException("Invalid credentials.", "Basic realm=\"Graylog Server session\"");
+                throw new NotAuthorizedException("Invalid credentials.", "Basic realm=\"perfmanager Server session\"");
             }
         } catch (AuthenticationServiceUnavailableException e) {
             throw new ServiceUnavailableException("Authentication service unavailable");
@@ -171,6 +169,12 @@ public class SessionsResource extends RestResource {
 
             session.setAttribute("username", user.getName());
 
+            final HTTPHeaderAuthConfig httpHeaderConfig = loadHTTPHeaderConfig();
+            final Optional<String> usernameHeader = ShiroRequestHeadersBinder.getHeaderFromThreadContext(httpHeaderConfig.usernameHeader());
+            if (httpHeaderConfig.enabled() && usernameHeader.isPresent()) {
+                session.setAttribute(HTTPHeaderAuthenticationRealm.SESSION_AUTH_HEADER, usernameHeader.get());
+            }
+
             LOG.debug("Session created {}", session.getId());
             session.touch();
             // save subject in session, otherwise we can't get the username back in subsequent requests.
@@ -190,5 +194,9 @@ public class SessionsResource extends RestResource {
     public void terminateSession(@ApiParam(name = "sessionId", required = true) @PathParam("sessionId") String sessionId) {
         final Subject subject = getSubject();
         securityManager.logout(subject);
+    }
+
+    private HTTPHeaderAuthConfig loadHTTPHeaderConfig() {
+        return clusterConfigService.getOrDefault(HTTPHeaderAuthConfig.class, HTTPHeaderAuthConfig.createDisabled());
     }
 }

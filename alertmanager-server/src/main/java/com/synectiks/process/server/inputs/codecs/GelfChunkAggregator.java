@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.codecs;
 
 import com.codahale.metrics.Counter;
@@ -21,12 +7,14 @@ import com.codahale.metrics.MetricRegistry;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import com.google.common.collect.Maps;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import com.synectiks.process.server.inputs.codecs.gelf.GELFMessage;
 import com.synectiks.process.server.inputs.codecs.gelf.GELFMessageChunk;
 import com.synectiks.process.server.plugin.Tools;
 import com.synectiks.process.server.plugin.inputs.codecs.CodecAggregator;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -262,7 +250,6 @@ public class GelfChunkAggregator implements CodecAggregator {
             }
             // If two chunk entries have the same timestamp, we have to compare the IDs. Otherwise the removal from
             // the eviction set might not work and leak memory.
-            // See: https://github.com/Graylog2/graylog2-server/issues/1462
             if (firstTimestamp == o.firstTimestamp) {
                 return id.compareTo(o.id);
             }

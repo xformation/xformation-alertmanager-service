@@ -1,24 +1,12 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.testing.graylognode;
 
 import com.google.common.base.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static com.synectiks.process.common.testing.graylognode.ExecutableFileUtil.makeSureExecutableIsFound;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,8 +15,6 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-
-import static com.synectiks.process.common.testing.graylognode.ExecutableFileUtil.makeSureExecutableIsFound;
 
 public class MavenPackager {
     private static final Logger LOG = LoggerFactory.getLogger(MavenPackager.class);

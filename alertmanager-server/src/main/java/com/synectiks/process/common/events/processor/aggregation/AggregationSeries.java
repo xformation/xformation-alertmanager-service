@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.processor.aggregation;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -58,7 +44,6 @@ public abstract class AggregationSeries {
 
         public AggregationSeries build() {
             // Most of the views code doesn't handle empty strings. Best to convert them here.
-            // See: https://github.com/Graylog2/graylog2-server/issues/6933#issuecomment-568447111
             // TODO: It would be cleaner to use validations like "@NotBlank" and fix the frontend to send
             //       "null" instead of an empty string. This requires an auto-value update and some other
             //       modifications but we didn't want to do this in 3.2-beta.

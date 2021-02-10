@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.beats;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -30,6 +16,7 @@ import com.synectiks.process.server.plugin.inputs.annotations.ConfigClass;
 import com.synectiks.process.server.plugin.inputs.annotations.FactoryClass;
 import com.synectiks.process.server.plugin.inputs.codecs.AbstractCodec;
 import com.synectiks.process.server.plugin.journal.RawMessage;
+
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,16 +86,16 @@ public class Beats2Codec extends AbstractCodec {
         gelfMessage.addField("beats_type", beatsType);
 
         // This field should be stored without a prefix
-        final String gl2SourceCollector = event.path(Message.FIELD_GL2_SOURCE_COLLECTOR).asText();
-        if (!gl2SourceCollector.isEmpty()) {
-            gelfMessage.addField(Message.FIELD_GL2_SOURCE_COLLECTOR, gl2SourceCollector);
+        final String xfperfSourceCollector = event.path(Message.FIELD_XFPERF_SOURCE_COLLECTOR).asText();
+        if (!xfperfSourceCollector.isEmpty()) {
+            gelfMessage.addField(Message.FIELD_XFPERF_SOURCE_COLLECTOR, xfperfSourceCollector);
         }
 
         // Remove fields that should not be duplicated with a prefix
         if (event.isObject()) {
             ObjectNode onode = (ObjectNode) event;
             onode.remove("message");
-            onode.remove(Message.FIELD_GL2_SOURCE_COLLECTOR);
+            onode.remove(Message.FIELD_XFPERF_SOURCE_COLLECTOR);
         }
         addFlattened(gelfMessage, rootPath, event);
         return gelfMessage;

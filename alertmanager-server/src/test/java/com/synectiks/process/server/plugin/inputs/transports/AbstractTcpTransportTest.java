@@ -1,22 +1,16 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin.inputs.transports;
 
 import com.google.common.collect.ImmutableMap;
+import com.synectiks.process.server.inputs.transports.NettyTransportConfiguration;
+import com.synectiks.process.server.inputs.transports.netty.EventLoopGroupFactory;
+import com.synectiks.process.server.plugin.LocalMetricRegistry;
+import com.synectiks.process.server.plugin.configuration.Configuration;
+import com.synectiks.process.server.plugin.inputs.MessageInput;
+import com.synectiks.process.server.plugin.inputs.transports.AbstractTcpTransport;
+import com.synectiks.process.server.plugin.inputs.util.ThroughputCounter;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
@@ -24,12 +18,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LoggingHandler;
-import com.synectiks.process.server.inputs.transports.NettyTransportConfiguration;
-import com.synectiks.process.server.inputs.transports.netty.EventLoopGroupFactory;
-import com.synectiks.process.server.plugin.LocalMetricRegistry;
-import com.synectiks.process.server.plugin.configuration.Configuration;
-import com.synectiks.process.server.plugin.inputs.MessageInput;
-import com.synectiks.process.server.plugin.inputs.util.ThroughputCounter;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

@@ -1,29 +1,15 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.testing.elasticsearch;
 
 import com.github.zafarkhaja.semver.Version;
 import org.junit.Before;
 import org.junit.Rule;
 
+import static com.synectiks.process.server.indexer.IndexMappingFactory.indexMappingFor;
+
 import java.util.Collections;
 import java.util.Map;
-
-import static com.synectiks.process.server.indexer.IndexMappingFactory.indexMappingFor;
 
 /**
  * This class can be used as base class for Elasticsearch integration tests.
@@ -54,7 +40,7 @@ public abstract class ElasticsearchBaseTest {
     private static Map<String, Map<String, Object>> getGraylogDefaultMessageTemplates(Version version) {
         final Map<String, Object> template =
                 indexMappingFor(version).messageTemplate("*", "standard", -1);
-        return Collections.singletonMap("graylog-test-internal", template);
+        return Collections.singletonMap("perfmanager-test-internal", template);
     }
 
     private void addIndexTemplates(Map<String, Map<String, Object>> templates) {
@@ -78,7 +64,7 @@ public abstract class ElasticsearchBaseTest {
 
     /**
      * Import the given fixture resource path. The given path can be either a single file name or a full
-     * resource path to a JSON fixture file. (e.g. "TheTest.json" or "org/graylog/test/TheTest.json")
+     * resource path to a JSON fixture file. (e.g. "TheTest.json" or "com/synectiks/process/common/test/TheTest.json")
      * If the resource path is a single filename, the method tries to find the resource in the resource path of
      * the test class.
      *

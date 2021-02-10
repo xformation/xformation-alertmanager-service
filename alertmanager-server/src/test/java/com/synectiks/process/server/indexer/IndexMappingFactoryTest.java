@@ -1,24 +1,13 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer;
 
 import com.github.zafarkhaja.semver.Version;
+import com.synectiks.process.server.indexer.ElasticsearchException;
+import com.synectiks.process.server.indexer.IndexMappingFactory;
 import com.synectiks.process.server.indexer.cluster.Node;
 import com.synectiks.process.server.indexer.indexset.IndexSetConfig;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -111,7 +100,7 @@ public class IndexMappingFactoryTest {
     private void testForIndexMappingType(String version, String mappingClassName, IndexSetConfig.TemplateType templateType) throws ClassNotFoundException {
         mockNodeVersion(version);
 
-        final Class<?> expectedMappingClass = Class.forName("com.synectiks.process.server.indexer." + mappingClassName);
+        final Class<?> expectedMappingClass = Class.forName("org.graylog2.indexer." + mappingClassName);
 
         assertThat(sut.createIndexMapping(templateType)).isInstanceOf(expectedMappingClass);
     }

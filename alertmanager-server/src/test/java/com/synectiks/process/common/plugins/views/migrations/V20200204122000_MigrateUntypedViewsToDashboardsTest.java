@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.migrations;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -21,8 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-import org.bson.conversions.Bson;
 import com.synectiks.process.common.plugins.views.migrations.V20200204122000_MigrateUntypedViewsToDashboards.V20200204122000_MigrateUntypedViewsToDashboards;
 import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
 import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
@@ -30,6 +14,9 @@ import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.migrations.Migration;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -51,8 +38,8 @@ import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.synectiks.process.common.plugins.views.migrations.V20200204122000_MigrateUntypedViewsToDashboards.V20200204122000_MigrateUntypedViewsToDashboards.MigrationCompleted;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;

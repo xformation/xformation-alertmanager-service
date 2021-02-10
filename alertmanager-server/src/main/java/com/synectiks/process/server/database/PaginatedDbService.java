@@ -1,25 +1,12 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.database;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Streams;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
+
+import org.bson.types.ObjectId;
 import org.mongojack.DBCursor;
 import org.mongojack.DBQuery;
 import org.mongojack.DBSort;
@@ -38,7 +25,7 @@ import java.util.stream.Stream;
  * This class is a helper to implement a basic Mongojack-based database service that allows CRUD operations on a
  * single DTO type and offers paginated access.
  * <p>
- * It makes only a few assumptions, which are common to many Graylog entities:
+ * It makes only a few assumptions, which are common to many perfmanager entities:
  *     <ul>
  *         <li>The DTO class has a name which is unique</li>
  *     </ul>

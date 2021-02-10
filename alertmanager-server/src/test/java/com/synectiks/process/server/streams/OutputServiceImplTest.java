@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.streams;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +11,9 @@ import com.synectiks.process.server.database.NotFoundException;
 import com.synectiks.process.server.outputs.OutputRegistry;
 import com.synectiks.process.server.plugin.streams.Output;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+import com.synectiks.process.server.streams.OutputServiceImpl;
+import com.synectiks.process.server.streams.StreamService;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -105,8 +94,8 @@ public class OutputServiceImplTest {
     public void countByTypeReturnsNumberOfOutputsByType() {
         assertThat(outputService.countByType())
                 .hasSize(2)
-                .containsEntry("com.synectiks.process.server.outputs.LoggingOutput", 1L)
-                .containsEntry("com.synectiks.process.server.outputs.GelfOutput", 1L);
+                .containsEntry("org.graylog2.outputs.LoggingOutput", 1L)
+                .containsEntry("org.graylog2.outputs.GelfOutput", 1L);
     }
 
     @Test

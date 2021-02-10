@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.initializers;
 
 import com.google.common.base.Stopwatch;
@@ -21,6 +7,7 @@ import com.google.common.util.concurrent.AbstractIdleService;
 import com.synectiks.process.server.periodical.Periodicals;
 import com.synectiks.process.server.plugin.ServerStatus;
 import com.synectiks.process.server.plugin.periodical.Periodical;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +44,7 @@ public class PeriodicalsService extends AbstractIdleService {
                 periodical.initialize();
 
                 if (periodical.masterOnly() && !serverStatus.hasCapability(ServerStatus.Capability.MASTER)) {
-                    LOG.info("Not starting [{}] periodical. Only started on Graylog master nodes.", periodical.getClass().getCanonicalName());
+                    LOG.info("Not starting [{}] periodical. Only started on perfmanager master nodes.", periodical.getClass().getCanonicalName());
                     continue;
                 }
 

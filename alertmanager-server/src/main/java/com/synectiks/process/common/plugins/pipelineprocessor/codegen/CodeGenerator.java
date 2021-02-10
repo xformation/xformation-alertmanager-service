@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.codegen;
 
 import com.google.common.base.Joiner;
@@ -36,9 +22,6 @@ import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
-
-import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang3.StringUtils;
 import com.synectiks.process.common.plugins.pipelineprocessor.EvaluationContext;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.Rule;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.RuleAstBaseListener;
@@ -70,6 +53,9 @@ import com.synectiks.process.common.plugins.pipelineprocessor.ast.functions.Func
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.statements.VarAssignStatement;
 import com.synectiks.process.common.plugins.pipelineprocessor.codegen.compiler.JavaCompiler;
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.FunctionRegistry;
+
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Period;

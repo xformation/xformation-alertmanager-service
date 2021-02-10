@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.users;
 
 import com.codahale.metrics.annotation.Timed;
@@ -22,14 +8,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.permission.WildcardPermission;
 import com.synectiks.process.common.security.UserContext;
 import com.synectiks.process.common.security.permissions.GRNPermission;
 import com.synectiks.process.server.audit.AuditEventTypes;
@@ -63,6 +41,16 @@ import com.synectiks.process.server.shared.users.UserService;
 import com.synectiks.process.server.users.PaginatedUserService;
 import com.synectiks.process.server.users.RoleService;
 import com.synectiks.process.server.users.UserOverviewDTO;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.permission.WildcardPermission;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,6 +78,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -103,14 +92,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.maxBy;
 import static com.synectiks.process.server.shared.security.RestPermissions.USERS_EDIT;
 import static com.synectiks.process.server.shared.security.RestPermissions.USERS_PERMISSIONSEDIT;
 import static com.synectiks.process.server.shared.security.RestPermissions.USERS_ROLESEDIT;
 import static com.synectiks.process.server.shared.security.RestPermissions.USERS_TOKENCREATE;
 import static com.synectiks.process.server.shared.security.RestPermissions.USERS_TOKENLIST;
 import static com.synectiks.process.server.shared.security.RestPermissions.USERS_TOKENREMOVE;
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.maxBy;
 
 @RequiresAuthentication
 @Path("/users")
@@ -329,6 +318,17 @@ public class UsersResource extends RestResource {
         if (roles != null) {
             try {
                 final Map<String, Role> nameMap = roleService.loadAllLowercaseNameMap();
+                List<String> unknownRoles = new ArrayList<>();
+                roles.forEach(roleName -> {
+                    if (!nameMap.containsKey(roleName.toLowerCase(Locale.US))) {
+                        unknownRoles.add(roleName);
+                    }
+                });
+                if (!unknownRoles.isEmpty()) {
+                    throw new BadRequestException(
+                        String.format(Locale.ENGLISH,"Invalid role names: %s", StringUtils.join(unknownRoles, ", "))
+                    );
+                }
                 final Iterable<String> roleIds = Iterables.transform(roles, Roles.roleNameToIdFunction(nameMap));
                 user.setRoleIds(Sets.newHashSet(roleIds));
             } catch (com.synectiks.process.server.database.NotFoundException e) {

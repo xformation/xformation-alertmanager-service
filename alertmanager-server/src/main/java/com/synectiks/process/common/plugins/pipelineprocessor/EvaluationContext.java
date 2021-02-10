@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor;
 
 import com.google.common.collect.Lists;
@@ -23,6 +9,7 @@ import com.synectiks.process.server.plugin.EmptyMessages;
 import com.synectiks.process.server.plugin.Message;
 import com.synectiks.process.server.plugin.MessageCollection;
 import com.synectiks.process.server.plugin.Messages;
+
 import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;
@@ -55,7 +42,7 @@ public class EvaluationContext {
     private List<EvalError> evalErrors;
 
     private EvaluationContext() {
-        this(new Message("__dummy", "__dummy", DateTime.parse("2010-07-30T16:03:25Z"))); // first Graylog release
+        this(new Message("__dummy", "__dummy", DateTime.parse("2010-07-30T16:03:25Z"))); 
     }
 
     public EvaluationContext(@Nonnull Message message) {

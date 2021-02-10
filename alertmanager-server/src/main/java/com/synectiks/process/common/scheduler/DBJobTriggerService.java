@@ -1,31 +1,18 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.scheduler;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
-import one.util.streamex.StreamEx;
-import org.bson.types.ObjectId;
 import com.synectiks.process.common.scheduler.clock.JobSchedulerClock;
 import com.synectiks.process.common.scheduler.schedule.OnceJobSchedule;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.plugin.system.NodeId;
+
+import one.util.streamex.StreamEx;
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.mongojack.DBCursor;
 import org.mongojack.DBQuery;
@@ -380,7 +367,7 @@ public class DBJobTriggerService {
      * <p></p>
      * This method will release all triggers that are locked by the calling node. It should be called before starting
      * the scheduler service on the current node to release all triggers that might be in a stale
-     * {@link JobTriggerStatus#RUNNING RUNNING} status after an unclean JVM or Graylog server shutdown.
+     * {@link JobTriggerStatus#RUNNING RUNNING} status after an unclean JVM or perfmanager server shutdown.
      *
      * @return number of released triggers
      */

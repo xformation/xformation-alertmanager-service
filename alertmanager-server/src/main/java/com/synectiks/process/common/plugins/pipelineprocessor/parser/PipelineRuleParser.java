@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.parser;
 
 import com.google.common.collect.ImmutableList;
@@ -21,19 +7,6 @@ import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import org.antlr.v4.runtime.ANTLRInputStream;
-import org.antlr.v4.runtime.BaseErrorListener;
-import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.DefaultErrorStrategy;
-import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.RecognitionException;
-import org.antlr.v4.runtime.Recognizer;
-import org.antlr.v4.runtime.RuleContext;
-import org.antlr.v4.runtime.Token;
-import org.antlr.v4.runtime.tree.ParseTreeProperty;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.mina.util.IdentityHashSet;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.Pipeline;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.Rule;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.Stage;
@@ -87,6 +60,20 @@ import com.synectiks.process.common.plugins.pipelineprocessor.parser.errors.Unde
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.errors.UndeclaredVariable;
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.errors.WrongNumberOfArgs;
 import com.synectiks.process.common.plugins.pipelineprocessor.processors.ConfigurationStateUpdater;
+
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.BaseErrorListener;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.DefaultErrorStrategy;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.RecognitionException;
+import org.antlr.v4.runtime.Recognizer;
+import org.antlr.v4.runtime.RuleContext;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.tree.ParseTreeProperty;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.mina.util.IdentityHashSet;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Period;

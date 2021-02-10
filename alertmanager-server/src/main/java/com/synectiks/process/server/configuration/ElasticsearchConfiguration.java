@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.configuration;
 
 import com.github.joschi.jadconfig.Parameter;
@@ -35,7 +21,7 @@ public class ElasticsearchConfiguration {
 
     @Deprecated // Should be removed in Graylog 3.0
     @Parameter(value = "elasticsearch_index_prefix", required = true)
-    private String indexPrefix = "graylog";
+    private String indexPrefix = "perfmanager";
 
     @Deprecated // Should be removed in Graylog 3.0
     @Parameter(value = "elasticsearch_max_number_of_indices", required = true, validator = PositiveIntegerValidator.class)
@@ -67,7 +53,7 @@ public class ElasticsearchConfiguration {
 
     @Deprecated // Should be removed in Graylog 3.0
     @Parameter(value = "elasticsearch_template_name")
-    private String templateName = "graylog-internal";
+    private String templateName = "perfmanager-internal";
 
     @Parameter(value = "no_retention")
     private boolean noRetention = false;

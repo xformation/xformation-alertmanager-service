@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.configuration;
 
 import com.github.joschi.jadconfig.Parameter;
@@ -26,6 +12,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.net.HostAndPort;
 import com.google.common.net.InetAddresses;
 import com.synectiks.process.server.plugin.Tools;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,14 +28,14 @@ import java.nio.file.Path;
 public class HttpConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(HttpConfiguration.class);
 
-    private static final int GRAYLOG_DEFAULT_PORT = 9000;
+    private static final int PERFMANAGER_DEFAULT_PORT = 9000;
 
-    public static final String OVERRIDE_HEADER = "X-Graylog-Server-URL";
+    public static final String OVERRIDE_HEADER = "X-perfmanager-Server-URL";
     public static final String PATH_WEB = "";
     public static final String PATH_API = "api/";
 
     @Parameter(value = "http_bind_address", required = true)
-    private HostAndPort httpBindAddress = HostAndPort.fromParts("127.0.0.1", GRAYLOG_DEFAULT_PORT);
+    private HostAndPort httpBindAddress = HostAndPort.fromParts("127.0.0.1", PERFMANAGER_DEFAULT_PORT);
 
     @Parameter(value = "http_publish_uri", validator = URIAbsoluteValidator.class)
     private URI httpPublishUri;
@@ -83,13 +70,10 @@ public class HttpConfiguration {
     @Parameter(value = "http_external_uri")
     private URI httpExternalUri;
 
-    @Parameter(value = "enable_web_framework")
-    private boolean enableWebFramework = false;
-    
-	public HostAndPort getHttpBindAddress() {
+    public HostAndPort getHttpBindAddress() {
         return httpBindAddress
                 .requireBracketsForIPv6()
-                .withDefaultPort(GRAYLOG_DEFAULT_PORT);
+                .withDefaultPort(PERFMANAGER_DEFAULT_PORT);
     }
 
     public String getUriScheme() {
@@ -118,7 +102,7 @@ public class HttpConfiguration {
                 LOG.warn("\"{}\" is not a valid setting for \"http_publish_uri\". Using default <{}>.", httpPublishUri, defaultHttpUri);
                 return defaultHttpUri;
             } else {
-                return Tools.normalizeURI(httpPublishUri, httpPublishUri.getScheme(), GRAYLOG_DEFAULT_PORT, httpPublishUri.getPath());
+                return Tools.normalizeURI(httpPublishUri, httpPublishUri.getScheme(), PERFMANAGER_DEFAULT_PORT, httpPublishUri.getPath());
             }
         }
     }
@@ -142,7 +126,7 @@ public class HttpConfiguration {
                     LOG.debug("Using loopback address {}", guessedAddress);
                 }
             } catch (Exception e) {
-                LOG.error("Could not guess primary network address for \"http_publish_uri\". Please configure it in your Graylog configuration.", e);
+                LOG.error("Could not guess primary network address for \"http_publish_uri\". Please configure it in your perfmanager configuration.", e);
                 throw new ParameterException("No http_publish_uri.", e);
             }
 
@@ -264,9 +248,4 @@ public class HttpConfiguration {
     private boolean isRegularFileAndReadable(Path path) {
         return path != null && Files.isRegularFile(path) && Files.isReadable(path);
     }
-    
-    public boolean isEnableWebFramework() {
-		return enableWebFramework;
-	}
-    
 }

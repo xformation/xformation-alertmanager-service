@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin;
 
 import org.slf4j.Logger;
@@ -152,7 +138,7 @@ public class Version implements Comparable<Version> {
     }
 
     /**
-     * Try to read the version from the {@literal graylog-plugin.properties} file included in a plugin.
+     * Try to read the version from the {@literal perfmanager-plugin.properties} file included in a plugin.
      *
      * @param pluginClass     Class where the class loader should be obtained from.
      * @param path            Path of the properties file on the classpath which contains the version information.
@@ -283,7 +269,6 @@ public class Version implements Comparable<Version> {
         } else {
             // If this is a pre-release version, use the major.minor.patch version for comparison with the other.
             // This allows plugins to require a server version of 2.1.0 and it still gets loaded on a 2.1.0-beta.2 server.
-            // See: https://github.com/Graylog2/graylog2-server/issues/2462
             return com.github.zafarkhaja.semver.Version.valueOf(version.getNormalVersion()).greaterThanOrEqualTo(other.getVersion());
         }
     }

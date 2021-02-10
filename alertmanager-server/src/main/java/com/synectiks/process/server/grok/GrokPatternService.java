@@ -1,21 +1,12 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.grok;
 
+import com.synectiks.process.server.grok.krakens.GrokUtils;
+import com.synectiks.process.server.grok.krakens.exception.GrokException;
+
+import com.synectiks.process.server.database.NotFoundException;
+import com.synectiks.process.server.plugin.database.ValidationException;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -26,11 +17,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.synectiks.process.server.database.NotFoundException;
-import com.synectiks.process.server.grok.krakens.GrokUtils;
-import com.synectiks.process.server.grok.krakens.exception.GrokException;
-import com.synectiks.process.server.plugin.database.ValidationException;
 
 public interface GrokPatternService {
     GrokPattern load(String patternId) throws NotFoundException;

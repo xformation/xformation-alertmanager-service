@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.buffers.processors;
 
 import com.codahale.metrics.Meter;
@@ -23,7 +9,6 @@ import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
 import com.lmax.disruptor.WorkHandler;
-import de.huxhorn.sulky.ulid.ULID;
 import com.synectiks.process.server.buffers.OutputBuffer;
 import com.synectiks.process.server.messageprocessors.OrderedMessageProcessors;
 import com.synectiks.process.server.plugin.Message;
@@ -34,6 +19,9 @@ import com.synectiks.process.server.plugin.messageprocessors.MessageProcessor;
 import com.synectiks.process.server.plugin.streams.DefaultStream;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.system.processing.ProcessingStatusRecorder;
+
+import de.huxhorn.sulky.ulid.ULID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -136,10 +124,10 @@ public class ProcessBufferProcessor implements WorkHandler<MessageEvent> {
             messages = messageProcessor.process(messages);
         }
         for (Message message : messages) {
-            if (!message.hasField(Message.FIELD_GL2_MESSAGE_ID) || isNullOrEmpty(message.getFieldAs(String.class, Message.FIELD_GL2_MESSAGE_ID))) {
+            if (!message.hasField(Message.FIELD_XFPERF_MESSAGE_ID) || isNullOrEmpty(message.getFieldAs(String.class, Message.FIELD_XFPERF_MESSAGE_ID))) {
                 // Set the message ID once all message processors have finished
-                // See documentation of Message.FIELD_GL2_MESSAGE_ID for details
-                message.addField(Message.FIELD_GL2_MESSAGE_ID, ulid.nextULID());
+                // See documentation of Message.FIELD_XFPERF_MESSAGE_ID for details
+                message.addField(Message.FIELD_XFPERF_MESSAGE_ID, ulid.nextULID());
             }
 
             // The processing time should only be set once all message processors have finished

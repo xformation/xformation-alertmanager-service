@@ -1,24 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.engine;
 
 import com.google.common.collect.ImmutableSet;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import one.util.streamex.StreamEx;
 import com.synectiks.process.common.plugins.views.search.Query;
 import com.synectiks.process.common.plugins.views.search.QueryMetadata;
 import com.synectiks.process.common.plugins.views.search.QueryMetadataDecorator;
@@ -28,6 +13,9 @@ import com.synectiks.process.common.plugins.views.search.SearchJob;
 import com.synectiks.process.common.plugins.views.search.errors.QueryError;
 import com.synectiks.process.common.plugins.views.search.errors.SearchError;
 import com.synectiks.process.common.plugins.views.search.errors.SearchException;
+
+import one.util.streamex.StreamEx;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,6 +36,7 @@ public class QueryEngine {
     private static final Logger LOG = LoggerFactory.getLogger(QueryEngine.class);
 
     private final Set<QueryMetadataDecorator> queryMetadataDecorators;
+    private final QueryParser queryParser;
 
     // TODO proper thread pool with tunable settings
     private final Executor queryPool = Executors.newFixedThreadPool(4, new ThreadFactoryBuilder().setNameFormat("query-engine-%d").build());
@@ -55,16 +44,19 @@ public class QueryEngine {
 
     @Inject
     public QueryEngine(QueryBackend<? extends GeneratedQueryContext> elasticsearchBackend,
-                       Set<QueryMetadataDecorator> queryMetadataDecorators) {
+                       Set<QueryMetadataDecorator> queryMetadataDecorators,
+                       QueryParser queryParser) {
         this.elasticsearchBackend = elasticsearchBackend;
         this.queryMetadataDecorators = queryMetadataDecorators;
+        this.queryParser = queryParser;
     }
 
     // TODO: Backwards-compatible constructor to avoid breakage. Remove at some point.
     @Deprecated
     public QueryEngine(Map<String, QueryBackend<? extends GeneratedQueryContext>> backends,
-                       Set<QueryMetadataDecorator> queryMetadataDecorators) {
-        this(backends.get("elasticsearch"), queryMetadataDecorators);
+                       Set<QueryMetadataDecorator> queryMetadataDecorators,
+                       QueryParser queryParser) {
+        this(backends.get("elasticsearch"), queryMetadataDecorators, queryParser);
     }
 
     private static Set<QueryResult> allOfResults(Set<CompletableFuture<QueryResult>> futures) {
@@ -83,7 +75,7 @@ public class QueryEngine {
     }
 
     public QueryMetadata parse(Search search, Query query) {
-        final QueryMetadata parsedMetadata = elasticsearchBackend.parse(search.parameters(), query);
+        final QueryMetadata parsedMetadata = queryParser.parse(query);
 
         return this.queryMetadataDecorators.stream()
                 .reduce((decorator1, decorator2) -> (s, q, metadata) -> decorator1.decorate(s, q, decorator2.decorate(s, q, metadata)))

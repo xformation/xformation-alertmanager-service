@@ -1,20 +1,14 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.periodical;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
 
 import com.synectiks.process.server.indexer.cluster.Cluster;
 import com.synectiks.process.server.indexer.cluster.health.AbsoluteValueWatermarkSettings;
@@ -27,13 +21,7 @@ import com.synectiks.process.server.indexer.cluster.health.WatermarkSettings;
 import com.synectiks.process.server.notifications.Notification;
 import com.synectiks.process.server.notifications.NotificationImpl;
 import com.synectiks.process.server.notifications.NotificationService;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import com.synectiks.process.server.periodical.IndexerClusterCheckerThread;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.bindings;
 
 import com.codahale.metrics.MetricRegistry;
@@ -24,7 +10,6 @@ import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.name.Names;
-import okhttp3.OkHttpClient;
 import com.synectiks.process.server.plugin.IOState;
 import com.synectiks.process.server.plugin.LocalMetricRegistry;
 import com.synectiks.process.server.plugin.buffers.InputBuffer;
@@ -41,6 +26,8 @@ import com.synectiks.process.server.shared.buffers.InputBufferImpl;
 import com.synectiks.process.server.shared.buffers.ProcessBuffer;
 import com.synectiks.process.server.shared.buffers.processors.DecodingProcessor;
 import com.synectiks.process.server.shared.inputs.InputRegistry;
+
+import okhttp3.OkHttpClient;
 
 import javax.activation.MimetypesFileTypeMap;
 import java.util.concurrent.ExecutorService;

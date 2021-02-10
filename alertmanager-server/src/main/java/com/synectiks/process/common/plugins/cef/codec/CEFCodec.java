@@ -1,23 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.cef.codec;
 
-import com.github.jcustenborder.cef.CEFParser;
-import com.github.jcustenborder.cef.CEFParserFactory;
+import com.synectiks.process.server.cef.CEFParser;
+import com.synectiks.process.server.cef.CEFParserFactory;
 import com.google.common.primitives.Ints;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
@@ -37,6 +23,7 @@ import com.synectiks.process.server.plugin.inputs.codecs.Codec;
 import com.synectiks.process.server.plugin.inputs.codecs.CodecAggregator;
 import com.synectiks.process.server.plugin.journal.RawMessage;
 import com.synectiks.process.server.shared.SuppressForbidden;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -147,7 +134,7 @@ public class CEFCodec implements Codec {
         }
     }
 
-    protected String buildMessageSummary(com.github.jcustenborder.cef.Message cef) {
+    protected String buildMessageSummary(com.synectiks.process.server.cef.Message cef) {
         return cef.deviceProduct() + ": [" + cef.deviceEventClassId() + ", " + cef.severity() + "] " + cef.name();
     }
 

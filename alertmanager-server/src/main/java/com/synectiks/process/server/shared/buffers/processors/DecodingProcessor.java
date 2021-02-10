@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.buffers.processors;
 
 import com.codahale.metrics.Counter;
@@ -36,6 +22,7 @@ import com.synectiks.process.server.plugin.inputs.codecs.MultiMessageCodec;
 import com.synectiks.process.server.plugin.journal.RawMessage;
 import com.synectiks.process.server.shared.journal.Journal;
 import com.synectiks.process.server.shared.utilities.ExceptionUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -196,22 +183,21 @@ public class DecodingProcessor implements EventHandler<MessageEvent> {
             switch (node.type) {
                 case SERVER:
                     // Always use the last source node.
-                    if (message.getField(Message.FIELD_GL2_SOURCE_INPUT) != null) {
+                    if (message.getField(Message.FIELD_XFPERF_SOURCE_INPUT) != null) {
                         LOG.debug("Multiple server nodes ({} {}) set for message id {}",
-                                message.getField(Message.FIELD_GL2_SOURCE_INPUT), node.nodeId, message.getId());
+                                message.getField(Message.FIELD_XFPERF_SOURCE_INPUT), node.nodeId, message.getId());
                     }
-                    message.addField(Message.FIELD_GL2_SOURCE_INPUT, node.inputId);
-                    message.addField(Message.FIELD_GL2_SOURCE_NODE, node.nodeId);
+                    message.addField(Message.FIELD_XFPERF_SOURCE_INPUT, node.inputId);
+                    message.addField(Message.FIELD_XFPERF_SOURCE_NODE, node.nodeId);
                     break;
-                // TODO Due to be removed in Graylog 3.x
                 case RADIO:
                     // Always use the last source node.
-                    if (message.getField(Message.FIELD_GL2_SOURCE_RADIO_INPUT) != null) {
+                    if (message.getField(Message.FIELD_XFPERF_SOURCE_RADIO_INPUT) != null) {
                         LOG.debug("Multiple radio nodes ({} {}) set for message id {}",
-                                message.getField(Message.FIELD_GL2_SOURCE_RADIO_INPUT), node.nodeId, message.getId());
+                                message.getField(Message.FIELD_XFPERF_SOURCE_RADIO_INPUT), node.nodeId, message.getId());
                     }
-                    message.addField(Message.FIELD_GL2_SOURCE_RADIO_INPUT, node.inputId);
-                    message.addField(Message.FIELD_GL2_SOURCE_RADIO, node.nodeId);
+                    message.addField(Message.FIELD_XFPERF_SOURCE_RADIO_INPUT, node.inputId);
+                    message.addField(Message.FIELD_XFPERF_SOURCE_RADIO, node.nodeId);
                     break;
             }
         }
@@ -227,12 +213,12 @@ public class DecodingProcessor implements EventHandler<MessageEvent> {
         final ResolvableInetSocketAddress remoteAddress = raw.getRemoteAddress();
         if (remoteAddress != null) {
             final String addrString = InetAddresses.toAddrString(remoteAddress.getAddress());
-            message.addField(Message.FIELD_GL2_REMOTE_IP, addrString);
+            message.addField(Message.FIELD_XFPERF_REMOTE_IP, addrString);
             if (remoteAddress.getPort() > 0) {
-                message.addField(Message.FIELD_GL2_REMOTE_PORT, remoteAddress.getPort());
+                message.addField(Message.FIELD_XFPERF_REMOTE_PORT, remoteAddress.getPort());
             }
             if (remoteAddress.isReverseLookedUp()) { // avoid reverse lookup if the hostname is available
-                message.addField(Message.FIELD_GL2_REMOTE_HOSTNAME, remoteAddress.getHostName());
+                message.addField(Message.FIELD_XFPERF_REMOTE_HOSTNAME, remoteAddress.getHostName());
             }
             if (Strings.isNullOrEmpty(message.getSource())) {
                 message.setSource(addrString);

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.legacy;
 
 import com.google.auto.value.AutoValue;
@@ -24,7 +10,6 @@ import com.mongodb.Block;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import org.bson.Document;
 import com.synectiks.process.common.events.conditions.Expr;
 import com.synectiks.process.common.events.conditions.Expression;
 import com.synectiks.process.common.events.notifications.DBNotificationService;
@@ -41,6 +26,8 @@ import com.synectiks.process.common.events.processor.aggregation.AggregationFunc
 import com.synectiks.process.common.events.processor.aggregation.AggregationSeries;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.shared.users.UserService;
+
+import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,8 +45,8 @@ import static com.google.common.base.MoreObjects.firstNonNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
 /**
- * Takes care of migrating legacy alert condition and alarm callback configurations to new {@link org.graylog.events.processor.EventDefinition event definitions}
- * and {@link org.graylog.events.notifications.EventNotificationConfig notification configurations}.
+ * Takes care of migrating legacy alert condition and alarm callback configurations to new {@link com.synectiks.process.common.events.processor.EventDefinition event definitions}
+ * and {@link com.synectiks.process.common.events.notifications.EventNotificationConfig notification configurations}.
  *
  * This class is deliberately avoiding the usage of the legacy Java classes by using the raw MongoDB client
  * so we can safely delete the legacy classes at one point and still run the migrations.
@@ -169,7 +156,7 @@ public class LegacyAlertConditionMigrator {
      *     {
      *       "_id": "54e3deadbeefdeadbeef0001",
      *       "stream_id" : "54e3deadbeefdeadbeef0001",
-     *       "type" : "com.synectiks.process.server.alarmcallbacks.HTTPAlarmCallback",
+     *       "type" : "org.graylog2.alarmcallbacks.HTTPAlarmCallback",
      *       "title" : "HTTP Callback Test",
      *       "configuration" : {
      *         "url" : "http://localhost:11000/"

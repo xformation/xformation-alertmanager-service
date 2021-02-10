@@ -1,28 +1,8 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.sidecar.services;
 
 import com.mongodb.BasicDBObject;
-import freemarker.cache.MultiTemplateLoader;
-import freemarker.cache.StringTemplateLoader;
-import freemarker.cache.TemplateLoader;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateExceptionHandler;
 import com.synectiks.process.common.plugins.sidecar.rest.models.Configuration;
 import com.synectiks.process.common.plugins.sidecar.rest.models.ConfigurationVariable;
 import com.synectiks.process.common.plugins.sidecar.rest.models.Sidecar;
@@ -34,6 +14,14 @@ import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.database.PaginatedDbService;
 import com.synectiks.process.server.database.PaginatedList;
 import com.synectiks.process.server.search.SearchQuery;
+
+import freemarker.cache.MultiTemplateLoader;
+import freemarker.cache.StringTemplateLoader;
+import freemarker.cache.TemplateLoader;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateExceptionHandler;
+
 import org.mongojack.DBQuery;
 import org.mongojack.DBSort;
 import org.slf4j.Logger;

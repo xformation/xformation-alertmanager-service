@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.netflow.codecs;
 
 import com.google.common.collect.ImmutableList;
@@ -21,12 +7,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.io.Resources;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
-import io.netty.buffer.Unpooled;
-import io.pkts.Pcap;
-import io.pkts.packet.UDPPacket;
-import io.pkts.protocol.Protocol;
+import com.synectiks.process.common.plugins.netflow.codecs.NetFlowCodec;
+import com.synectiks.process.common.plugins.netflow.codecs.NetflowV9CodecAggregator;
 import com.synectiks.process.common.plugins.netflow.flows.NetFlowFormatter;
 import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9BaseRecord;
 import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9FieldDef;
@@ -38,6 +20,14 @@ import com.synectiks.process.server.plugin.Message;
 import com.synectiks.process.server.plugin.configuration.Configuration;
 import com.synectiks.process.server.plugin.inputs.codecs.CodecAggregator;
 import com.synectiks.process.server.plugin.journal.RawMessage;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.buffer.Unpooled;
+import io.pkts.Pcap;
+import io.pkts.packet.UDPPacket;
+import io.pkts.protocol.Protocol;
+
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Ignore;

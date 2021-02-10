@@ -1,31 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.sidecar.rest.resources;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.synectiks.process.common.plugins.sidecar.audit.SidecarAuditEventTypes;
 import com.synectiks.process.common.plugins.sidecar.filter.ActiveSidecarFilter;
 import com.synectiks.process.common.plugins.sidecar.mapper.SidecarStatusMapper;
@@ -53,6 +32,14 @@ import com.synectiks.process.server.search.SearchQuery;
 import com.synectiks.process.server.search.SearchQueryField;
 import com.synectiks.process.server.search.SearchQueryParser;
 import com.synectiks.process.server.shared.rest.resources.RestResource;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -196,7 +183,7 @@ public class SidecarResource extends RestResource implements PluginRestResource 
                              @PathParam("sidecarId") @NotEmpty String sidecarId,
                              @ApiParam(name = "JSON body", required = true)
                              @Valid @NotNull RegistrationRequest request,
-                             @HeaderParam(value = "X-Graylog-Sidecar-Version") @NotEmpty String sidecarVersion) {
+                             @HeaderParam(value = "X-perfmanager-Sidecar-Version") @NotEmpty String sidecarVersion) {
         final Sidecar newSidecar;
         final Sidecar oldSidecar = sidecarService.findByNodeId(sidecarId);
         List<ConfigurationAssignment> assignments = null;

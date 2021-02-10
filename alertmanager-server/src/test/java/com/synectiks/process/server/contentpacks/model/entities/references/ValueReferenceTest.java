@@ -1,24 +1,12 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.model.entities.references;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.synectiks.process.server.contentpacks.model.entities.references.ValueReference;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+
 import org.json.JSONException;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -54,7 +42,7 @@ public class ValueReferenceTest {
         assertThat(ValueReference.of(TestEnum.A).asEnum(Collections.emptyMap(), TestEnum.class)).isEqualTo(TestEnum.A);
         assertThatThrownBy(() -> ValueReference.of("Test").asEnum(Collections.emptyMap(), TestEnum.class))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("No enum constant com.synectiks.process.server.contentpacks.model.entities.references.ValueReferenceTest.TestEnum.Test");
+                .hasMessage("No enum constant org.graylog2.contentpacks.model.entities.references.ValueReferenceTest.TestEnum.Test");
         assertThatThrownBy(() -> ValueReference.of(0).asEnum(Collections.emptyMap(), TestEnum.class))
                 .isInstanceOf(IllegalStateException.class)
                 .hasMessage("Expected value reference of type STRING or PARAMETER but got INTEGER");

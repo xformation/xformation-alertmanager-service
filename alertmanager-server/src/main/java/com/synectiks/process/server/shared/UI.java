@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared;
 
 import org.slf4j.Logger;
@@ -21,9 +7,9 @@ import org.slf4j.LoggerFactory;
 
 public class UI {
 
-    private static final String HELP_DOCS = "http://docs.graylog.org/";
-    private static final String HELP_COMMUNITY = "https://www.graylog.org/community-support/";
-    private static final String HELP_COMMERCIAL = "https://www.graylog.com/technical-support/";
+    private static final String HELP_DOCS = "http://docs.perfmanager.org/";
+    private static final String HELP_COMMUNITY = "https://www.perfmanager.org/community-support/";
+    private static final String HELP_COMMERCIAL = "https://www.perfmanager.com/technical-support/";
 
     private static final Logger LOG = LoggerFactory.getLogger(UI.class);
 

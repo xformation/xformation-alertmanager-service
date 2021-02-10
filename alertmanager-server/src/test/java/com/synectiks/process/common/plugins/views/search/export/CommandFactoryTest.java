@@ -1,25 +1,17 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.export;
 
 import com.google.common.collect.ImmutableSet;
 import com.synectiks.process.common.plugins.views.search.Query;
 import com.synectiks.process.common.plugins.views.search.Search;
 import com.synectiks.process.common.plugins.views.search.elasticsearch.ElasticsearchQueryString;
+import com.synectiks.process.common.plugins.views.search.export.CommandFactory;
+import com.synectiks.process.common.plugins.views.search.export.ExportException;
+import com.synectiks.process.common.plugins.views.search.export.ExportMessagesCommand;
+import com.synectiks.process.common.plugins.views.search.export.MessagesRequest;
+import com.synectiks.process.common.plugins.views.search.export.QueryStringDecorator;
+import com.synectiks.process.common.plugins.views.search.export.ResultFormat;
 import com.synectiks.process.common.plugins.views.search.filter.AndFilter;
 import com.synectiks.process.common.plugins.views.search.filter.StreamFilter;
 import com.synectiks.process.common.plugins.views.search.searchtypes.MessageList;
@@ -29,19 +21,20 @@ import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteR
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.InvalidRangeParametersException;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.RelativeRange;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.TimeRange;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static com.synectiks.process.common.plugins.views.search.export.ExportMessagesCommand.DEFAULT_FIELDS;
 import static com.synectiks.process.common.plugins.views.search.export.ExportMessagesCommand.defaultTimeRange;
 import static com.synectiks.process.common.plugins.views.search.export.TestData.relativeRange;
 import static com.synectiks.process.common.plugins.views.search.export.TestData.validQueryBuilder;
 import static com.synectiks.process.common.plugins.views.search.export.TestData.validQueryBuilderWith;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;

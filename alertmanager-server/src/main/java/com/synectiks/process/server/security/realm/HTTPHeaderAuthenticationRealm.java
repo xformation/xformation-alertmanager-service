@@ -1,28 +1,8 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.security.realm;
 
 import com.google.common.base.Joiner;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAccount;
-import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
-import org.apache.shiro.realm.AuthenticatingRealm;
 import com.synectiks.process.common.security.authservice.AuthServiceAuthenticator;
 import com.synectiks.process.common.security.authservice.AuthServiceCredentials;
 import com.synectiks.process.common.security.authservice.AuthServiceException;
@@ -32,6 +12,13 @@ import com.synectiks.process.server.security.headerauth.HTTPHeaderAuthConfig;
 import com.synectiks.process.server.shared.security.HttpHeadersToken;
 import com.synectiks.process.server.shared.security.ShiroSecurityContext;
 import com.synectiks.process.server.utilities.IpSubnet;
+
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAccount;
+import org.apache.shiro.authc.credential.AllowAllCredentialsMatcher;
+import org.apache.shiro.realm.AuthenticatingRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +38,7 @@ public class HTTPHeaderAuthenticationRealm extends AuthenticatingRealm {
     private static final Joiner JOINER = Joiner.on(", ");
 
     public static final String NAME = "http-header-authentication";
+    public static final String SESSION_AUTH_HEADER = "http-header-auth-user";
 
     private final ClusterConfigService clusterConfigService;
     private final AuthServiceAuthenticator authServiceAuthenticator;

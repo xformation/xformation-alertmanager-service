@@ -1,22 +1,18 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system.indexer;
 
 import org.apache.shiro.subject.Subject;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
+
 import com.synectiks.process.server.indexer.IndexSet;
 import com.synectiks.process.server.indexer.IndexSetRegistry;
 import com.synectiks.process.server.indexer.IndexSetStatsCreator;
@@ -33,21 +29,13 @@ import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRota
 import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategyConfig;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.rest.models.system.indexer.responses.IndexStats;
+import com.synectiks.process.server.rest.resources.system.indexer.IndexSetsResource;
 import com.synectiks.process.server.rest.resources.system.indexer.requests.IndexSetUpdateRequest;
 import com.synectiks.process.server.rest.resources.system.indexer.responses.IndexSetResponse;
 import com.synectiks.process.server.rest.resources.system.indexer.responses.IndexSetStats;
 import com.synectiks.process.server.rest.resources.system.indexer.responses.IndexSetSummary;
 import com.synectiks.process.server.shared.bindings.GuiceInjectorHolder;
 import com.synectiks.process.server.system.jobs.SystemJobManager;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
 
 import javax.inject.Provider;
 import javax.ws.rs.BadRequestException;

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.processors;
 
 import com.codahale.metrics.Meter;
@@ -45,6 +31,8 @@ import com.synectiks.process.common.plugins.pipelineprocessor.functions.messages
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.messages.SetField;
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.FunctionRegistry;
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.PipelineRuleParser;
+import com.synectiks.process.common.plugins.pipelineprocessor.processors.ConfigurationStateUpdater;
+import com.synectiks.process.common.plugins.pipelineprocessor.processors.PipelineInterpreter;
 import com.synectiks.process.common.plugins.pipelineprocessor.rest.PipelineConnections;
 import com.synectiks.process.server.events.ClusterEventBus;
 import com.synectiks.process.server.plugin.Message;
@@ -53,6 +41,7 @@ import com.synectiks.process.server.plugin.Tools;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.shared.SuppressForbidden;
 import com.synectiks.process.server.shared.journal.Journal;
+
 import org.junit.Test;
 
 import java.util.Collections;
@@ -62,8 +51,8 @@ import java.util.SortedMap;
 import java.util.concurrent.Executors;
 
 import static com.codahale.metrics.MetricRegistry.name;
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_STREAM_ID;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

@@ -1,26 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations.V20200803120800_GrantsMigrations;
 
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import org.bson.Document;
-import org.bson.types.ObjectId;
 import com.synectiks.process.common.grn.GRN;
 import com.synectiks.process.common.grn.GRNRegistry;
 import com.synectiks.process.common.grn.GRNTypes;
@@ -37,12 +21,16 @@ import com.synectiks.process.common.testing.mongodb.MongoJackExtension;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.database.NotFoundException;
+import com.synectiks.process.server.migrations.V20200803120800_GrantsMigrations.ViewSharingToGrantsMigration;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.plugin.database.users.User;
 import com.synectiks.process.server.shared.users.Role;
 import com.synectiks.process.server.shared.users.UserService;
 import com.synectiks.process.server.users.RoleImpl;
 import com.synectiks.process.server.users.RoleService;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

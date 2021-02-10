@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.migrations;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -23,12 +9,13 @@ import com.google.auto.value.AutoValue;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import org.bson.Document;
-import org.bson.types.ObjectId;
-import org.graylog.autovalue.WithBeanGetter;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.migrations.Migration;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
+import org.graylog.autovalue.WithBeanGetter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

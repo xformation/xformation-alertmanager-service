@@ -1,27 +1,16 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.zafarkhaja.semver.Version;
 import com.revinate.assertj.json.JsonPathAssert;
+import com.synectiks.process.server.indexer.IndexMappingFactory;
+import com.synectiks.process.server.indexer.IndexMappingTemplate;
 import com.synectiks.process.server.indexer.indexset.IndexSetConfig;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
 import com.synectiks.process.server.utilities.AssertJsonPath;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 

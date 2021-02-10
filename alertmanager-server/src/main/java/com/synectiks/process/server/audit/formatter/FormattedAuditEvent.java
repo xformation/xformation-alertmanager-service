@@ -1,24 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.audit.formatter;
 
-import com.synectiks.process.server.audit.AuditActor;
-
 import java.util.Map;
+
+import com.synectiks.process.server.audit.AuditActor;
 
 public interface FormattedAuditEvent {
     /**
@@ -28,8 +14,8 @@ public interface FormattedAuditEvent {
      *
      * Examples:
      *
-     *    {@code urn:graylog:user:jane}
-     *    {@code urn:graylog:node:28164cbe-4ad9-4c9c-a76e-088655aa7889}
+     *    {@code urn:perfmanager:user:jane}
+     *    {@code urn:perfmanager:node:28164cbe-4ad9-4c9c-a76e-088655aa7889}
      *
      * @return the actor URN
      */
@@ -38,7 +24,7 @@ public interface FormattedAuditEvent {
     /**
      * The audit event namespace.
      *
-     * Each plugin should have its own, unique namespace. The Graylog server namespace is {@code server}.
+     * Each plugin should have its own, unique namespace. The perfmanager server namespace is {@code server}.
      *
      * @return namespace string
      */
@@ -49,9 +35,9 @@ public interface FormattedAuditEvent {
      *
      * Examples:
      *
-     *   {@code urn:graylog:dashboard:56f2fdefa0275b357744230c:widget:57ab37cc67d0cb54582d43a0}
-     *   {@code urn:graylog:message_input:56f2fdefa0275b357744230c}
-     *   {@code urn:graylog:pipeline-rule:57ab37cc67d0cb54582d43a0}
+     *   {@code urn:perfmanager:dashboard:56f2fdefa0275b357744230c:widget:57ab37cc67d0cb54582d43a0}
+     *   {@code urn:perfmanager:message_input:56f2fdefa0275b357744230c}
+     *   {@code urn:perfmanager:pipeline-rule:57ab37cc67d0cb54582d43a0}
      *
      * @return the object URN
      */

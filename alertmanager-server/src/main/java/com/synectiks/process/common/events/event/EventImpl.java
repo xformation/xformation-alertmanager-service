@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.event;
 
 import com.codahale.metrics.Meter;
@@ -22,9 +8,10 @@ import com.google.common.base.MoreObjects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import org.apache.logging.log4j.util.Strings;
 import com.synectiks.process.common.events.fields.FieldValue;
 import com.synectiks.process.server.jackson.TypeReferences;
+
+import org.apache.logging.log4j.util.Strings;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
@@ -35,8 +22,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
 import static com.synectiks.process.server.plugin.Tools.buildElasticSearchTimeFormat;
+import static java.util.Objects.requireNonNull;
 import static org.joda.time.DateTimeZone.UTC;
 
 public class EventImpl implements Event {

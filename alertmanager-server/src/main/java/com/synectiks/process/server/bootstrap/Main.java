@@ -1,34 +1,21 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.bootstrap;
 
 import com.github.rvesse.airline.Cli;
 import com.github.rvesse.airline.builder.CliBuilder;
 import com.google.common.collect.ImmutableSet;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.synectiks.process.server.bootstrap.commands.CliCommandHelp;
 import com.synectiks.process.server.bootstrap.commands.ShowVersion;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.security.Security;
 import java.util.ServiceLoader;
 
 public class Main {
     public static void main(String[] args) {
-        final CliBuilder<CliCommand> builder = Cli.<CliCommand>builder("graylog")
+        final CliBuilder<CliCommand> builder = Cli.<CliCommand>builder("perfmanager")
                 .withDescription("Open source, centralized log management")
                 .withDefaultCommand(CliCommandHelp.class)
                 .withCommands(ImmutableSet.of(

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.periodical;
 
 import com.codahale.metrics.Gauge;
@@ -30,13 +16,14 @@ import com.synectiks.process.server.plugin.periodical.Periodical;
 import com.synectiks.process.server.shared.buffers.ProcessBuffer;
 import com.synectiks.process.server.shared.journal.Journal;
 import com.synectiks.process.server.shared.journal.KafkaJournal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.synectiks.process.server.shared.metrics.MetricUtils.safelyRegister;
+
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import static com.synectiks.process.server.shared.metrics.MetricUtils.safelyRegister;
 
 /**
  * The ThrottleStateUpdater publishes the current state buffer state of the journal to other interested parties,
@@ -235,7 +222,7 @@ public class ThrottleStateUpdaterThread extends Periodical {
         // publish to interested parties
         eventBus.post(throttleState);
 
-        // Abusing the current thread to send notifications from KafkaJournal in the graylog2-shared module
+        // Abusing the current thread to send notifications from KafkaJournal in the perfmanager2-shared module
         final double journalUtilizationPercentage = throttleState.journalSizeLimit > 0 ? (throttleState.journalSize * 100) / throttleState.journalSizeLimit : 0.0;
 
         if (journalUtilizationPercentage > KafkaJournal.NOTIFY_ON_UTILIZATION_PERCENTAGE) {

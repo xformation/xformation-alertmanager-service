@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.processor.aggregation;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -44,12 +30,13 @@ import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.Bucke
 import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.Pivot;
 import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.PivotResult;
 import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.SeriesSpec;
-import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.buckets.DateRangeBucket;
 import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.buckets.DateRange;
+import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.buckets.DateRangeBucket;
 import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.buckets.Values;
 import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.series.Count;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.TimeRange;
 import com.synectiks.process.server.plugin.streams.Stream;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -421,7 +408,7 @@ public class PivotAggregationSearch implements AggregationSearch {
             // Then we add the configured groups
             groupBy.addAll(config.groupBy().stream()
                     .map(field -> Values.builder()
-                            // The pivot search type (as of Graylog 3.1.0) is using the "terms" aggregation under
+                            // The pivot search type is using the "terms" aggregation under
                             // the hood. The "terms" aggregation is meant to return the "top" terms and does not allow
                             // and efficient retrieval and pagination over all terms.
                             // Using Integer.MAX_VALUE as a limit can be very expensive with high cardinality grouping.

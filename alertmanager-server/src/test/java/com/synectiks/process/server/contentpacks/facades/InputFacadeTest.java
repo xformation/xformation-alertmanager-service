@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.facades;
 
 import com.codahale.metrics.MetricRegistry;
@@ -23,10 +9,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.eventbus.EventBus;
 import com.google.common.graph.Graph;
-import org.apache.commons.collections.map.HashedMap;
 import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
 import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
 import com.synectiks.process.server.contentpacks.EntityDescriptorIds;
+import com.synectiks.process.server.contentpacks.facades.InputFacade;
+import com.synectiks.process.server.contentpacks.facades.InputWithExtractors;
 import com.synectiks.process.server.contentpacks.model.ModelId;
 import com.synectiks.process.server.contentpacks.model.ModelTypes;
 import com.synectiks.process.server.contentpacks.model.entities.ConverterEntity;
@@ -69,6 +56,8 @@ import com.synectiks.process.server.shared.SuppressForbidden;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
 import com.synectiks.process.server.shared.inputs.InputRegistry;
 import com.synectiks.process.server.shared.inputs.MessageInputFactory;
+
+import org.apache.commons.collections.map.HashedMap;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
@@ -145,8 +134,8 @@ public class InputFacadeTest {
         final RawUDPInput.Factory rawUDPInputFactory = mock(RawUDPInput.Factory.class);
         final RawUDPInput.Descriptor rawUDPInputDescriptor = mock(RawUDPInput.Descriptor.class);
         when(rawUDPInputFactory.getDescriptor()).thenReturn(rawUDPInputDescriptor);
-        inputFactories.put("com.synectiks.process.server.inputs.random.FakeHttpMessageInput", fakeHttpMessageInputFactory);
-        inputFactories.put("com.synectiks.process.server.inputs.raw.udp.RawUDPInput", rawUDPInputFactory);
+        inputFactories.put("org.graylog2.inputs.random.FakeHttpMessageInput", fakeHttpMessageInputFactory);
+        inputFactories.put("org.graylog2.inputs.raw.udp.RawUDPInput", rawUDPInputFactory);
 
         facade = new InputFacade(
                 objectMapper,
@@ -166,7 +155,7 @@ public class InputFacadeTest {
     public void exportNativeEntity() {
         final ImmutableMap<String, Object> fields = ImmutableMap.of(
                 MessageInput.FIELD_TITLE, "Input Title",
-                MessageInput.FIELD_TYPE, "com.synectiks.process.server.inputs.raw.udp.RawUDPInput",
+                MessageInput.FIELD_TYPE, "org.graylog2.inputs.raw.udp.RawUDPInput",
                 MessageInput.FIELD_CONFIGURATION, Collections.emptyMap()
         );
         final InputImpl input = new InputImpl(fields);
@@ -183,7 +172,7 @@ public class InputFacadeTest {
         final EntityV1 entityV1 = (EntityV1) entity;
         final InputEntity inputEntity = objectMapper.convertValue(entityV1.data(), InputEntity.class);
         assertThat(inputEntity.title()).isEqualTo(ValueReference.of("Input Title"));
-        assertThat(inputEntity.type()).isEqualTo(ValueReference.of("com.synectiks.process.server.inputs.raw.udp.RawUDPInput"));
+        assertThat(inputEntity.type()).isEqualTo(ValueReference.of("org.graylog2.inputs.raw.udp.RawUDPInput"));
         assertThat(inputEntity.configuration()).isEmpty();
     }
 
@@ -202,7 +191,7 @@ public class InputFacadeTest {
         final EntityV1 entityV1 = (EntityV1) entity;
         final InputEntity inputEntity = objectMapper.convertValue(entityV1.data(), InputEntity.class);
         assertThat(inputEntity.title()).isEqualTo(ValueReference.of("Local Raw UDP"));
-        assertThat(inputEntity.type()).isEqualTo(ValueReference.of("com.synectiks.process.server.inputs.raw.udp.RawUDPInput"));
+        assertThat(inputEntity.type()).isEqualTo(ValueReference.of("org.graylog2.inputs.raw.udp.RawUDPInput"));
         assertThat(inputEntity.global()).isEqualTo(ValueReference.of(false));
         assertThat(inputEntity.configuration())
                 .containsEntry("bind_address", ValueReference.of("127.0.0.1"))
@@ -226,7 +215,7 @@ public class InputFacadeTest {
                         ValueReference.of("Local Raw UDP"),
                         ReferenceMapUtils.toReferenceMap(configuration),
                         Collections.emptyMap(),
-                        ValueReference.of("com.synectiks.process.server.inputs.raw.udp.RawUDPInput"),
+                        ValueReference.of("org.graylog2.inputs.raw.udp.RawUDPInput"),
                         ValueReference.of(false),
                         Collections.emptyList()), JsonNode.class))
                 .build();
@@ -238,7 +227,7 @@ public class InputFacadeTest {
         final String savedId = savedInput.getId();
         assertThat(nativeEntity.descriptor()).isEqualTo(EntityDescriptor.create(savedId, ModelTypes.INPUT_V1));
         assertThat(savedInput.getTitle()).isEqualTo("Local Raw UDP");
-        assertThat(savedInput.getType()).isEqualTo("com.synectiks.process.server.inputs.raw.udp.RawUDPInput");
+        assertThat(savedInput.getType()).isEqualTo("org.graylog2.inputs.raw.udp.RawUDPInput");
         assertThat(savedInput.isGlobal()).isFalse();
         assertThat(savedInput.getContentPack()).isNull();
     }
@@ -303,7 +292,7 @@ public class InputFacadeTest {
         assertThat(entity.type()).isEqualTo(ModelTypes.INPUT_V1);
         final InputEntity inputEntity = objectMapper.convertValue(entity.data(), InputEntity.class);
         assertThat(inputEntity.title()).isEqualTo(ValueReference.of("Global Random HTTP"));
-        assertThat(inputEntity.type()).isEqualTo(ValueReference.of("com.synectiks.process.server.inputs.random.FakeHttpMessageInput"));
+        assertThat(inputEntity.type()).isEqualTo(ValueReference.of("org.graylog2.inputs.random.FakeHttpMessageInput"));
         assertThat(inputEntity.global()).isEqualTo(ValueReference.of(true));
         assertThat(inputEntity.staticFields()).containsEntry("custom_field", ValueReference.of("foobar"));
         assertThat(inputEntity.configuration()).isNotEmpty();
@@ -326,7 +315,7 @@ public class InputFacadeTest {
                         ValueReference.of("Local Raw UDP"),
                         ReferenceMapUtils.toReferenceMap(configuration),
                         Collections.emptyMap(),
-                        ValueReference.of("com.synectiks.process.server.inputs.raw.udp.RawUDPInput"),
+                        ValueReference.of("org.graylog2.inputs.raw.udp.RawUDPInput"),
                         ValueReference.of(false),
                         Collections.emptyList()), JsonNode.class))
                 .build();
@@ -358,7 +347,7 @@ public class InputFacadeTest {
                         ValueReference.of("Local Raw UDP"),
                         ReferenceMapUtils.toReferenceMap(configuration),
                         Collections.emptyMap(),
-                        ValueReference.of("com.synectiks.process.server.inputs.raw.udp.RawUDPInput"),
+                        ValueReference.of("org.graylog2.inputs.raw.udp.RawUDPInput"),
                         ValueReference.of(false),
                         Collections.emptyList()), JsonNode.class))
                 .build();

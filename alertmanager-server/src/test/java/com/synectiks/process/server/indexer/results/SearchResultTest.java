@@ -1,24 +1,13 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.results;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.synectiks.process.server.indexer.results.ResultMessage;
+import com.synectiks.process.server.indexer.results.SearchResult;
 import com.synectiks.process.server.plugin.Message;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,7 +44,7 @@ public class SearchResultTest {
             "source",
             "timestamp",
             "http_response",
-            "gl2_source_node",
+            "xfperf_source_node",
             "_index"
         ));
         when(r1.getMessage()).thenReturn(m1);
@@ -67,7 +56,7 @@ public class SearchResultTest {
             "source",
             "timestamp",
             "took_ms",
-            "gl2_source_collector"
+            "xfperf_source_collector"
         ));
         when(r2.getMessage()).thenReturn(m2);
 

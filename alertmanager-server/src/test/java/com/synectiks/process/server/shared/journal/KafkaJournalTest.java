@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.journal;
 
 import com.codahale.metrics.MetricRegistry;
@@ -22,16 +8,20 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.eventbus.EventBus;
 import com.google.common.primitives.Ints;
-import kafka.common.KafkaException;
-import kafka.log.LogSegment;
-import kafka.message.Message;
-import kafka.message.MessageSet;
-import kafka.utils.FileLock;
 import com.synectiks.process.server.Configuration;
 import com.synectiks.process.server.audit.NullAuditEventSender;
 import com.synectiks.process.server.plugin.InstantMillisProvider;
 import com.synectiks.process.server.plugin.ServerStatus;
 import com.synectiks.process.server.plugin.lifecycles.Lifecycle;
+import com.synectiks.process.server.shared.journal.Journal;
+import com.synectiks.process.server.shared.journal.KafkaJournal;
+
+import kafka.common.KafkaException;
+import kafka.log.LogSegment;
+import kafka.message.Message;
+import kafka.message.MessageSet;
+import kafka.utils.FileLock;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;

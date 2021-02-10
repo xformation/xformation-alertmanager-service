@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.system.shutdown;
 
 import com.google.common.base.Stopwatch;
@@ -35,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static java.util.Objects.requireNonNull;
 
 /**
- * A service that participates in the Graylog server graceful shutdown.
+ * A service that participates in the perfmanager server graceful shutdown.
  * <p>
  * Services can implement {@link GracefulShutdownHook} and register themselves with this service to make sure they
  * get shut down properly on server shutdown. During shutdown the registered hooks will be called in no particular

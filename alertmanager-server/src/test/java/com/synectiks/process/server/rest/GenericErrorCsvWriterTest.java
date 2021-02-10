@@ -1,32 +1,20 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import com.synectiks.process.server.plugin.database.validators.ValidationResult;
 import com.synectiks.process.server.plugin.rest.ApiError;
 import com.synectiks.process.server.plugin.rest.ValidationApiError;
+import com.synectiks.process.server.rest.GenericErrorCsvWriter;
 import com.synectiks.process.server.rest.resources.search.responses.QueryParseError;
 import com.synectiks.process.server.rest.resources.search.responses.SearchError;
 import com.synectiks.process.server.shared.bindings.GuiceInjectorHolder;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

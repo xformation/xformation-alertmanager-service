@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer;
 
 import com.google.common.collect.ImmutableList;
@@ -76,7 +62,7 @@ public abstract class IndexMapping implements IndexMappingTemplate {
     private Map<String, Map<String, Object>> internalFieldsMapping() {
         return ImmutableMap.of("internal_fields",
                 ImmutableMap.of(
-                        "match", "gl2_*",
+                        "match", "xfperf_*",
                         "match_mapping_type", "string",
                         "mapping", notAnalyzedString())
         );
@@ -99,9 +85,9 @@ public abstract class IndexMapping implements IndexMappingTemplate {
                 // http://joda-time.sourceforge.net/api-release/org/joda/time/format/DateTimeFormat.html
                 // http://www.elasticsearch.org/guide/reference/mapping/date-format.html
                 .put("timestamp", typeTimeWithMillis())
-                .put(Message.FIELD_GL2_ACCOUNTED_MESSAGE_SIZE, typeLong())
-                .put(Message.FIELD_GL2_RECEIVE_TIMESTAMP, typeTimeWithMillis())
-                .put(Message.FIELD_GL2_PROCESSING_TIMESTAMP, typeTimeWithMillis())
+                .put(Message.FIELD_XFPERF_ACCOUNTED_MESSAGE_SIZE, typeLong())
+                .put(Message.FIELD_XFPERF_RECEIVE_TIMESTAMP, typeTimeWithMillis())
+                .put(Message.FIELD_XFPERF_PROCESSING_TIMESTAMP, typeTimeWithMillis())
                 // to support wildcard searches in source we need to lowercase the content (wildcard search lowercases search term)
                 .put("source", analyzedString("analyzer_keyword", true))
                 .put("streams", notAnalyzedString())

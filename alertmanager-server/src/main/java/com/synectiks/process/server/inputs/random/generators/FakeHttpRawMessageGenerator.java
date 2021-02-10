@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.random.generators;
 
 import com.google.common.collect.ImmutableList;
@@ -22,17 +8,18 @@ import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
 import com.synectiks.process.server.plugin.Message;
 import com.synectiks.process.server.plugin.Tools;
+
 import org.joda.time.DateTime;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static java.util.Objects.requireNonNull;
 import static com.synectiks.process.server.inputs.random.generators.FakeHttpRawMessageGenerator.GeneratorState.Method.DELETE;
 import static com.synectiks.process.server.inputs.random.generators.FakeHttpRawMessageGenerator.GeneratorState.Method.GET;
 import static com.synectiks.process.server.inputs.random.generators.FakeHttpRawMessageGenerator.GeneratorState.Method.POST;
 import static com.synectiks.process.server.inputs.random.generators.FakeHttpRawMessageGenerator.GeneratorState.Method.PUT;
+import static java.util.Objects.requireNonNull;
 
 public class FakeHttpRawMessageGenerator {
     private static final Random RANDOM = new Random();

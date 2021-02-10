@@ -1,26 +1,11 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.facades;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import org.bson.types.ObjectId;
 import com.synectiks.process.common.events.legacy.V20190722150700_LegacyAlertConditionMigration;
 import com.synectiks.process.common.security.entities.EntityOwnershipService;
 import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
@@ -28,6 +13,7 @@ import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
 import com.synectiks.process.server.alarmcallbacks.AlarmCallbackConfigurationService;
 import com.synectiks.process.server.alerts.AlertService;
 import com.synectiks.process.server.contentpacks.EntityDescriptorIds;
+import com.synectiks.process.server.contentpacks.facades.StreamFacade;
 import com.synectiks.process.server.contentpacks.model.ModelId;
 import com.synectiks.process.server.contentpacks.model.ModelTypes;
 import com.synectiks.process.server.contentpacks.model.entities.Entity;
@@ -57,6 +43,8 @@ import com.synectiks.process.server.streams.StreamRuleServiceImpl;
 import com.synectiks.process.server.streams.StreamService;
 import com.synectiks.process.server.streams.StreamServiceImpl;
 import com.synectiks.process.server.streams.matchers.StreamRuleMock;
+
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.lookup.adapters.dnslookup;
 
 import com.google.common.base.Joiner;
@@ -23,6 +9,8 @@ import com.google.common.collect.Lists;
 import com.google.common.net.HostAndPort;
 import com.google.common.net.InetAddresses;
 import com.google.common.net.InternetDomainName;
+import com.synectiks.process.server.shared.utilities.ExceptionUtils;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
@@ -41,7 +29,6 @@ import io.netty.resolver.dns.SequentialDnsServerAddressStreamProvider;
 import io.netty.util.concurrent.Future;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import com.synectiks.process.server.shared.utilities.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -469,7 +456,7 @@ public class DnsClient {
 
         if (!isHostName(hostName)) {
             throw new IllegalArgumentException(
-                    String.format(Locale.ENGLISH, "[%s] is an invalid hostname. Please supply a pure hostname (eg. api.graylog.com)",
+                    String.format(Locale.ENGLISH, "[%s] is an invalid hostname. Please supply a pure hostname (eg. api.perfmanager.com)",
                                   hostName));
         }
     }

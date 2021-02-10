@@ -1,31 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.transports;
 
 import com.github.joschi.jadconfig.util.Size;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.EventLoopGroup;
-import io.netty.handler.codec.http.HttpContentDecompressor;
-import io.netty.handler.codec.http.HttpObjectAggregator;
-import io.netty.handler.codec.http.HttpRequestDecoder;
-import io.netty.handler.codec.http.HttpResponseEncoder;
-import io.netty.handler.timeout.ReadTimeoutHandler;
 import com.synectiks.process.server.inputs.transports.netty.EventLoopGroupFactory;
 import com.synectiks.process.server.inputs.transports.netty.HttpHandler;
 import com.synectiks.process.server.plugin.LocalMetricRegistry;
@@ -40,6 +19,14 @@ import com.synectiks.process.server.plugin.inputs.annotations.FactoryClass;
 import com.synectiks.process.server.plugin.inputs.transports.AbstractTcpTransport;
 import com.synectiks.process.server.plugin.inputs.transports.Transport;
 import com.synectiks.process.server.plugin.inputs.util.ThroughputCounter;
+
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.EventLoopGroup;
+import io.netty.handler.codec.http.HttpContentDecompressor;
+import io.netty.handler.codec.http.HttpObjectAggregator;
+import io.netty.handler.codec.http.HttpRequestDecoder;
+import io.netty.handler.codec.http.HttpResponseEncoder;
+import io.netty.handler.timeout.ReadTimeoutHandler;
 
 import java.util.LinkedHashMap;
 import java.util.concurrent.Callable;
@@ -66,14 +53,14 @@ public class HttpTransport extends AbstractTcpTransport {
                          NettyTransportConfiguration nettyTransportConfiguration,
                          ThroughputCounter throughputCounter,
                          LocalMetricRegistry localRegistry,
-                         com.synectiks.process.server.Configuration graylogConfiguration) {
+                         com.synectiks.process.server.Configuration serverConfiguration) {
         super(configuration,
               throughputCounter,
               localRegistry,
               eventLoopGroup,
               eventLoopGroupFactory,
               nettyTransportConfiguration,
-              graylogConfiguration);
+              serverConfiguration);
 
         enableCors = configuration.getBoolean(CK_ENABLE_CORS);
 
@@ -89,7 +76,6 @@ public class HttpTransport extends AbstractTcpTransport {
         if (idleWriterTimeout > 0) {
             // Install read timeout handler to close idle connections after a timeout.
             // This avoids dangling HTTP connections when the HTTP client does not close the connection properly.
-            // For details see: https://github.com/Graylog2/graylog2-server/issues/3223#issuecomment-270350500
             handlers.put("read-timeout-handler", () -> new ReadTimeoutHandler(idleWriterTimeout, TimeUnit.SECONDS));
         }
 

@@ -1,25 +1,13 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.migrations;
 
 import com.google.common.collect.ImmutableSet;
+import com.synectiks.process.common.plugins.views.migrations.V20200730000000_AddGl2MessageIdFieldAliasForEvents;
 import com.synectiks.process.server.configuration.ElasticsearchConfiguration;
 import com.synectiks.process.server.plugin.Version;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -73,7 +61,7 @@ class V20200730000000_AddGl2MessageIdFieldAliasForEventsTest {
 
         this.sut.upgrade();
 
-        verify(elasticsearchAdapter, never()).addGl2MessageIdFieldAlias(any());
+        verify(elasticsearchAdapter, never()).addXfPerfMessageIdFieldAlias(any());
     }
 
     @Test
@@ -83,7 +71,7 @@ class V20200730000000_AddGl2MessageIdFieldAliasForEventsTest {
         this.sut.upgrade();
 
         verify(elasticsearchAdapter)
-                .addGl2MessageIdFieldAlias(ImmutableSet.of("events-prefix", "system-events-prefix"));
+                .addXfPerfMessageIdFieldAlias(ImmutableSet.of("events-prefix", "system-events-prefix"));
     }
 
     @ParameterizedTest
@@ -93,7 +81,7 @@ class V20200730000000_AddGl2MessageIdFieldAliasForEventsTest {
 
         sut.upgrade();
 
-        verify(elasticsearchAdapter).addGl2MessageIdFieldAlias(any());
+        verify(elasticsearchAdapter).addXfPerfMessageIdFieldAlias(any());
     }
 
     @ParameterizedTest
@@ -103,7 +91,7 @@ class V20200730000000_AddGl2MessageIdFieldAliasForEventsTest {
 
         sut.upgrade();
 
-        verify(elasticsearchAdapter, never()).addGl2MessageIdFieldAlias(any());
+        verify(elasticsearchAdapter, never()).addXfPerfMessageIdFieldAlias(any());
     }
 
     @ParameterizedTest

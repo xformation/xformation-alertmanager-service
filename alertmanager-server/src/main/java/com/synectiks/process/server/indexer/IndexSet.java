@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer;
 
 import com.google.common.collect.ComparisonChain;
@@ -32,7 +18,7 @@ public interface IndexSet extends Comparable<IndexSet> {
     /**
      * Returns an array with all managed indices in this index set.
      * <p>
-     * Example: {@code ["graylog_0", "graylog_1", "graylog_2"]}
+     * Example: {@code ["perfmanager_0", "perfmanager_1", "perfmanager_2"]}
      *
      * @return array of index names
      */
@@ -43,7 +29,7 @@ public interface IndexSet extends Comparable<IndexSet> {
      * <p>
      * The write index alias always points to the newest index.
      * <p>
-     * Example: {@code "graylog_deflector"}
+     * Example: {@code "perfmanager_deflector"}
      *
      * @return the write index alias name
      */
@@ -54,7 +40,7 @@ public interface IndexSet extends Comparable<IndexSet> {
      * <p>
      * This can be used in Elasticsearch queries to match all managed indices in this index set.
      * <p>
-     * Example: {@code "graylog_*"}
+     * Example: {@code "perfmanager_*"}
      *
      * @return the index wildcard
      */
@@ -63,7 +49,7 @@ public interface IndexSet extends Comparable<IndexSet> {
     /**
      * Returns the newest index.
      * <p>
-     * Example: {@code "graylog_42"}
+     * Example: {@code "perfmanager_42"}
      *
      * @return the newest index
      * @throws NoTargetIndexException if there are no indices in this index set yet
@@ -75,7 +61,7 @@ public interface IndexSet extends Comparable<IndexSet> {
      * <p>
      * Incoming messages for this index set will be written into this index.
      * <p>
-     * Example: {@code "graylog_42"}
+     * Example: {@code "perfmanager_42"}
      *
      * @return the active write index
      * @throws TooManyAliasesException if the write index alias points to more than one index
@@ -88,7 +74,7 @@ public interface IndexSet extends Comparable<IndexSet> {
      * <p>
      * Only the active write index should have an alias, the other values should be empty.
      * <p>
-     * Example: {@code {graylog_0=[], graylog_1=[], graylog_2=[graylog_deflector}}
+     * Example: {@code {perfmanager_0=[], perfmanager_1=[], perfmanager_2=[perfmanager_deflector}}
      *
      * @return map of index names to index aliases
      */
@@ -97,7 +83,7 @@ public interface IndexSet extends Comparable<IndexSet> {
     /**
      * Returns the index prefix for this index set.
      * <p>
-     * Example: {@code "graylog"}
+     * Example: {@code "perfmanager"}
      *
      * @return index prefix for this index set
      */
@@ -156,7 +142,7 @@ public interface IndexSet extends Comparable<IndexSet> {
     /**
      * Extracts the index number from an index name.
      * <p>
-     * Example: {@code "graylog_42" => 42}
+     * Example: {@code "perfmanager_42" => 42}
      *
      * @param index index name
      * @return a filled {@link Optional} with the extracted index number, an empty one if the number couldn't be parsed

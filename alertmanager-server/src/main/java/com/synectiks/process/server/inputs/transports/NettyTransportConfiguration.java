@@ -1,30 +1,18 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.transports;
 
 import com.github.joschi.jadconfig.Parameter;
 import com.github.joschi.jadconfig.validators.PositiveIntegerValidator;
 import com.github.joschi.jadconfig.validators.StringNotBlankValidator;
 import com.google.common.annotations.VisibleForTesting;
+import com.synectiks.process.server.inputs.transports.netty.NettyTransportType;
+
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.kqueue.KQueue;
 import io.netty.handler.ssl.OpenSsl;
 import io.netty.handler.ssl.SslProvider;
-import com.synectiks.process.server.inputs.transports.netty.NettyTransportType;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -3,10 +3,10 @@
   "rev": 1,
   "v": "1",
   "name": "Default Grok Patterns",
-  "summary": "The Graylog default Grok patterns",
-  "description": "These are the default Grok patterns provided by Graylog.",
-  "vendor": "Graylog <hello@graylog.com>",
-  "url": "https://github.com/Graylog2/graylog2-server",
+  "summary": "The Alertmanager default Grok patterns",
+  "description": "These are the default Grok patterns provided by Alertmanager.",
+  "vendor": "Graylog <hello@graylog.com> ",
+  "url": "https://github.com/Graylog2/graylog2-server ",
   "parameters": [],
   "entities": [
     {

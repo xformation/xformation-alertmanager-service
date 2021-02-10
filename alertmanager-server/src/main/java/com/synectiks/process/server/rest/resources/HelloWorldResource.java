@@ -1,24 +1,8 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources;
 
 import com.codahale.metrics.annotation.Timed;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import com.synectiks.process.server.configuration.HttpConfiguration;
 import com.synectiks.process.server.plugin.Version;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
@@ -26,6 +10,9 @@ import com.synectiks.process.server.plugin.cluster.ClusterId;
 import com.synectiks.process.server.plugin.system.NodeId;
 import com.synectiks.process.server.rest.models.HelloWorldResponse;
 import com.synectiks.process.server.shared.rest.resources.RestResource;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -52,7 +39,7 @@ public class HelloWorldResource extends RestResource {
 
     @GET
     @Timed
-    @ApiOperation(value = "A few details about the Graylog node.")
+    @ApiOperation(value = "A few details about the perfmanager node.")
     @Produces(MediaType.APPLICATION_JSON)
     public HelloWorldResponse helloWorld() {
         final ClusterId clusterId = clusterConfigService.getOrDefault(ClusterId.class, ClusterId.create("UNKNOWN"));

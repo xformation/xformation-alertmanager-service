@@ -1,30 +1,18 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import org.bson.Document;
-import org.bson.types.ObjectId;
 import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
 import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
 import com.synectiks.process.server.Configuration;
+import com.synectiks.process.server.migrations.V20200226181600_EncryptAccessTokensMigration;
 import com.synectiks.process.server.security.AccessTokenCipher;
 import com.synectiks.process.server.security.AccessTokenImpl;
+
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Rule;
@@ -33,13 +21,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.synectiks.process.server.security.AccessTokenImpl.COLLECTION_NAME;
 import static com.synectiks.process.server.security.AccessTokenImpl.LAST_ACCESS;
 import static com.synectiks.process.server.security.AccessTokenImpl.NAME;
 import static com.synectiks.process.server.security.AccessTokenImpl.TOKEN;
 import static com.synectiks.process.server.security.AccessTokenImpl.TOKEN_TYPE;
 import static com.synectiks.process.server.security.AccessTokenImpl.USERNAME;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 public class V20200226181600_EncryptAccessTokensMigrationTest {

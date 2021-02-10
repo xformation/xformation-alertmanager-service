@@ -1,30 +1,16 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.buffers;
 
-import java.nio.ByteBuffer;
-
-import com.synectiks.process.server.plugin.journal.RawMessage;
 import com.synectiks.process.server.uuid.UUID;
-import org.joda.time.DateTime;
-
 import com.google.common.base.MoreObjects;
 import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.EventTranslatorOneArg;
+import com.synectiks.process.server.plugin.journal.RawMessage;
+
+import org.joda.time.DateTime;
+
+import java.nio.ByteBuffer;
 
 public class RawMessageEvent {
 

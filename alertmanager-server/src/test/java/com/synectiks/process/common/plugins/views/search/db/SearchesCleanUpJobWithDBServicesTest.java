@@ -1,33 +1,7 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.db;
 
-import com.synectiks.process.common.plugins.views.search.SearchRequirements;
-import com.synectiks.process.common.plugins.views.search.views.ViewRequirements;
-import com.synectiks.process.common.plugins.views.search.views.ViewService;
-import com.synectiks.process.common.security.entities.EntityOwnershipService;
-import com.synectiks.process.common.testing.inject.TestPasswordSecretModule;
-import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
-import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
-import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
-import com.synectiks.process.server.database.MongoConnection;
-import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
-import com.synectiks.process.server.shared.bindings.ObjectMapperModule;
-import com.synectiks.process.server.shared.bindings.ValidatorModule;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.Duration;
@@ -39,6 +13,21 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+
+import com.synectiks.process.common.plugins.views.search.SearchRequirements;
+import com.synectiks.process.common.plugins.views.search.db.SearchDbService;
+import com.synectiks.process.common.plugins.views.search.db.SearchesCleanUpJob;
+import com.synectiks.process.common.plugins.views.search.views.ViewRequirements;
+import com.synectiks.process.common.plugins.views.search.views.ViewService;
+import com.synectiks.process.common.security.entities.EntityOwnershipService;
+import com.synectiks.process.common.testing.inject.TestPasswordSecretModule;
+import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
+import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
+import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
+import com.synectiks.process.server.database.MongoConnection;
+import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
+import com.synectiks.process.server.shared.bindings.ObjectMapperModule;
+import com.synectiks.process.server.shared.bindings.ValidatorModule;
 
 import java.util.Collections;
 

@@ -90,7 +90,7 @@ public class StructuredSyslogMessageProcessor extends AbstractSyslogMessageProce
     }
 
 	/* (non-Javadoc)
-	 * @see org.graylog2.syslog4j.impl.message.processor.AbstractSyslogMessageProcessor#appendTimestamp(java.lang.StringBuffer, java.util.Date)
+	 * @see com.synectiks.process.server.syslog4j.impl.message.processor.AbstractSyslogMessageProcessor#appendTimestamp(java.lang.StringBuffer, java.util.Date)
 	 * 
 	 * This is compatible with RFC5424 protocol.
 	 */
@@ -105,7 +105,7 @@ public class StructuredSyslogMessageProcessor extends AbstractSyslogMessageProce
     }
 
     /* (non-Javadoc)
-     * @see org.graylog2.syslog4j.SyslogMessageProcessorIF#createSyslogHeader(int, int, java.lang.String, boolean, boolean)
+     * @see com.synectiks.process.server.syslog4j.SyslogMessageProcessorIF#createSyslogHeader(int, int, java.lang.String, boolean, boolean)
      * 
      * This is compatible with RFC5424 protocol.
      * 
@@ -117,7 +117,7 @@ public class StructuredSyslogMessageProcessor extends AbstractSyslogMessageProce
     }
 
     /* (non-Javadoc)
-     * @see org.graylog2.syslog4j.SyslogMessageProcessorIF#createSyslogHeader(int, int, java.lang.String, boolean, java.util.Date)
+     * @see com.synectiks.process.server.syslog4j.SyslogMessageProcessorIF#createSyslogHeader(int, int, java.lang.String, boolean, java.util.Date)
      * 
      * This is compatible with RFC5424 protocol.
      * 

@@ -1,29 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.alerts;
 
 import com.floreysoft.jmte.Engine;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailConstants;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
 import com.synectiks.process.server.configuration.EmailConfiguration;
 import com.synectiks.process.server.notifications.Notification;
 import com.synectiks.process.server.notifications.NotificationService;
@@ -34,6 +15,12 @@ import com.synectiks.process.server.plugin.alarms.transports.TransportConfigurat
 import com.synectiks.process.server.plugin.configuration.Configuration;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.plugin.system.NodeId;
+
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailConstants;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,7 +88,7 @@ public class FormattedEmailAlertSender implements AlertSender {
     String buildSubject(Stream stream, AlertCondition.CheckResult checkResult, List<Message> backlog) {
         final String template;
         if (pluginConfig == null || pluginConfig.getString("subject") == null) {
-            template = "Graylog alert for stream: ${stream.title}: ${check_result.resultDescription}";
+            template = "perfmanager alert for stream: ${stream.title}: ${check_result.resultDescription}";
         } else {
             template = pluginConfig.getString("subject");
         }
@@ -141,7 +128,7 @@ public class FormattedEmailAlertSender implements AlertSender {
     private String buildStreamDetailsURL(URI baseUri, AlertCondition.CheckResult checkResult, Stream stream) {
         // Return an informational message if the web interface URL hasn't been set
         if (baseUri == null || isNullOrEmpty(baseUri.getHost())) {
-            return "Please configure 'transport_email_web_interface_url' in your Graylog configuration file.";
+            return "Please configure 'transport_email_web_interface_url' in your perfmanager configuration file.";
         }
 
         int time = 5;

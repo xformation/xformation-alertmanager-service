@@ -11,7 +11,7 @@ import org.apache.log4j.helpers.LogLog;
  * <p/>
  * <pre>
  * <code>
- * &lt;appender name="Syslog4j" class="org.graylog2.syslog4j.impl.log4j.Syslog4jAppender"&gt;
+ * &lt;appender name="Syslog4j" class="com.synectiks.process.server.syslog4j.impl.log4j.Syslog4jAppender"&gt;
  * &lt;param name="Facility" value="user"/&gt;
  * &lt;param name="Protocol" value="tcp"/&gt;
  * &lt;param name="Host" value="192.168.0.1"/&gt;

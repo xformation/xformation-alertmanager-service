@@ -1,36 +1,26 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.export;
 
 import org.assertj.core.groups.Tuple;
-import com.synectiks.process.common.plugins.views.search.LegacyDecoratorProcessor;
-import com.synectiks.process.common.plugins.views.search.elasticsearch.ElasticsearchQueryString;
-import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteRange;
-import com.synectiks.process.server.rest.models.messages.responses.ResultMessageSummary;
-import com.synectiks.process.server.rest.resources.search.responses.SearchResponse;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.synectiks.process.common.plugins.views.search.LegacyDecoratorProcessor;
+import com.synectiks.process.common.plugins.views.search.elasticsearch.ElasticsearchQueryString;
+import com.synectiks.process.common.plugins.views.search.export.ExportMessagesCommand;
+import com.synectiks.process.common.plugins.views.search.export.LegacyChunkDecorator;
+import com.synectiks.process.common.plugins.views.search.export.SimpleMessageChunk;
+import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteRange;
+import com.synectiks.process.server.rest.models.messages.responses.ResultMessageSummary;
+import com.synectiks.process.server.rest.resources.search.responses.SearchResponse;
+
 import static com.synectiks.process.common.plugins.views.search.export.LinkedHashSetUtil.linkedHashSetOf;
 import static com.synectiks.process.common.plugins.views.search.export.TestData.simpleMessageChunkWithIndexNames;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

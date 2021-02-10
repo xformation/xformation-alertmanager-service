@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin;
 
 import com.codahale.metrics.Meter;
@@ -25,9 +11,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.synectiks.process.server.indexer.IndexSet;
+import com.synectiks.process.server.plugin.Message;
+import com.synectiks.process.server.plugin.Tools;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.shared.SuppressForbidden;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;
@@ -54,8 +43,8 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import static com.google.common.collect.Sets.symmetricDifference;
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.synectiks.process.server.plugin.streams.Stream.DEFAULT_STREAM_ID;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -455,7 +444,7 @@ public class MessageTest {
     public void testToElasticsearchObjectAddsAccountedMessageSize() {
         final Message message = new Message("message", "source", Tools.nowUTC());
 
-        assertThat(message.toElasticSearchObject(objectMapper, invalidTimestampMeter).get("gl2_accounted_message_size"))
+        assertThat(message.toElasticSearchObject(objectMapper, invalidTimestampMeter).get("xfperf_accounted_message_size"))
                 .isEqualTo(43L);
     }
 

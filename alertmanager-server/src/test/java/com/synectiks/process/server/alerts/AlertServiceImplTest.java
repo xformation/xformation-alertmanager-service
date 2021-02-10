@@ -1,28 +1,18 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.alerts;
 
 import com.google.common.collect.ImmutableList;
 import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
 import com.synectiks.process.server.alarmcallbacks.AlarmCallbackHistory;
 import com.synectiks.process.server.alarmcallbacks.AlarmCallbackHistoryService;
+import com.synectiks.process.server.alerts.Alert;
+import com.synectiks.process.server.alerts.AlertConditionFactory;
+import com.synectiks.process.server.alerts.AlertServiceImpl;
 import com.synectiks.process.server.database.MongoDBServiceTest;
 import com.synectiks.process.server.plugin.Tools;
 import com.synectiks.process.server.plugin.alarms.AlertCondition;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Seconds;

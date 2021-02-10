@@ -1,34 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-
-import javax.inject.Inject;
-import javax.validation.constraints.NotEmpty;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
+import com.codahale.metrics.annotation.Timed;
+import com.synectiks.process.server.uuid.UUID;
 import com.synectiks.process.server.cluster.Node;
 import com.synectiks.process.server.cluster.NodeNotFoundException;
 import com.synectiks.process.server.cluster.NodeService;
@@ -39,16 +14,25 @@ import com.synectiks.process.server.plugin.system.NodeId;
 import com.synectiks.process.server.rest.models.system.cluster.responses.NodeSummary;
 import com.synectiks.process.server.rest.models.system.cluster.responses.NodeSummaryList;
 import com.synectiks.process.server.shared.rest.resources.RestResource;
-import com.synectiks.process.server.uuid.UUID;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-
-import com.codahale.metrics.annotation.Timed;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+
+import javax.inject.Inject;
+import javax.validation.constraints.NotEmpty;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 @Api(value = "System/Cluster", description = "Node discovery")
 @RequiresAuthentication

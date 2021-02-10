@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.lookup;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -38,6 +24,7 @@ import com.synectiks.process.server.plugin.lookup.LookupDataAdapter;
 import com.synectiks.process.server.plugin.lookup.LookupResult;
 import com.synectiks.process.server.utilities.LatchUpdaterListener;
 import com.synectiks.process.server.utilities.LoggingServiceListener;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,10 +49,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static com.google.common.util.concurrent.Uninterruptibles.awaitUninterruptibly;
-import static java.lang.Math.toIntExact;
-import static java.util.Objects.requireNonNull;
 import static com.synectiks.process.server.shared.utilities.ExceptionUtils.getRootCauseMessage;
 import static com.synectiks.process.server.utilities.ObjectUtils.objectId;
+import static java.lang.Math.toIntExact;
+import static java.util.Objects.requireNonNull;
 
 /**
  * This service maintains the in-memory adapters, caches and lookup table instances.

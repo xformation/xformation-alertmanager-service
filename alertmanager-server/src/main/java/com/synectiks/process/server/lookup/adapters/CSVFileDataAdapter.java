@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.lookup.adapters;
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -29,12 +15,13 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Multimap;
 import com.google.common.primitives.Ints;
 import com.google.inject.assistedinject.Assisted;
-import org.graylog.autovalue.WithBeanGetter;
 import com.synectiks.process.server.plugin.lookup.LookupCachePurge;
 import com.synectiks.process.server.plugin.lookup.LookupDataAdapter;
 import com.synectiks.process.server.plugin.lookup.LookupDataAdapterConfiguration;
 import com.synectiks.process.server.plugin.lookup.LookupResult;
 import com.synectiks.process.server.plugin.utilities.FileInfo;
+
+import org.graylog.autovalue.WithBeanGetter;
 import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -209,7 +196,7 @@ public class CSVFileDataAdapter extends LookupDataAdapter {
         public Config defaultConfiguration() {
             return Config.builder()
                     .type(NAME)
-                    .path("/etc/graylog/lookup-table.csv")
+                    .path("/opt/perfmanager/lookup-table.csv")
                     .separator(",")
                     .quotechar("\"")
                     .keyColumn("key")

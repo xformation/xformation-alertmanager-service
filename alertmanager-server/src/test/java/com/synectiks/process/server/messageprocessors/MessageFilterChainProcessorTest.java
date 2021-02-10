@@ -1,30 +1,18 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.messageprocessors;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
+import com.synectiks.process.server.messageprocessors.MessageFilterChainProcessor;
 import com.synectiks.process.server.plugin.Message;
 import com.synectiks.process.server.plugin.Messages;
 import com.synectiks.process.server.plugin.ServerStatus;
 import com.synectiks.process.server.plugin.Tools;
 import com.synectiks.process.server.plugin.filters.MessageFilter;
 import com.synectiks.process.server.shared.journal.Journal;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations;
 
 import com.google.common.collect.ImmutableSet;
@@ -25,9 +11,12 @@ import com.synectiks.process.server.indexer.retention.strategies.DeletionRetenti
 import com.synectiks.process.server.indexer.retention.strategies.DeletionRetentionStrategyConfig;
 import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategy;
 import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategyConfig;
+import com.synectiks.process.server.migrations.Migration;
+import com.synectiks.process.server.migrations.V20161124104700_AddRetentionRotationAndDefaultFlagToIndexSetMigration;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.plugin.indexer.retention.RetentionStrategyConfig;
 import com.synectiks.process.server.plugin.indexer.rotation.RotationStrategyConfig;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

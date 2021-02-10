@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.transports;
 
 import com.codahale.metrics.Gauge;
@@ -21,6 +7,18 @@ import com.github.joschi.jadconfig.util.Size;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.primitives.Ints;
 import com.google.common.util.concurrent.Uninterruptibles;
+import com.synectiks.process.server.inputs.transports.NettyTransportConfiguration;
+import com.synectiks.process.server.inputs.transports.UdpTransport;
+import com.synectiks.process.server.inputs.transports.netty.EventLoopGroupFactory;
+import com.synectiks.process.server.plugin.LocalMetricRegistry;
+import com.synectiks.process.server.plugin.configuration.Configuration;
+import com.synectiks.process.server.plugin.configuration.ConfigurationRequest;
+import com.synectiks.process.server.plugin.inputs.MessageInput;
+import com.synectiks.process.server.plugin.inputs.MisfireException;
+import com.synectiks.process.server.plugin.inputs.transports.NettyTransport;
+import com.synectiks.process.server.plugin.inputs.util.ThroughputCounter;
+import com.synectiks.process.server.shared.SuppressForbidden;
+
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandler;
@@ -32,15 +30,6 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.ReferenceCountUtil;
 import org.apache.commons.lang3.SystemUtils;
-import com.synectiks.process.server.inputs.transports.netty.EventLoopGroupFactory;
-import com.synectiks.process.server.plugin.LocalMetricRegistry;
-import com.synectiks.process.server.plugin.configuration.Configuration;
-import com.synectiks.process.server.plugin.configuration.ConfigurationRequest;
-import com.synectiks.process.server.plugin.inputs.MessageInput;
-import com.synectiks.process.server.plugin.inputs.MisfireException;
-import com.synectiks.process.server.plugin.inputs.transports.NettyTransport;
-import com.synectiks.process.server.plugin.inputs.util.ThroughputCounter;
-import com.synectiks.process.server.shared.SuppressForbidden;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.views;
 
 import com.google.common.collect.ImmutableSet;
@@ -21,6 +7,11 @@ import com.synectiks.process.common.plugins.views.search.Search;
 import com.synectiks.process.common.plugins.views.search.SearchRequiresParameterSupport;
 import com.synectiks.process.common.plugins.views.search.ValueParameter;
 import com.synectiks.process.common.plugins.views.search.db.SearchDbService;
+import com.synectiks.process.common.plugins.views.search.views.EnterpriseMetadataSummary;
+import com.synectiks.process.common.plugins.views.search.views.PluginMetadataSummary;
+import com.synectiks.process.common.plugins.views.search.views.RequiresParameterSupport;
+import com.synectiks.process.common.plugins.views.search.views.ViewDTO;
+
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;

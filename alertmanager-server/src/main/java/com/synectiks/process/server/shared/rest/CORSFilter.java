@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.rest;
 
 import com.google.common.collect.ImmutableMap;
@@ -33,7 +19,7 @@ public class CORSFilter implements ContainerRequestFilter, ContainerResponseFilt
             ImmutableMap.of(
                     "Access-Control-Allow-Origin", "*",
                     "Access-Control-Allow-Credentials", true,
-                    "Access-Control-Allow-Headers", "Authorization, Content-Type, X-Graylog-No-Session-Extension, X-Requested-With, X-Requested-By",
+                    "Access-Control-Allow-Headers", "Authorization, Content-Type, X-perfmanager-No-Session-Extension, X-Requested-With, X-Requested-By",
                     "Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS",
                     // In order to avoid redoing the preflight thingy for every request, see http://stackoverflow.com/a/12021982/1088469
                     "Access-Control-Max-Age", "600" // 10 minutes seems to be the maximum allowable value

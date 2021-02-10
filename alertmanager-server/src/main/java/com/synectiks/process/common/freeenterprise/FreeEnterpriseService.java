@@ -1,27 +1,15 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.freeenterprise;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.eventbus.EventBus;
-import okhttp3.OkHttpClient;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.plugin.cluster.ClusterId;
+
+import okhttp3.OkHttpClient;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -105,7 +93,7 @@ public class FreeEnterpriseService {
             final Response<FreeLicenseAPIResponse> response = apiClient.requestFreeLicense(apiRequest).execute();
 
             if (response.isSuccessful() && response.body() != null) {
-                LOG.debug("Received free Graylog Enterprise license: {}", response.body());
+                LOG.debug("Received free perfmanager Enterprise license: {}", response.body());
                 final StagedFreeEnterpriseLicense dto = StagedFreeEnterpriseLicense.builder()
                         .clusterId(clusterId)
                         .license(response.body().licenseString())
@@ -117,21 +105,21 @@ public class FreeEnterpriseService {
                 eventBus.post(dto);
             } else {
                 if (response.errorBody() != null) {
-                    LOG.error("Couldn't request free Graylog Enterprise license: {} (code={})", response.errorBody().string(), response.code());
+                    LOG.error("Couldn't request free perfmanager Enterprise license: {} (code={})", response.errorBody().string(), response.code());
                 } else {
-                    LOG.error("Couldn't request free Graylog Enterprise license: {} (code={}, message=\"{}\")", response.message(), response.code(), response.message());
+                    LOG.error("Couldn't request free perfmanager Enterprise license: {} (code={}, message=\"{}\")", response.message(), response.code(), response.message());
                 }
-                throw new FreeLicenseRequestException("Couldn't request free Graylog Enterprise license", request);
+                throw new FreeLicenseRequestException("Couldn't request free perfmanager Enterprise license", request);
             }
         } catch (FreeLicenseRequestException e) {
             // no need to log this again
             throw e;
         } catch (IOException e) {
-            LOG.error("Couldn't request free Graylog Enterprise license from remote service", e);
-            throw new FreeLicenseRequestException("Couldn't request free Graylog Enterprise license from remote service", request, e);
+            LOG.error("Couldn't request free perfmanager Enterprise license from remote service", e);
+            throw new FreeLicenseRequestException("Couldn't request free perfmanager Enterprise license from remote service", request, e);
         } catch (Exception e) {
-            LOG.error("Couldn't request free Graylog Enterprise license", e);
-            throw new FreeLicenseRequestException("Couldn't request free Graylog Enterprise license", request, e);
+            LOG.error("Couldn't request free perfmanager Enterprise license", e);
+            throw new FreeLicenseRequestException("Couldn't request free perfmanager Enterprise license", request, e);
         }
     }
 }

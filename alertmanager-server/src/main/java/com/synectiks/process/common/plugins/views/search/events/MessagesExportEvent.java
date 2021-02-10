@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.events;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -22,7 +8,11 @@ import com.google.auto.value.AutoValue;
 import com.synectiks.process.common.plugins.views.search.export.AuditContext;
 import com.synectiks.process.common.plugins.views.search.export.ExportMessagesCommand;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteRange;
+
 import org.joda.time.DateTime;
+
+import static com.synectiks.process.common.plugins.views.audit.ViewsAuditEventTypes.MESSAGES_EXPORT_REQUESTED;
+import static com.synectiks.process.common.plugins.views.audit.ViewsAuditEventTypes.MESSAGES_EXPORT_SUCCEEDED;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -30,9 +20,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.Set;
-
-import static com.synectiks.process.common.plugins.views.audit.ViewsAuditEventTypes.MESSAGES_EXPORT_REQUESTED;
-import static com.synectiks.process.common.plugins.views.audit.ViewsAuditEventTypes.MESSAGES_EXPORT_SUCCEEDED;
 
 @AutoValue
 @JsonAutoDetect

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.views;
 
 import com.google.common.collect.ImmutableMap;
@@ -23,6 +9,7 @@ import com.synectiks.process.common.plugins.views.search.views.EnterpriseMetadat
 import com.synectiks.process.common.plugins.views.search.views.PluginMetadataSummary;
 import com.synectiks.process.common.plugins.views.search.views.ViewDTO;
 import com.synectiks.process.common.plugins.views.search.views.ViewRequirements;
+
 import org.junit.Test;
 
 import java.net.URI;
@@ -41,11 +28,11 @@ public class ViewRequirementsTest {
 
     private final PluginMetadataSummary plugin = PluginMetadataSummary.create(
             "com.synectiks.process.common.plugins.aioverlord",
-            "Graylog AI Overlord",
-            "garybot@graylog.org",
-            new URI("https://www.graylog.org/ai"),
+            "perfmanager AI Overlord",
+            "garybot@perfmanager.org",
+            new URI("https://www.perfmanager.org/ai"),
             "3.0.0",
-            "Graylog becomes self-aware at 2:14AM."
+            "perfmanager becomes self-aware at 2:14AM."
     );
 
     public ViewRequirementsTest() throws URISyntaxException {

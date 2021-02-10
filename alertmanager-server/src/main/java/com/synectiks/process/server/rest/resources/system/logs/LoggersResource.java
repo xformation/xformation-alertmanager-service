@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system.logs;
 
 import com.codahale.metrics.annotation.Timed;
@@ -21,6 +7,18 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.synectiks.process.server.audit.AuditEventTypes;
+import com.synectiks.process.server.audit.jersey.AuditEvent;
+import com.synectiks.process.server.log4j.MemoryAppender;
+import com.synectiks.process.server.rest.models.system.loggers.responses.InternalLogMessage;
+import com.synectiks.process.server.rest.models.system.loggers.responses.LogMessagesSummary;
+import com.synectiks.process.server.rest.models.system.loggers.responses.LoggersSummary;
+import com.synectiks.process.server.rest.models.system.loggers.responses.SingleLoggerSummary;
+import com.synectiks.process.server.rest.models.system.loggers.responses.SingleSubsystemSummary;
+import com.synectiks.process.server.rest.models.system.loggers.responses.SubsystemSummary;
+import com.synectiks.process.server.shared.rest.resources.RestResource;
+import com.synectiks.process.server.shared.security.RestPermissions;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -37,17 +35,6 @@ import org.apache.logging.log4j.core.config.LoggerConfig;
 import org.apache.logging.log4j.core.impl.ThrowableProxy;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import com.synectiks.process.server.audit.AuditEventTypes;
-import com.synectiks.process.server.audit.jersey.AuditEvent;
-import com.synectiks.process.server.log4j.MemoryAppender;
-import com.synectiks.process.server.rest.models.system.loggers.responses.InternalLogMessage;
-import com.synectiks.process.server.rest.models.system.loggers.responses.LogMessagesSummary;
-import com.synectiks.process.server.rest.models.system.loggers.responses.LoggersSummary;
-import com.synectiks.process.server.rest.models.system.loggers.responses.SingleLoggerSummary;
-import com.synectiks.process.server.rest.models.system.loggers.responses.SingleSubsystemSummary;
-import com.synectiks.process.server.rest.models.system.loggers.responses.SubsystemSummary;
-import com.synectiks.process.server.shared.rest.resources.RestResource;
-import com.synectiks.process.server.shared.security.RestPermissions;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.LoggerFactory;
@@ -71,14 +58,14 @@ import java.util.Locale;
 import java.util.Map;
 
 @RequiresAuthentication
-@Api(value = "System/Loggers", description = "Internal Graylog loggers")
+@Api(value = "System/Loggers", description = "Internal perfmanager loggers")
 @Path("/system/loggers")
 public class LoggersResource extends RestResource {
     private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(LoggersResource.class);
-    private static final String MEMORY_APPENDER_NAME = "graylog-internal-logs";
+    private static final String MEMORY_APPENDER_NAME = "perfmanager-internal-logs";
 
     private static final Map<String, Subsystem> SUBSYSTEMS = ImmutableMap.<String, Subsystem>of(
-            "graylog", new Subsystem("Graylog", ImmutableList.of("org.graylog2", "org.graylog"), "All messages from Graylog-owned systems."),
+            "perfmanager", new Subsystem("perfmanager", ImmutableList.of("com.synectiks.process.server", "com.synectiks.process.common"), "All messages from perfmanager-owned systems."),
             "indexer", new Subsystem("Indexer", "org.elasticsearch", "All messages related to indexing and searching."),
             "authentication", new Subsystem("Authentication", "org.apache.shiro", "All user authentication messages."),
             "sockets", new Subsystem("Sockets", "netty", "All messages related to socket communication."));

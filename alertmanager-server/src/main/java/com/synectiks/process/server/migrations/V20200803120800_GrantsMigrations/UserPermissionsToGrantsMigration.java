@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations.V20200803120800_GrantsMigrations;
 
 import com.google.common.collect.ImmutableSet;
@@ -29,6 +15,7 @@ import com.synectiks.process.server.migrations.V20200803120800_GrantsMigrations.
 import com.synectiks.process.server.plugin.database.ValidationException;
 import com.synectiks.process.server.plugin.database.users.User;
 import com.synectiks.process.server.shared.users.UserService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,8 +28,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
 import static com.synectiks.process.common.plugins.views.search.rest.ViewsRestPermissions.VIEW_READ;
+import static java.util.Objects.requireNonNull;
 
 public class UserPermissionsToGrantsMigration {
     private static final Logger LOG = LoggerFactory.getLogger(UserPermissionsToGrantsMigration.class);

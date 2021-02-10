@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.streams;
 
 import com.codahale.metrics.annotation.Timed;
@@ -23,14 +9,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.bson.types.ObjectId;
 import com.synectiks.process.common.security.UserContext;
 import com.synectiks.process.server.alarmcallbacks.AlarmCallbackConfiguration;
 import com.synectiks.process.server.alarmcallbacks.AlarmCallbackConfigurationService;
@@ -74,6 +52,15 @@ import com.synectiks.process.server.streams.StreamRouterEngine;
 import com.synectiks.process.server.streams.StreamRuleImpl;
 import com.synectiks.process.server.streams.StreamRuleService;
 import com.synectiks.process.server.streams.StreamService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.ISODateTimeFormat;
@@ -531,10 +518,7 @@ public class StreamResource extends RestResource {
             stream.getDisabled(),
             stream.getStreamRules(),
             alertConditions,
-            AlertReceivers.create(
-                firstNonNull(emailAlertReceivers, Collections.emptyList()),
-                firstNonNull(usersAlertReceivers, Collections.emptyList())
-            ),
+            AlertReceivers.create(emailAlertReceivers, usersAlertReceivers),
             stream.getTitle(),
             stream.getContentPack(),
             stream.isDefaultStream(),

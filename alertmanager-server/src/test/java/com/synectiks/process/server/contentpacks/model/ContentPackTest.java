@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.model;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,7 +10,12 @@ import com.github.zafarkhaja.semver.Version;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.io.Resources;
-import org.bson.types.ObjectId;
+import com.synectiks.process.server.contentpacks.model.ContentPack;
+import com.synectiks.process.server.contentpacks.model.ContentPackV1;
+import com.synectiks.process.server.contentpacks.model.LegacyContentPack;
+import com.synectiks.process.server.contentpacks.model.ModelId;
+import com.synectiks.process.server.contentpacks.model.ModelTypes;
+import com.synectiks.process.server.contentpacks.model.ModelVersion;
 import com.synectiks.process.server.contentpacks.model.constraints.GraylogVersionConstraint;
 import com.synectiks.process.server.contentpacks.model.constraints.PluginVersionConstraint;
 import com.synectiks.process.server.contentpacks.model.entities.EntityV1;
@@ -36,6 +27,8 @@ import com.synectiks.process.server.contentpacks.model.parameters.LongParameter;
 import com.synectiks.process.server.contentpacks.model.parameters.StringParameter;
 import com.synectiks.process.server.jackson.AutoValueSubtypeResolver;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -213,7 +206,7 @@ public class ContentPackTest {
                         .data(objectMapper.convertValue(expectedLookupTable, JsonNode.class))
                         .constraints(ImmutableSet.of(
                                 GraylogVersionConstraint.builder().version(">=3.0.0").build(),
-                                PluginVersionConstraint.builder().pluginId("com.synectiks.process.common.plugins.threatintel.ThreatIntelPlugin").version(">=3.0.0").build()))
+                                PluginVersionConstraint.builder().pluginId("org.graylog.plugins.threatintel.ThreatIntelPlugin").version(">=3.0.0").build()))
                         .build(),
                 EntityV1.builder()
                         .version(ModelVersion.of("1"))
@@ -222,7 +215,7 @@ public class ContentPackTest {
                         .data(objectMapper.convertValue(expectedLookupDataAdapter, JsonNode.class))
                         .constraints(ImmutableSet.of(
                                 GraylogVersionConstraint.builder().version(">=3.0.0").build(),
-                                PluginVersionConstraint.builder().pluginId("com.synectiks.process.common.plugins.threatintel.ThreatIntelPlugin").version(">=3.0.0").build()))
+                                PluginVersionConstraint.builder().pluginId("org.graylog.plugins.threatintel.ThreatIntelPlugin").version(">=3.0.0").build()))
                         .build()
         );
     }
@@ -298,7 +291,7 @@ public class ContentPackTest {
                         .data(objectMapper.createObjectNode()
                                 .put("id", "53794eebe4b03cdadeadbeef")
                                 .put("title", "Input Title")
-                                .put("type", "com.synectiks.process.server.inputs.raw.tcp.RawTCPInput")
+                                .put("type", "org.graylog2.inputs.raw.tcp.RawTCPInput")
                                 .put("global", true)
                                 .setAll(ImmutableMap.of(
                                         "configuration", objectMapper.createObjectNode()
@@ -360,7 +353,7 @@ public class ContentPackTest {
                         .data(objectMapper.createObjectNode()
                                 .put("id", "56ba78eae4b0bcb6deadbeef")
                                 .put("title", "Output Title")
-                                .put("type", "com.synectiks.process.server.plugins.slack.output.SlackMessageOutput")
+                                .put("type", "org.graylog2.plugins.slack.output.SlackMessageOutput")
                                 .set("configuration", objectMapper.createObjectNode()
                                         .put("graylog2_url", "https://graylog.example.com/")
                                         .put("user_name", "Username")
@@ -450,7 +443,7 @@ public class ContentPackTest {
                         .data(objectMapper.createObjectNode()
                                 .put("id", "53794eebe4b03cdadeadbeef")
                                 .put("title", "Input Title")
-                                .put("type", "com.synectiks.process.server.inputs.raw.tcp.RawTCPInput")
+                                .put("type", "org.graylog2.inputs.raw.tcp.RawTCPInput")
                                 .put("global", true)
                                 .setAll(ImmutableMap.of(
                                         "configuration", objectMapper.createObjectNode()
@@ -512,7 +505,7 @@ public class ContentPackTest {
                         .data(objectMapper.createObjectNode()
                                 .put("id", "56ba78eae4b0bcb6deadbeef")
                                 .put("title", "Output Title")
-                                .put("type", "com.synectiks.process.server.plugins.slack.output.SlackMessageOutput")
+                                .put("type", "org.graylog2.plugins.slack.output.SlackMessageOutput")
                                 .set("configuration", objectMapper.createObjectNode()
                                         .put("graylog2_url", "https://graylog.example.com/")
                                         .put("user_name", "Username")

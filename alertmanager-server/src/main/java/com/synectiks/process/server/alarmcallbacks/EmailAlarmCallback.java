@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.alarmcallbacks;
 
 import com.google.common.collect.ImmutableMap;
@@ -41,6 +27,7 @@ import com.synectiks.process.server.plugin.database.users.User;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.plugin.system.NodeId;
 import com.synectiks.process.server.shared.users.UserService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,7 +52,7 @@ public class EmailAlarmCallback implements AlarmCallback {
     private final UserService userService;
     private final EmailConfiguration emailConfiguration;
     private Configuration configuration;
-    private com.synectiks.process.server.Configuration graylogConfig;
+    private com.synectiks.process.server.Configuration serverConfig;
 
     @Inject
     public EmailAlarmCallback(AlertSender alertSender,
@@ -74,14 +61,14 @@ public class EmailAlarmCallback implements AlarmCallback {
                               EmailRecipients.Factory emailRecipientsFactory,
                               UserService userService,
                               EmailConfiguration emailConfiguration,
-                              com.synectiks.process.server.Configuration graylogConfig) {
+                              com.synectiks.process.server.Configuration serverConfig) {
         this.alertSender = alertSender;
         this.notificationService = notificationService;
         this.nodeId = nodeId;
         this.emailRecipientsFactory = emailRecipientsFactory;
         this.userService = userService;
         this.emailConfiguration = emailConfiguration;
-        this.graylogConfig = graylogConfig;
+        this.serverConfig = serverConfig;
     }
 
     @Override
@@ -180,7 +167,7 @@ public class EmailAlarmCallback implements AlarmCallback {
 
         configurationRequest.addField(new TextField("subject",
                 "E-Mail Subject",
-                "Graylog alert for stream: ${stream.title}: ${check_result.resultDescription}",
+                "perfmanager alert for stream: ${stream.title}: ${check_result.resultDescription}",
                 "The subject of sent out mail alerts",
                 ConfigurationField.Optional.NOT_OPTIONAL));
 
@@ -195,7 +182,7 @@ public class EmailAlarmCallback implements AlarmCallback {
                 "User Receivers",
                 Collections.emptyList(),
                 userNames,
-                "Graylog usernames that should receive this alert",
+                "perfmanager usernames that should receive this alert",
                 ConfigurationField.Optional.OPTIONAL));
 
         configurationRequest.addField(new ListField(CK_EMAIL_RECEIVERS,
@@ -220,7 +207,7 @@ public class EmailAlarmCallback implements AlarmCallback {
                 .collect(Collectors.toMap(User::getName, User::getName));
 
         final Map<String, String> userNames = ImmutableMap.<String, String>builder()
-                .put(graylogConfig.getRootUsername(), graylogConfig.getRootUsername())
+                .put(serverConfig.getRootUsername(), serverConfig.getRootUsername())
                 .putAll(regularUsers)
                 .build();
 

@@ -1,24 +1,14 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.security.authservice.ldap;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.primitives.Ints;
+import com.synectiks.process.server.security.TrustAllX509TrustManager;
+import com.synectiks.process.server.security.TrustManagerProvider;
+import com.synectiks.process.server.security.encryption.EncryptedValue;
+import com.synectiks.process.server.security.encryption.EncryptedValueService;
 import com.unboundid.ldap.sdk.Attribute;
 import com.unboundid.ldap.sdk.BindRequest;
 import com.unboundid.ldap.sdk.BindResult;
@@ -39,10 +29,7 @@ import com.unboundid.ldap.sdk.extensions.StartTLSExtendedRequest;
 import com.unboundid.util.Base64;
 import com.unboundid.util.LDAPTestUtils;
 import com.unboundid.util.ssl.SSLUtil;
-import com.synectiks.process.server.security.TrustAllX509TrustManager;
-import com.synectiks.process.server.security.TrustManagerProvider;
-import com.synectiks.process.server.security.encryption.EncryptedValue;
-import com.synectiks.process.server.security.encryption.EncryptedValueService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -111,8 +98,7 @@ public class UnboundLDAPConnector {
 
             final SSLUtil sslUtil;
             if (ldapConfig.verifyCertificates()) {
-                // TODO support multiple hosts
-                sslUtil = new SSLUtil(trustManagerProvider.create(addresses[0]));
+                sslUtil = new SSLUtil(trustManagerProvider.create(Arrays.asList(addresses)));
             } else {
                 sslUtil = new SSLUtil(new TrustAllX509TrustManager());
             }

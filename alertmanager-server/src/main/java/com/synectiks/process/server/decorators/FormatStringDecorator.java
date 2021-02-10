@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.decorators;
 
 import com.floreysoft.jmte.Engine;
@@ -88,7 +74,7 @@ public class FormatStringDecorator implements SearchResponseDecorator {
 
     public static class Descriptor extends SearchResponseDecorator.Descriptor {
         public Descriptor() {
-            super("Format String", "http://docs.graylog.org/", "Format string");
+            super("Format String", "http://docs.perfmanager.org/", "Format string");
         }
     }
 

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.map.geoip;
 
 import com.codahale.metrics.MetricFilter;
@@ -24,7 +10,9 @@ import com.google.common.net.InetAddresses;
 import com.synectiks.process.common.plugins.map.ConditionalRunner;
 import com.synectiks.process.common.plugins.map.ResourceExistsCondition;
 import com.synectiks.process.common.plugins.map.config.GeoIpResolverConfig;
+import com.synectiks.process.common.plugins.map.geoip.GeoIpResolverEngine;
 import com.synectiks.process.server.plugin.Message;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -132,7 +120,7 @@ public class GeoIpResolverEngineTest {
         messageFields.put("source", "192.168.0.1");
         messageFields.put("message", "Hello from 1.2.3.4");
         messageFields.put("extracted_ip", "1.2.3.4");
-        messageFields.put(Message.FIELD_GL2_REMOTE_IP, "1.2.3.4");
+        messageFields.put(Message.FIELD_XFPERF_REMOTE_IP, "1.2.3.4");
         messageFields.put("ipv6", "2001:4860:4860::8888");
 
         final Message message = new Message(messageFields);
@@ -142,7 +130,7 @@ public class GeoIpResolverEngineTest {
         assertEquals("Should have looked up three IPs", 3, metricRegistry.timer(name(GeoIpResolverEngine.class, "resolveTime")).getCount());
         assertFieldNotResolved(message, "source", "Should not have resolved private IP");
         assertFieldNotResolved(message, "message", "Should have resolved public IP");
-        assertFieldNotResolved(message, "gl2_remote_ip", "Should not have resolved text with an IP");
+        assertFieldNotResolved(message, "xfperf_remote_ip", "Should not have resolved text with an IP");
         assertFieldResolved(message, "extracted_ip", "Should have resolved public IP");
         assertFieldResolved(message, "ipv6", "Should have resolved public IPv6");
     }

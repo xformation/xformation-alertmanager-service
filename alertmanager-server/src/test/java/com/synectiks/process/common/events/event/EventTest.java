@@ -1,25 +1,14 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.event;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.synectiks.process.common.events.event.Event;
+import com.synectiks.process.common.events.event.EventDto;
 import com.synectiks.process.common.events.fields.FieldValueType;
+
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +29,7 @@ public class EventTest {
                 .id("01DF119QKMPCR5VWBXS8783799")
                 .eventDefinitionType("aggregation-v1")
                 .eventDefinitionId("54e3deadbeefdeadbeefaffe")
-                .originContext("urn:graylog:message:es:graylog_0:199a616d-4d48-4155-b4fc-339b1c3129b2")
+                .originContext("urn:perfmanager:message:es:perfmanager_0:199a616d-4d48-4155-b4fc-339b1c3129b2")
                 .eventTimestamp(now)
                 .processingTimestamp(now)
                 .timerangeStart(now)
@@ -60,7 +49,7 @@ public class EventTest {
             assertThat(event.getId()).isEqualTo("01DF119QKMPCR5VWBXS8783799");
             assertThat(event.getEventDefinitionType()).isEqualTo("aggregation-v1");
             assertThat(event.getEventDefinitionId()).isEqualTo("54e3deadbeefdeadbeefaffe");
-            assertThat(event.getOriginContext()).isEqualTo("urn:graylog:message:es:graylog_0:199a616d-4d48-4155-b4fc-339b1c3129b2");
+            assertThat(event.getOriginContext()).isEqualTo("urn:perfmanager:message:es:perfmanager_0:199a616d-4d48-4155-b4fc-339b1c3129b2");
             assertThat(event.getEventTimestamp()).isEqualTo(now);
             assertThat(event.getProcessingTimestamp()).isEqualTo(now);
             assertThat(event.getTimerangeStart()).isEqualTo(now);

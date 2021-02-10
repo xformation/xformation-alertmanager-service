@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.searches;
 
 import com.codahale.metrics.Counter;
@@ -257,8 +243,6 @@ public class Searches {
             if (indexSet == null && filter == null) {
                 // Don't include the index range if it's for an event index set to avoid sorting issues.
                 // See the following issues for details:
-                // - https://github.com/Graylog2/graylog2-server/issues/6384
-                // - https://github.com/Graylog2/graylog2-server/issues/6490
                 if (eventIndexSets.stream().anyMatch(set -> set.isManagedIndex(indexRange.indexName()))) {
                     continue;
                 }

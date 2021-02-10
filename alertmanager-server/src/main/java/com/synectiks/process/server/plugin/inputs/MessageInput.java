@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin.inputs;
 
 import com.codahale.metrics.Counter;
@@ -36,6 +22,7 @@ import com.synectiks.process.server.plugin.configuration.ConfigurationRequest;
 import com.synectiks.process.server.plugin.inputs.codecs.Codec;
 import com.synectiks.process.server.plugin.inputs.transports.Transport;
 import com.synectiks.process.server.plugin.journal.RawMessage;
+
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -138,7 +125,7 @@ public abstract class MessageInput implements Stoppable {
             }
             metricRegistry.register(getUniqueReadableId(), localRegistry);
         } catch (IllegalArgumentException ignored) {
-            // This happens for certain types of inputs, see https://github.com/Graylog2/graylog2-server/issues/1049#issuecomment-88857134
+            // This happens for certain types of inputs
         }
     }
 

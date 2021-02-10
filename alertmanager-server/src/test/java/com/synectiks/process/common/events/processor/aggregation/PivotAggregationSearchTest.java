@@ -1,24 +1,17 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.processor.aggregation;
 
 import com.google.common.collect.ImmutableList;
 import com.synectiks.process.common.events.EventsConfigurationTestProvider;
 import com.synectiks.process.common.events.processor.EventDefinition;
+import com.synectiks.process.common.events.processor.aggregation.AggregationEventProcessorConfig;
+import com.synectiks.process.common.events.processor.aggregation.AggregationEventProcessorParameters;
+import com.synectiks.process.common.events.processor.aggregation.AggregationFunction;
+import com.synectiks.process.common.events.processor.aggregation.AggregationKeyResult;
+import com.synectiks.process.common.events.processor.aggregation.AggregationSeries;
+import com.synectiks.process.common.events.processor.aggregation.AggregationSeriesValue;
+import com.synectiks.process.common.events.processor.aggregation.PivotAggregationSearch;
 import com.synectiks.process.common.events.search.MoreSearch;
 import com.synectiks.process.common.plugins.views.search.db.SearchJobService;
 import com.synectiks.process.common.plugins.views.search.engine.QueryEngine;
@@ -28,6 +21,7 @@ import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.bucke
 import com.synectiks.process.common.plugins.views.search.searchtypes.pivot.buckets.DateRangeBucket;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteRange;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.TimeRange;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;

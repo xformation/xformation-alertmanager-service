@@ -1,31 +1,18 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.alarmcallbacks;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.mongodb.DBCollection;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.database.CollectionName;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.plugin.database.ValidationException;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.rest.models.alarmcallbacks.requests.CreateAlarmCallbackRequest;
+
+import org.bson.types.ObjectId;
 import org.mongojack.DBCursor;
 import org.mongojack.DBQuery;
 import org.mongojack.JacksonDBCollection;

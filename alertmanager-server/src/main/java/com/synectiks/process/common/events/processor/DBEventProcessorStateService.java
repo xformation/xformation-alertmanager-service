@@ -1,28 +1,15 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.processor;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableSet;
 import com.mongodb.BasicDBObject;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.database.MongoDBUpsertRetryer;
+
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.mongojack.DBQuery;
 import org.mongojack.DBUpdate;
@@ -38,10 +25,10 @@ import java.util.Set;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Strings.isNullOrEmpty;
-import static java.util.Objects.requireNonNull;
 import static com.synectiks.process.common.events.processor.EventProcessorStateDto.FIELD_EVENT_DEFINITION_ID;
 import static com.synectiks.process.common.events.processor.EventProcessorStateDto.FIELD_MAX_PROCESSED_TIMESTAMP;
 import static com.synectiks.process.common.events.processor.EventProcessorStateDto.FIELD_MIN_PROCESSED_TIMESTAMP;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Manages database state for {@link EventProcessor}s.

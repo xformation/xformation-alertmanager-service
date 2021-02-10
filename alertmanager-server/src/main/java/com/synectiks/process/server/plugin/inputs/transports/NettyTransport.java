@@ -1,28 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin.inputs.transports;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.MetricSet;
 import com.google.common.annotations.VisibleForTesting;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
 import com.synectiks.process.server.inputs.transports.netty.EventLoopGroupFactory;
 import com.synectiks.process.server.inputs.transports.netty.ExceptionLoggingChannelHandler;
 import com.synectiks.process.server.inputs.transports.netty.PromiseFailureHandler;
@@ -37,6 +19,12 @@ import com.synectiks.process.server.plugin.inputs.MessageInput;
 import com.synectiks.process.server.plugin.inputs.codecs.CodecAggregator;
 import com.synectiks.process.server.plugin.inputs.util.PacketInformationDumper;
 import com.synectiks.process.server.plugin.inputs.util.ThroughputCounter;
+
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

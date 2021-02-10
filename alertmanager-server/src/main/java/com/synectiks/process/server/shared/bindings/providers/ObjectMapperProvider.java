@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.bindings.providers;
 
 import com.codahale.metrics.json.MetricsModule;
@@ -30,8 +16,6 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.zafarkhaja.semver.Version;
-import com.vdurmont.semver4j.Requirement;
-import com.vdurmont.semver4j.Semver;
 import com.synectiks.process.common.grn.GRN;
 import com.synectiks.process.common.grn.GRNDeserializer;
 import com.synectiks.process.common.grn.GRNKeyDeserializer;
@@ -53,6 +37,9 @@ import com.synectiks.process.server.security.encryption.EncryptedValueService;
 import com.synectiks.process.server.shared.jackson.SizeSerializer;
 import com.synectiks.process.server.shared.plugins.GraylogClassLoader;
 import com.synectiks.process.server.shared.rest.RangeJsonSerializer;
+import com.synectiks.process.server.semver4j.Requirement;
+import com.synectiks.process.server.semver4j.Semver;
+
 import org.joda.time.Period;
 
 import javax.inject.Inject;
@@ -98,7 +85,7 @@ public class ObjectMapperProvider implements Provider<ObjectMapper> {
                 .registerModule(new Jdk8Module())
                 .registerModule(new JavaTimeModule())
                 .registerModule(new MetricsModule(TimeUnit.SECONDS, TimeUnit.SECONDS, false))
-                .registerModule(new SimpleModule("Graylog")
+                .registerModule(new SimpleModule("perfmanager")
                         .addKeyDeserializer(Period.class, new JodaTimePeriodKeyDeserializer())
                         .addKeyDeserializer(GRN.class, new GRNKeyDeserializer(grnRegistry))
                         .addSerializer(new RangeJsonSerializer())

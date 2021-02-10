@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.transports;
 
 import com.codahale.metrics.MetricSet;
@@ -23,10 +9,6 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import com.synectiks.process.server.plugin.ServerStatus;
 import com.synectiks.process.server.plugin.configuration.Configuration;
 import com.synectiks.process.server.plugin.configuration.ConfigurationRequest;
@@ -43,6 +25,12 @@ import com.synectiks.process.server.plugin.inputs.transports.ThrottleableTranspo
 import com.synectiks.process.server.plugin.inputs.transports.Transport;
 import com.synectiks.process.server.plugin.journal.RawMessage;
 import com.synectiks.process.server.plugin.lifecycles.Lifecycle;
+
+import okhttp3.Headers;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -217,7 +205,7 @@ public class HttpPollTransport extends ThrottleableTransport {
                     CK_HEADERS,
                     "Additional HTTP headers",
                     "",
-                    "Add a comma separated list of additional HTTP headers. For example: Accept: application/json, X-Requester: Graylog",
+                    "Add a comma separated list of additional HTTP headers. For example: Accept: application/json, X-Requester: perfmanager",
                     ConfigurationField.Optional.OPTIONAL
             ));
 

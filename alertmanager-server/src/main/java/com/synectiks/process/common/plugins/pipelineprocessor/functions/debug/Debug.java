@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.functions.debug;
 
 import com.synectiks.process.common.plugins.pipelineprocessor.EvaluationContext;
@@ -31,7 +17,7 @@ public class Debug extends AbstractFunction<Void> {
     public static final String NAME = "debug";
 
     Debug() {
-        valueParam = ParameterDescriptor.object("value").description("The value to print in the graylog-server log.").build();
+        valueParam = ParameterDescriptor.object("value").description("The value to print in the perfmanager-server log.").build();
     }
 
     @Override
@@ -53,7 +39,7 @@ public class Debug extends AbstractFunction<Void> {
                 .name(NAME)
                 .returnType(Void.class)
                 .params(of(valueParam) )
-                .description("Print any passed value as string in the graylog-server log. Note that this will only appear in the " +
+                .description("Print any passed value as string in the perfmanager-server log. Note that this will only appear in the " +
                         "log of the graylog-server node that is processing the message you are trying to debug.")
                 .build();
     }

@@ -1,35 +1,22 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system.indices;
 
 import com.codahale.metrics.annotation.Timed;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.module.jsonSchema.factories.SchemaFactoryWrapper;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.plugin.indexer.retention.RetentionStrategy;
 import com.synectiks.process.server.plugin.indexer.retention.RetentionStrategyConfig;
 import com.synectiks.process.server.rest.models.system.indices.RetentionStrategies;
 import com.synectiks.process.server.rest.models.system.indices.RetentionStrategyDescription;
 import com.synectiks.process.server.shared.rest.resources.RestResource;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,7 +60,7 @@ public class RetentionStrategyResource extends RestResource {
     @Path("strategies")
     @Timed
     @ApiOperation(value = "List available retention strategies",
-            notes = "This resource returns a list of all available retention strategies on this Graylog node.")
+            notes = "This resource returns a list of all available retention strategies on this perfmanager node.")
     public RetentionStrategies list() {
         final Set<RetentionStrategyDescription> strategies = retentionStrategies.keySet()
                 .stream()

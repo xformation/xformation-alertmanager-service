@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.processors;
 
 import com.codahale.metrics.MetricRegistry;
@@ -40,6 +26,7 @@ import com.synectiks.process.common.plugins.pipelineprocessor.parser.FunctionReg
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.ParseException;
 import com.synectiks.process.common.plugins.pipelineprocessor.parser.PipelineRuleParser;
 import com.synectiks.process.common.plugins.pipelineprocessor.rest.PipelineConnections;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,7 +99,7 @@ public class ConfigurationStateUpdater {
     private static void setAllowCodeGeneration(Boolean allowCodeGeneration) {
         if (allowCodeGeneration && ToolProvider.getSystemJavaCompiler() == null) {
             log.warn("Your Java runtime does not have a compiler available, turning off dynamic " +
-                    "code generation. Please consider running Graylog in a JDK, not a JRE, to " +
+                    "code generation. Please consider running perfmanager in a JDK, not a JRE, to " +
                     "avoid a performance penalty in pipeline processing.");
             allowCodeGeneration = false;
         }

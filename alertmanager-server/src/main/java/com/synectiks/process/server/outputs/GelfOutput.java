@@ -1,30 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.outputs;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.assistedinject.Assisted;
-import com.synectiks.process.server.gelfclient.GelfConfiguration;
-import com.synectiks.process.server.gelfclient.GelfMessage;
-import com.synectiks.process.server.gelfclient.GelfMessageBuilder;
-import com.synectiks.process.server.gelfclient.GelfMessageLevel;
-import com.synectiks.process.server.gelfclient.GelfTransports;
-import com.synectiks.process.server.gelfclient.transport.GelfTransport;
 import com.synectiks.process.server.plugin.Message;
 import com.synectiks.process.server.plugin.Tools;
 import com.synectiks.process.server.plugin.configuration.Configuration;
@@ -37,6 +17,13 @@ import com.synectiks.process.server.plugin.configuration.fields.TextField;
 import com.synectiks.process.server.plugin.outputs.MessageOutput;
 import com.synectiks.process.server.plugin.outputs.MessageOutputConfigurationException;
 import com.synectiks.process.server.plugin.streams.Stream;
+
+import com.synectiks.process.server.gelfclient.GelfConfiguration;
+import com.synectiks.process.server.gelfclient.GelfMessage;
+import com.synectiks.process.server.gelfclient.GelfMessageBuilder;
+import com.synectiks.process.server.gelfclient.GelfMessageLevel;
+import com.synectiks.process.server.gelfclient.GelfTransports;
+import com.synectiks.process.server.gelfclient.transport.GelfTransport;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

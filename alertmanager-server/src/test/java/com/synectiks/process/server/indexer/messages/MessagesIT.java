@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.messages;
 
 import com.codahale.metrics.MetricRegistry;
@@ -21,12 +7,14 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import joptsimple.internal.Strings;
 import com.synectiks.process.common.testing.elasticsearch.ElasticsearchBaseTest;
 import com.synectiks.process.server.indexer.IndexFailure;
 import com.synectiks.process.server.indexer.IndexSet;
 import com.synectiks.process.server.indexer.TestIndexSet;
 import com.synectiks.process.server.indexer.indexset.IndexSetConfig;
+import com.synectiks.process.server.indexer.messages.Messages;
+import com.synectiks.process.server.indexer.messages.MessagesAdapter;
+import com.synectiks.process.server.indexer.messages.TrafficAccounting;
 import com.synectiks.process.server.indexer.results.ResultMessage;
 import com.synectiks.process.server.indexer.retention.strategies.DeletionRetentionStrategy;
 import com.synectiks.process.server.indexer.retention.strategies.DeletionRetentionStrategyConfig;
@@ -34,6 +22,9 @@ import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRota
 import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategyConfig;
 import com.synectiks.process.server.plugin.Message;
 import com.synectiks.process.server.system.processing.ProcessingStatusRecorder;
+
+import joptsimple.internal.Strings;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.After;
@@ -133,7 +124,7 @@ public abstract class MessagesIT extends ElasticsearchBaseTest {
     public void testIfTooLargeBatchesGetSplitUp() throws Exception {
         // This test assumes that ES is configured with bulk_max_body_size to 100MB
         // Check if we can index about 300MB of messages (once the large batch gets split up)
-        final int MESSAGECOUNT = 303;
+        final int MESSAGECOUNT = 101;
         // Each Message is about 1 MB
         final List<Map.Entry<IndexSet, Message>> largeMessageBatch = createMessageBatch(1024 * 1024, MESSAGECOUNT);
         final List<String> failedItems = this.messages.bulkIndex(largeMessageBatch);

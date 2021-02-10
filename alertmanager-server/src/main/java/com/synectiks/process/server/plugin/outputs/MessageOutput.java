@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin.outputs;
 
 import com.synectiks.process.server.plugin.AbstractDescriptor;
@@ -27,8 +13,8 @@ import com.synectiks.process.server.plugin.streams.Stream;
 import java.util.List;
 
 public interface MessageOutput extends Stoppable {
-    // This factory is implemented by output plugins that have been built before Graylog 3.0.1.
-    // We have to keep it around to make sure older plugins still load with Graylog >=3.0.1.
+    // This factory is implemented by output plugins that have been built before perfmanager 3.0.1.
+    // We have to keep it around to make sure older plugins still load with perfmanager >=3.0.1.
     // It can be removed once we decide to stop supporting old plugins.
     interface Factory<T> {
         T create(Stream stream, Configuration configuration);
@@ -36,7 +22,7 @@ public interface MessageOutput extends Stoppable {
         Descriptor getDescriptor();
     }
 
-    // This is the factory that should be implemented by output plugins which target Graylog 3.0.1 and later.
+    // This is the factory that should be implemented by output plugins which target perfmanager 3.0.1 and later.
     // The only change compared to Factory is that it also takes the Output instance parameter.
     interface Factory2<T> {
         T create(Output output, Stream stream, Configuration configuration);

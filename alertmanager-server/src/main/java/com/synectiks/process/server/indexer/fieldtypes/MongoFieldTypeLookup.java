@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.fieldtypes;
 
 import com.google.common.collect.HashMultimap;
@@ -85,14 +71,14 @@ public class MongoFieldTypeLookup implements FieldTypeLookup {
         //
         // [
         //   {
-        //     "index_name": "graylog_0",
+        //     "index_name": "perfmanager_0",
         //     "fields": [
         //       {"field_name": "message", "physical_type": "text"},
         //       {"field_name": "source", "physical_type": "keyword"}
         //     ]
         //   },
         //   {
-        //     "index_name": "graylog_1",
+        //     "index_name": "perfmanager_1",
         //     "fields": [
         //       {"field_name": "message", "physical_type": "text"},
         //     ]
@@ -108,7 +94,7 @@ public class MongoFieldTypeLookup implements FieldTypeLookup {
         //       {
         //         "type": "string",
         //         "properties": ["full-text-search"],
-        //         "index_names": ["graylog_0", "graylog_1"]
+        //         "index_names": ["perfmanager_0", "perfmanager_1"]
         //     ]
         //   },
         //   "source": {
@@ -117,7 +103,7 @@ public class MongoFieldTypeLookup implements FieldTypeLookup {
         //       {
         //         "type": "string",
         //         "properties": ["enumerable"],
-        //         "index_names": ["graylog_0"]
+        //         "index_names": ["perfmanager_0"]
         //     ]
         //   }
         // }

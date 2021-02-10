@@ -1,30 +1,19 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.decorators;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
-import org.assertj.core.api.Assertions;
+import com.synectiks.process.server.decorators.DecoratorImpl;
+import com.synectiks.process.server.decorators.SyslogSeverityMapperDecorator;
 import com.synectiks.process.server.plugin.Tools;
 import com.synectiks.process.server.rest.models.messages.responses.ResultMessageSummary;
 import com.synectiks.process.server.rest.models.system.indexer.responses.IndexRangeSummary;
 import com.synectiks.process.server.rest.resources.search.responses.SearchResponse;
+
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.util.List;

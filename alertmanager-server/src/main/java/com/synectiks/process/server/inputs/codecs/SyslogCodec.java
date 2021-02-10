@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.codecs;
 
 import com.codahale.metrics.MetricRegistry;
@@ -35,6 +21,7 @@ import com.synectiks.process.server.plugin.inputs.codecs.AbstractCodec;
 import com.synectiks.process.server.plugin.inputs.codecs.CodecAggregator;
 import com.synectiks.process.server.plugin.inputs.transports.NettyTransport;
 import com.synectiks.process.server.plugin.journal.RawMessage;
+
 import com.synectiks.process.server.syslog4j.server.SyslogServerEventIF;
 import com.synectiks.process.server.syslog4j.server.impl.event.CiscoSyslogServerEvent;
 import com.synectiks.process.server.syslog4j.server.impl.event.FortiGateSyslogEvent;
@@ -133,7 +120,7 @@ public class SyslogCodec extends AbstractCodec {
         }
 
         // If the message is a structured one, we do not want the message ID and the structured data in the
-        // message string. See: https://github.com/Graylog2/graylog2-server/issues/845#issuecomment-69499719
+        // message string
         final String syslogMessage;
         if (e instanceof StructuredSyslogServerEvent) {
             final String structMessage = ((StructuredSyslogServerEvent) e).getStructuredMessage().getMessage();
@@ -153,7 +140,7 @@ public class SyslogCodec extends AbstractCodec {
         }
         if (e instanceof FortiGateSyslogEvent) {
             final HashMap<String, Object> fields = new HashMap<>(((FortiGateSyslogEvent) e).getFields());
-            // The FortiGate "level" field is a string, Graylog requires a numeric value.
+            // The FortiGate "level" field is a string, perfmanager requires a numeric value.
             fields.remove("level");
             m.addFields(fields);
         }

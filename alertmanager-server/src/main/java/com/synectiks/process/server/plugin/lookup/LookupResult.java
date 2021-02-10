@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin.lookup;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -36,7 +22,7 @@ import java.util.Map;
  * {@link com.fasterxml.jackson.databind.ObjectMapper}, but we strongly recommend implementing your own
  * serialization and deserialization logic if you're implementing a lookup cache.
  * <p>
- * There are <em>no guarantees</em> about binary compatibility of this class across Graylog releases!
+ * There are <em>no guarantees</em> about binary compatibility of this class across perfmanager releases!
  *
  * @see LookupDataAdapter#get(Object)
  * @see LookupCache#get(LookupCacheKey, java.util.concurrent.Callable)

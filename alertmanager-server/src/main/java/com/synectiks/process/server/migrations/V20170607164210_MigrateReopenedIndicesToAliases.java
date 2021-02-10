@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,6 +11,7 @@ import com.synectiks.process.server.indexer.MongoIndexSet;
 import com.synectiks.process.server.indexer.cluster.Node;
 import com.synectiks.process.server.indexer.indexset.IndexSetService;
 import com.synectiks.process.server.indexer.indices.Indices;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +26,7 @@ import java.util.Set;
 
 public class V20170607164210_MigrateReopenedIndicesToAliases extends Migration {
     private static final Logger LOG = LoggerFactory.getLogger(V20170607164210_MigrateReopenedIndicesToAliases.class);
-    private static final String REOPENED_INDEX_SETTING = "graylog2_reopened";
+    private static final String REOPENED_INDEX_SETTING = "perfmanager2_reopened";
 
     private final Node node;
     private final IndexSetService indexSetService;

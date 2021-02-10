@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs;
 
 import com.google.common.base.Optional;
@@ -29,7 +15,6 @@ import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.database.NotFoundException;
 import com.synectiks.process.server.database.PersistedServiceImpl;
@@ -51,6 +36,8 @@ import com.synectiks.process.server.rest.models.system.inputs.responses.InputDel
 import com.synectiks.process.server.rest.models.system.inputs.responses.InputUpdated;
 import com.synectiks.process.server.shared.inputs.MessageInputFactory;
 import com.synectiks.process.server.shared.inputs.NoSuchInputTypeException;
+
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -215,7 +202,7 @@ public class InputServiceImpl extends PersistedServiceImpl implements InputServi
 
         final DBObject o = findOne(InputImpl.class, new BasicDBObject("$and", query));
         if (o == null) {
-            throw new NotFoundException("Couldn't find input " + id + " on Graylog node " + nodeId);
+            throw new NotFoundException("Couldn't find input " + id + " on perfmanager node " + nodeId);
         } else {
             return new InputImpl((ObjectId) o.get(InputImpl.FIELD_ID), o.toMap());
         }

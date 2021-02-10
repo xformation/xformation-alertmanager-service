@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views;
 
 import com.google.common.collect.ImmutableSet;
@@ -24,12 +10,12 @@ import com.synectiks.process.common.plugins.views.migrations.V20181220133700_Add
 import com.synectiks.process.common.plugins.views.migrations.V20190127111728_MigrateWidgetFormatSettings;
 import com.synectiks.process.common.plugins.views.migrations.V20190304102700_MigrateMessageListStructure;
 import com.synectiks.process.common.plugins.views.migrations.V20190805115800_RemoveDashboardStateFromViews;
-import com.synectiks.process.common.plugins.views.migrations.V20191125144500_MigrateDashboardsToViewsSupport.V20191125144500_MigrateDashboardsToViews;
-import com.synectiks.process.common.plugins.views.migrations.V20191203120602_MigrateSavedSearchesToViewsSupport.V20191203120602_MigrateSavedSearchesToViews;
 import com.synectiks.process.common.plugins.views.migrations.V20191204000000_RemoveLegacyViewsPermissions;
-import com.synectiks.process.common.plugins.views.migrations.V20200204122000_MigrateUntypedViewsToDashboards.V20200204122000_MigrateUntypedViewsToDashboards;
 import com.synectiks.process.common.plugins.views.migrations.V20200409083200_RemoveRootQueriesFromMigratedDashboards;
 import com.synectiks.process.common.plugins.views.migrations.V20200730000000_AddGl2MessageIdFieldAliasForEvents;
+import com.synectiks.process.common.plugins.views.migrations.V20191125144500_MigrateDashboardsToViewsSupport.V20191125144500_MigrateDashboardsToViews;
+import com.synectiks.process.common.plugins.views.migrations.V20191203120602_MigrateSavedSearchesToViewsSupport.V20191203120602_MigrateSavedSearchesToViews;
+import com.synectiks.process.common.plugins.views.migrations.V20200204122000_MigrateUntypedViewsToDashboards.V20200204122000_MigrateUntypedViewsToDashboards;
 import com.synectiks.process.common.plugins.views.providers.ExportBackendProvider;
 import com.synectiks.process.common.plugins.views.search.SearchRequirements;
 import com.synectiks.process.common.plugins.views.search.SearchRequiresParameterSupport;
@@ -76,6 +62,7 @@ import com.synectiks.process.common.plugins.views.search.views.widgets.aggregati
 import com.synectiks.process.common.plugins.views.search.views.widgets.aggregation.AreaVisualizationConfigDTO;
 import com.synectiks.process.common.plugins.views.search.views.widgets.aggregation.AutoIntervalDTO;
 import com.synectiks.process.common.plugins.views.search.views.widgets.aggregation.BarVisualizationConfigDTO;
+import com.synectiks.process.common.plugins.views.search.views.widgets.aggregation.HeatmapVisualizationConfigDTO;
 import com.synectiks.process.common.plugins.views.search.views.widgets.aggregation.LineVisualizationConfigDTO;
 import com.synectiks.process.common.plugins.views.search.views.widgets.aggregation.NumberVisualizationConfigDTO;
 import com.synectiks.process.common.plugins.views.search.views.widgets.aggregation.TimeHistogramConfigDTO;
@@ -205,6 +192,7 @@ public class ViewsBindings extends ViewsModule {
         registerJacksonSubtype(NumberVisualizationConfigDTO.class);
         registerJacksonSubtype(LineVisualizationConfigDTO.class);
         registerJacksonSubtype(AreaVisualizationConfigDTO.class);
+        registerJacksonSubtype(HeatmapVisualizationConfigDTO.class);
     }
 
     private void registerParameterSubtypes() {

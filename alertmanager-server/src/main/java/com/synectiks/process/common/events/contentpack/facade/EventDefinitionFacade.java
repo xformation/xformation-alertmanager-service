@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.contentpack.facade;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -47,6 +33,7 @@ import com.synectiks.process.server.contentpacks.model.entities.references.Value
 import com.synectiks.process.server.plugin.PluginMetaData;
 import com.synectiks.process.server.plugin.database.users.User;
 import com.synectiks.process.server.shared.users.UserService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

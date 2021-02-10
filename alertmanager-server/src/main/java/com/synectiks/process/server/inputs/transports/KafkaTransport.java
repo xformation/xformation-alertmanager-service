@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.transports;
 
 import com.codahale.metrics.Gauge;
@@ -28,24 +14,6 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
-import kafka.consumer.Consumer;
-import kafka.consumer.ConsumerConfig;
-import kafka.consumer.ConsumerIterator;
-import kafka.consumer.ConsumerTimeoutException;
-import kafka.consumer.KafkaStream;
-import kafka.consumer.TopicFilter;
-import kafka.consumer.Whitelist;
-import kafka.javaapi.consumer.ConsumerConnector;
-import kafka.message.MessageAndMetadata;
-import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.apache.kafka.clients.consumer.InvalidOffsetException;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.consumer.internals.NoOpConsumerRebalanceListener;
-import org.apache.kafka.common.KafkaException;
-import org.apache.kafka.common.errors.AuthorizationException;
-import org.apache.kafka.common.errors.WakeupException;
-import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 import com.synectiks.process.server.plugin.LocalMetricRegistry;
 import com.synectiks.process.server.plugin.ServerStatus;
 import com.synectiks.process.server.plugin.configuration.Configuration;
@@ -64,6 +32,25 @@ import com.synectiks.process.server.plugin.inputs.transports.Transport;
 import com.synectiks.process.server.plugin.journal.RawMessage;
 import com.synectiks.process.server.plugin.lifecycles.Lifecycle;
 import com.synectiks.process.server.plugin.system.NodeId;
+
+import kafka.consumer.Consumer;
+import kafka.consumer.ConsumerConfig;
+import kafka.consumer.ConsumerIterator;
+import kafka.consumer.ConsumerTimeoutException;
+import kafka.consumer.KafkaStream;
+import kafka.consumer.TopicFilter;
+import kafka.consumer.Whitelist;
+import kafka.javaapi.consumer.ConsumerConnector;
+import kafka.message.MessageAndMetadata;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.InvalidOffsetException;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.clients.consumer.internals.NoOpConsumerRebalanceListener;
+import org.apache.kafka.common.KafkaException;
+import org.apache.kafka.common.errors.AuthorizationException;
+import org.apache.kafka.common.errors.WakeupException;
+import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -106,7 +93,7 @@ public class KafkaTransport extends ThrottleableTransport {
     );
 
     private static final String DEFAULT_OFFSET_RESET = "largest";
-    private static final String DEFAULT_GROUP_ID = "graylog2";
+    private static final String DEFAULT_GROUP_ID = "perfmanager2";
 
     private static final Logger LOG = LoggerFactory.getLogger(KafkaTransport.class);
 
@@ -257,7 +244,7 @@ public class KafkaTransport extends ThrottleableTransport {
         public ConsumerRunnable(Properties props, MessageInput input, int threadId) {
             this.input = input;
             final Properties nprops = (Properties) props.clone();
-            nprops.put("client.id", "gl2-" + nodeId + "-" + input.getId() + "-" + threadId);
+            nprops.put("client.id", "xfperf-" + nodeId + "-" + input.getId() + "-" + threadId);
             this.props = nprops;
             consumer = new KafkaConsumer<>(props);
             //noinspection ConstantConditions
@@ -349,7 +336,7 @@ public class KafkaTransport extends ThrottleableTransport {
         final Properties props = new Properties();
 
         props.put("group.id", configuration.getString(CK_GROUP_ID, DEFAULT_GROUP_ID));
-        props.put("client.id", "gl2-" + nodeId + "-" + input.getId());
+        props.put("client.id", "xfperf-" + nodeId + "-" + input.getId());
 
         props.put("fetch.min.bytes", String.valueOf(configuration.getInt(CK_FETCH_MIN_BYTES)));
         props.put("fetch.wait.max.ms", String.valueOf(configuration.getInt(CK_FETCH_WAIT_MAX)));
@@ -515,7 +502,7 @@ public class KafkaTransport extends ThrottleableTransport {
             cr.addField(new BooleanField(CK_LEGACY,
                     "Legacy mode",
                     true,
-                    "Use old ZooKeeper-based consumer API. (Used before Graylog 3.3)",
+                    "Use old ZooKeeper-based consumer API. (Used before perfmanager 3.3)",
                     10
             ));
             cr.addField(new TextField(
@@ -579,7 +566,7 @@ public class KafkaTransport extends ThrottleableTransport {
                     CK_CUSTOM_PROPERTIES,
                     "Custom Kafka properties",
                     "",
-                    "A newline separated list of Kafka properties. (e.g.: \"ssl.keystore.location=/etc/graylog/server/kafka.keystore.jks\").",
+                    "A newline separated list of Kafka properties. (e.g.: \"ssl.keystore.location=/opt/perfmanager/kafka.keystore.jks\").",
                     ConfigurationField.Optional.OPTIONAL,
                     ConfigurationField.PLACE_AT_END_POSITION,
                     TextField.Attribute.TEXTAREA

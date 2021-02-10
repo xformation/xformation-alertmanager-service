@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer;
 
 import com.google.common.collect.ImmutableList;
@@ -30,11 +16,11 @@ import java.util.stream.Collectors;
 
 public abstract class GIMMapping extends IndexMapping {
     private static final Set<String> KEYWORD_FIELDS = ImmutableSet.<String>builder()
-            .add("gl2_gims_version")
-            .add("gl2_tags")
-            .add("gl2_event_category")
-            .add("gl2_event_subcategory")
-            .add("gl2_event_type")
+            .add("xfperf_gims_version")
+            .add("xfperf_tags")
+            .add("xfperf_event_category")
+            .add("xfperf_event_subcategory")
+            .add("xfperf_event_type")
             .add("user_command")
             .add("user_command_path")
             .add("user_domain")
@@ -258,7 +244,7 @@ public abstract class GIMMapping extends IndexMapping {
             .build();
 
     private static final Set<String> INTEGER_FIELDS = ImmutableSet.<String>builder()
-            .add("gl2_event_type_code")
+            .add("xfperf_event_type_code")
             .add("http_response_code")
             .add("source_nat_port")
             .add("destination_nat_port")

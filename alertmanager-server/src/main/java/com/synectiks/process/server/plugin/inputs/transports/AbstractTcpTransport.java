@@ -1,43 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin.inputs.transports;
 
 import com.codahale.metrics.Gauge;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
-import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.PooledByteBufAllocator;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.FixedRecvByteBufAllocator;
-import io.netty.channel.group.ChannelGroup;
-import io.netty.channel.group.DefaultChannelGroup;
-import io.netty.channel.socket.ServerSocketChannelConfig;
-import io.netty.handler.ssl.ClientAuth;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.SslHandler;
-import io.netty.handler.ssl.SslProvider;
-import io.netty.handler.ssl.util.SelfSignedCertificate;
-import io.netty.util.concurrent.GlobalEventExecutor;
 import com.synectiks.process.server.inputs.transports.NettyTransportConfiguration;
 import com.synectiks.process.server.inputs.transports.netty.ByteBufMessageAggregationHandler;
 import com.synectiks.process.server.inputs.transports.netty.ChannelRegistrationHandler;
@@ -59,6 +26,27 @@ import com.synectiks.process.server.plugin.inputs.codecs.CodecAggregator;
 import com.synectiks.process.server.plugin.inputs.transports.util.KeyUtil;
 import com.synectiks.process.server.plugin.inputs.util.ConnectionCounter;
 import com.synectiks.process.server.plugin.inputs.util.ThroughputCounter;
+
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.PooledByteBufAllocator;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.FixedRecvByteBufAllocator;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.channel.socket.ServerSocketChannelConfig;
+import io.netty.handler.ssl.ClientAuth;
+import io.netty.handler.ssl.SslContextBuilder;
+import io.netty.handler.ssl.SslHandler;
+import io.netty.handler.ssl.SslProvider;
+import io.netty.handler.ssl.util.SelfSignedCertificate;
+import io.netty.util.concurrent.GlobalEventExecutor;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -109,7 +97,7 @@ public abstract class AbstractTcpTransport extends NettyTransport {
     protected final Configuration configuration;
     protected final EventLoopGroup parentEventLoopGroup;
     private final NettyTransportConfiguration nettyTransportConfiguration;
-    private final com.synectiks.process.server.Configuration graylogConfiguration;
+    private final com.synectiks.process.server.Configuration serverConfiguration;
     private final AtomicReference<Channel> channelReference;
 
     private final boolean tlsEnable;
@@ -131,12 +119,12 @@ public abstract class AbstractTcpTransport extends NettyTransport {
             EventLoopGroup parentEventLoopGroup,
             EventLoopGroupFactory eventLoopGroupFactory,
             NettyTransportConfiguration nettyTransportConfiguration,
-            com.synectiks.process.server.Configuration graylogConfiguration) {
+            com.synectiks.process.server.Configuration serverConfiguration) {
         super(configuration, eventLoopGroupFactory, throughputCounter, localRegistry);
         this.configuration = configuration;
         this.parentEventLoopGroup = parentEventLoopGroup;
         this.nettyTransportConfiguration = nettyTransportConfiguration;
-        this.graylogConfiguration = graylogConfiguration;
+        this.serverConfiguration = serverConfiguration;
         this.channelReference = new AtomicReference<>();
         this.childChannels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
@@ -330,8 +318,8 @@ public abstract class AbstractTcpTransport extends NettyTransport {
                         .sslProvider(tlsProvider)
                         .clientAuth(clientAuth)
                         .trustManager(clientAuthCerts);
-                if (!graylogConfiguration.getEnabledTlsProtocols().isEmpty()) {
-                    sslContext.protocols(graylogConfiguration.getEnabledTlsProtocols());
+                if (!serverConfiguration.getEnabledTlsProtocols().isEmpty()) {
+                    sslContext.protocols(serverConfiguration.getEnabledTlsProtocols());
                 }
 
                 // TODO: Use byte buffer allocator of channel

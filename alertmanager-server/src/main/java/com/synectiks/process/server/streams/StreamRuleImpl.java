@@ -1,25 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.streams;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.database.CollectionName;
 import com.synectiks.process.server.database.PersistedImpl;
 import com.synectiks.process.server.database.validators.FilledStringValidator;
@@ -29,6 +14,8 @@ import com.synectiks.process.server.database.validators.OptionalStringValidator;
 import com.synectiks.process.server.plugin.database.validators.Validator;
 import com.synectiks.process.server.plugin.streams.StreamRule;
 import com.synectiks.process.server.plugin.streams.StreamRuleType;
+
+import org.bson.types.ObjectId;
 
 import java.util.Collections;
 import java.util.EnumSet;

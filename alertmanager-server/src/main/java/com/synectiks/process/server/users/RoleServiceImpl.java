@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.users;
 
 import com.google.common.base.Function;
@@ -22,7 +8,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DuplicateKeyException;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.database.MongoDBUpsertRetryer;
@@ -31,6 +16,8 @@ import com.synectiks.process.server.plugin.database.ValidationException;
 import com.synectiks.process.server.shared.security.Permissions;
 import com.synectiks.process.server.shared.users.Role;
 import com.synectiks.process.server.shared.users.Roles;
+
+import org.bson.types.ObjectId;
 import org.mongojack.DBCursor;
 import org.mongojack.DBQuery;
 import org.mongojack.JacksonDBCollection;
@@ -83,9 +70,9 @@ public class RoleServiceImpl implements RoleService {
 
         // make sure the two built-in roles actually exist
         adminRoleObjectId = checkNotNull(ensureBuiltinRole(ADMIN_ROLENAME, Sets.newHashSet("*"), "Admin",
-                                                           "Grants all permissions for Graylog administrators (built-in)"));
+                                                           "Grants all permissions for perfmanager administrators (built-in)"));
         readerRoleObjectId = checkNotNull(ensureBuiltinRole(READER_ROLENAME, permissions.readerBasePermissions(), "Reader",
-                          "Grants basic permissions for every Graylog user (built-in)"));
+                          "Grants basic permissions for every perfmanager user (built-in)"));
 
     }
 
@@ -117,12 +104,12 @@ public class RoleServiceImpl implements RoleService {
                 final RoleImpl savedRole = save(fixedAdmin);
                 return savedRole.getId();
             } catch (DuplicateKeyException | ValidationException e) {
-                log.error("Unable to save fixed " + roleName + " role, please restart Graylog to fix this.", e);
+                log.error("Unable to save fixed " + roleName + " role, please restart perfmanager to fix this.", e);
             }
         }
 
         if (previousRole == null) {
-            log.error("Unable to access fixed " + roleName + " role, please restart Graylog to fix this.");
+            log.error("Unable to access fixed " + roleName + " role, please restart perfmanager to fix this.");
             return null;
         }
 
@@ -195,7 +182,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleImpl save(Role role1) throws ValidationException {
-        // sucky but necessary because of graylog2-shared not knowing about mongodb :(
+        // sucky but necessary because of perfmanager2-shared not knowing about mongodb :(
         if (!(role1 instanceof RoleImpl)) {
             throw new IllegalArgumentException("invalid Role implementation class");
         }

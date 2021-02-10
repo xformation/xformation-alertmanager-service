@@ -1,34 +1,21 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.tools;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.Lists;
-import com.synectiks.process.server.grok.krakens.Grok;
-import com.synectiks.process.server.grok.krakens.GrokCompiler;
-import com.synectiks.process.server.grok.krakens.Match;
-import com.synectiks.process.server.grok.krakens.exception.GrokException;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import com.synectiks.process.server.audit.jersey.NoAuditEvent;
 import com.synectiks.process.server.grok.GrokPattern;
 import com.synectiks.process.server.grok.GrokPatternService;
 import com.synectiks.process.server.rest.models.tools.requests.GrokTestRequest;
 import com.synectiks.process.server.rest.resources.tools.responses.GrokTesterResponse;
 import com.synectiks.process.server.shared.rest.resources.RestResource;
+
+import com.synectiks.process.server.grok.krakens.Grok;
+import com.synectiks.process.server.grok.krakens.GrokCompiler;
+import com.synectiks.process.server.grok.krakens.Match;
+import com.synectiks.process.server.grok.krakens.exception.GrokException;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 
 import javax.inject.Inject;
 import javax.validation.Valid;

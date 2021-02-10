@@ -1,23 +1,19 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.system.jobs;
 
-import static com.codahale.metrics.MetricRegistry.name;
+import com.codahale.metrics.InstrumentedScheduledExecutorService;
+import com.codahale.metrics.MetricRegistry;
+import com.synectiks.process.server.uuid.UUID;
+import com.google.common.base.Stopwatch;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.synectiks.process.server.shared.system.activities.Activity;
+import com.synectiks.process.server.shared.system.activities.ActivityWriter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -25,18 +21,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
-
-import com.synectiks.process.server.shared.system.activities.Activity;
-import com.synectiks.process.server.shared.system.activities.ActivityWriter;
-import com.synectiks.process.server.uuid.UUID;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.codahale.metrics.InstrumentedScheduledExecutorService;
-import com.codahale.metrics.MetricRegistry;
-import com.google.common.base.Stopwatch;
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import static com.codahale.metrics.MetricRegistry.name;
 
 public class SystemJobManager {
 

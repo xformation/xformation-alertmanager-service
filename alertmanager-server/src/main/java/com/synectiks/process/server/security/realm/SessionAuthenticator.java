@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.security.realm;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -25,12 +11,15 @@ import org.apache.shiro.realm.AuthenticatingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ThreadContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.plugin.database.users.User;
+import com.synectiks.process.server.security.headerauth.HTTPHeaderAuthConfig;
 import com.synectiks.process.server.shared.security.SessionIdToken;
 import com.synectiks.process.server.shared.security.ShiroRequestHeadersBinder;
 import com.synectiks.process.server.shared.users.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.Optional;
@@ -38,13 +27,15 @@ import java.util.Optional;
 public class SessionAuthenticator extends AuthenticatingRealm {
     private static final Logger LOG = LoggerFactory.getLogger(SessionAuthenticator.class);
     public static final String NAME = "mongodb-session";
-    public static final String X_GRAYLOG_NO_SESSION_EXTENSION = "X-Graylog-No-Session-Extension";
+    public static final String X_GRAYLOG_NO_SESSION_EXTENSION = "X-perfmanager-No-Session-Extension";
 
     private final UserService userService;
+    private final ClusterConfigService clusterConfigService;
 
     @Inject
-    SessionAuthenticator(UserService userService) {
+    SessionAuthenticator(UserService userService, ClusterConfigService clusterConfigService) {
         this.userService = userService;
+        this.clusterConfigService = clusterConfigService;
         // this realm either rejects a session, or allows the associated user implicitly
         setCredentialsMatcher(new AllowAllCredentialsMatcher());
         setAuthenticationTokenClass(SessionIdToken.class);
@@ -72,6 +63,18 @@ public class SessionAuthenticator extends AuthenticatingRealm {
             LOG.debug("Found session {} for userId {}", session.getId(), userId);
         }
 
+        final String sessionUsername = (String) session.getAttribute(HTTPHeaderAuthenticationRealm.SESSION_AUTH_HEADER);
+        if (sessionUsername != null) {
+            final HTTPHeaderAuthConfig httpHeaderConfig = loadHTTPHeaderConfig();
+            final Optional<String> usernameHeader = ShiroRequestHeadersBinder.getHeaderFromThreadContext(httpHeaderConfig.usernameHeader());
+
+            if (httpHeaderConfig.enabled() && usernameHeader.isPresent() && !usernameHeader.get().equalsIgnoreCase(sessionUsername)) {
+                LOG.warn("Terminating session where user <{}> does not match trusted HTTP header <{}>.", sessionUsername, usernameHeader.get());
+                session.stop();
+                return null;
+            }
+        }
+
         final Optional<String> noSessionExtension = ShiroRequestHeadersBinder.getHeaderFromThreadContext(X_GRAYLOG_NO_SESSION_EXTENSION);
         if (noSessionExtension.isPresent() && "true".equalsIgnoreCase(noSessionExtension.get())) {
             LOG.debug("Not extending session because the request indicated not to.");
@@ -81,5 +84,9 @@ public class SessionAuthenticator extends AuthenticatingRealm {
         ThreadContext.bind(subject);
 
         return new SimpleAccount(user.getId(), null, "session authenticator");
+    }
+
+    private HTTPHeaderAuthConfig loadHTTPHeaderConfig() {
+        return clusterConfigService.getOrDefault(HTTPHeaderAuthConfig.class, HTTPHeaderAuthConfig.createDisabled());
     }
 }

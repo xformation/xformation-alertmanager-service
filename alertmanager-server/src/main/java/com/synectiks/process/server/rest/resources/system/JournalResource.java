@@ -1,28 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system;
 
 import com.codahale.metrics.annotation.Timed;
 import com.github.joschi.jadconfig.util.Size;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import kafka.log.LogSegment;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.synectiks.process.server.Configuration;
 import com.synectiks.process.server.plugin.KafkaJournalConfiguration;
 import com.synectiks.process.server.plugin.ThrottleState;
@@ -32,6 +13,12 @@ import com.synectiks.process.server.shared.journal.Journal;
 import com.synectiks.process.server.shared.journal.KafkaJournal;
 import com.synectiks.process.server.shared.rest.resources.RestResource;
 import com.synectiks.process.server.shared.security.RestPermissions;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import kafka.log.LogSegment;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;

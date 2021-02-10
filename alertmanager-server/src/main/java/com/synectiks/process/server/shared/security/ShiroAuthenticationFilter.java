@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.security;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -48,14 +34,14 @@ public class ShiroAuthenticationFilter implements ContainerRequestFilter {
                     context.loginSubject();
                 } catch (LockedAccountException e) {
                     LOG.debug("Unable to authenticate user, account is locked.", e);
-                    throw new NotAuthorizedException(e, "Basic realm=\"Graylog Server\"");
+                    throw new NotAuthorizedException(e, "Basic realm=\"perfmanager Server\"");
                 } catch (AuthenticationException e) {
                     LOG.debug("Unable to authenticate user.", e);
-                    throw new NotAuthorizedException(e, "Basic realm=\"Graylog Server\"");
+                    throw new NotAuthorizedException(e, "Basic realm=\"perfmanager Server\"");
                 }
             }
         } else {
-            throw new NotAuthorizedException("Basic realm=\"Graylog Server\"");
+            throw new NotAuthorizedException("Basic realm=\"perfmanager Server\"");
         }
 
     }

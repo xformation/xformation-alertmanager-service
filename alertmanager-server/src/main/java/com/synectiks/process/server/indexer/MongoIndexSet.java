@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -36,6 +22,7 @@ import com.synectiks.process.server.shared.system.activities.ActivityWriter;
 import com.synectiks.process.server.system.jobs.SystemJob;
 import com.synectiks.process.server.system.jobs.SystemJobConcurrencyException;
 import com.synectiks.process.server.system.jobs.SystemJobManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,8 +39,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
-import static java.util.Objects.requireNonNull;
 import static com.synectiks.process.server.audit.AuditEventTypes.ES_WRITE_INDEX_UPDATE;
+import static java.util.Objects.requireNonNull;
 
 public class MongoIndexSet implements IndexSet {
     private static final Logger LOG = LoggerFactory.getLogger(MongoIndexSet.class);
@@ -61,8 +48,6 @@ public class MongoIndexSet implements IndexSet {
     public static final String SEPARATOR = "_";
     public static final String DEFLECTOR_SUFFIX = "deflector";
 
-    // TODO: Hardcoded archive suffix. See: https://github.com/Graylog2/graylog2-server/issues/2058
-    // TODO 3.0: Remove this in 3.0, only used for pre 2.2 backwards compatibility.
     public static final String RESTORED_ARCHIVE_SUFFIX = "_restored_archive";
 
     public interface Factory {

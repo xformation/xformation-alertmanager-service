@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.lookup.adapters.dsvhttp;
 
 import com.google.common.collect.ImmutableMap;
@@ -64,7 +50,7 @@ public class HTTPFileRetriever {
         final Request.Builder requestBuilder = new Request.Builder()
                 .get()
                 .url(url)
-                .header("User-Agent", "Graylog (server)");
+                .header("User-Agent", "perfmanager (server)");
         if (addIfModifiedSinceHeader) {
             final String lastModified = this.lastLastModified.get().get(url);
             if (lastModified != null) {

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.ranges;
 
 import com.google.common.base.Stopwatch;
@@ -25,7 +11,6 @@ import com.google.common.eventbus.Subscribe;
 import com.google.common.primitives.Ints;
 import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.audit.AuditActor;
 import com.synectiks.process.server.audit.AuditEventSender;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
@@ -38,6 +23,8 @@ import com.synectiks.process.server.indexer.indices.events.IndicesDeletedEvent;
 import com.synectiks.process.server.indexer.indices.events.IndicesReopenedEvent;
 import com.synectiks.process.server.indexer.searches.IndexRangeStats;
 import com.synectiks.process.server.plugin.system.NodeId;
+
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.mongojack.DBCursor;
@@ -48,12 +35,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.concurrent.TimeUnit;
 
 import static com.synectiks.process.server.audit.AuditEventTypes.ES_INDEX_RANGE_CREATE;
 import static com.synectiks.process.server.audit.AuditEventTypes.ES_INDEX_RANGE_DELETE;
+
+import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.concurrent.TimeUnit;
 
 public class MongoIndexRangeService implements IndexRangeService {
     private static final Logger LOG = LoggerFactory.getLogger(MongoIndexRangeService.class);

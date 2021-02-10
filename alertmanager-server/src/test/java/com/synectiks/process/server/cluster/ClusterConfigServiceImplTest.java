@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.cluster;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,12 +11,15 @@ import com.mongodb.DBObject;
 import com.mongodb.WriteConcern;
 import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
+import com.synectiks.process.server.cluster.ClusterConfigChangedEvent;
+import com.synectiks.process.server.cluster.ClusterConfigServiceImpl;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.events.ClusterEventBus;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.plugin.system.NodeId;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
 import com.synectiks.process.server.shared.plugins.ChainingClassLoader;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;

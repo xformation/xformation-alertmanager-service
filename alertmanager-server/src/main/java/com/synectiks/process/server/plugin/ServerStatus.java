@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin;
 
 import com.google.common.collect.Sets;
@@ -25,6 +11,7 @@ import com.synectiks.process.server.audit.AuditEventSender;
 import com.synectiks.process.server.plugin.lifecycles.Lifecycle;
 import com.synectiks.process.server.plugin.system.NodeId;
 import com.synectiks.process.server.shared.SuppressForbidden;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -32,12 +19,13 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import static com.synectiks.process.server.audit.AuditEventTypes.MESSAGE_PROCESSING_LOCK;
+
 import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import static com.synectiks.process.server.audit.AuditEventTypes.MESSAGE_PROCESSING_LOCK;
 
 @Singleton
 public class ServerStatus {
@@ -149,6 +137,13 @@ public class ServerStatus {
         publishLifecycle(Lifecycle.OVERRIDE_LB_THROTTLED);
     }
 
+    /**
+     * Blocks until the server enters the RUNNING state and then executes the given Runnable.
+     * <p>
+     * <b>This method is not interruptible while waiting for the server to enter the RUNNING state.</b>
+     * @deprecated Preferably use {@link #awaitRunning()} instead, which is interruptible.
+     */
+    @Deprecated
     public void awaitRunning(final Runnable runnable) {
         LOG.debug("Waiting for server to enter RUNNING state");
         Uninterruptibles.awaitUninterruptibly(runningLatch);
@@ -160,6 +155,15 @@ public class ServerStatus {
         } catch (Exception e) {
             LOG.error("awaitRunning callback failed", e);
         }
+    }
+
+    /**
+     * Blocks until the server enters the RUNNING state.
+     * @throws InterruptedException if the thread is interrupted while waiting for the server to enter the RUNNING
+     * state.
+     */
+    public void awaitRunning() throws InterruptedException {
+        runningLatch.await();
     }
 
     public DateTime getStartedAt() {

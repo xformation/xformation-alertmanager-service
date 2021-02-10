@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.metrics;
 
 import com.codahale.metrics.Clock;
@@ -25,6 +11,9 @@ import com.codahale.metrics.Metric;
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.Timer;
 import com.codahale.metrics.UniformReservoir;
+import com.synectiks.process.server.shared.metrics.HdrHistogram;
+import com.synectiks.process.server.shared.metrics.MetricUtils;
+
 import org.junit.Test;
 
 import java.util.Map;
@@ -179,7 +168,7 @@ public class MetricUtilsTest {
 
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> MetricUtils.map("metric", metric))
-                .withMessageStartingWith("Unknown metric type class com.synectiks.process.server.shared.metrics.MetricUtilsTest");
+                .withMessageStartingWith("Unknown metric type class org.graylog2.shared.metrics.MetricUtilsTest");
     }
 
     private static class TestClock extends Clock {

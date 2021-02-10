@@ -1,35 +1,26 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.security.authservice.backend;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.assistedinject.Assisted;
-import com.unboundid.ldap.sdk.LDAPConnection;
-import com.unboundid.ldap.sdk.LDAPException;
 import com.synectiks.process.common.security.authservice.AuthServiceBackend;
 import com.synectiks.process.common.security.authservice.AuthServiceBackendDTO;
 import com.synectiks.process.common.security.authservice.AuthServiceCredentials;
+import com.synectiks.process.common.security.authservice.AuthenticationDetails;
 import com.synectiks.process.common.security.authservice.ProvisionerService;
 import com.synectiks.process.common.security.authservice.UserDetails;
+import com.synectiks.process.common.security.authservice.ldap.LDAPConnectorConfig;
 import com.synectiks.process.common.security.authservice.ldap.LDAPUser;
 import com.synectiks.process.common.security.authservice.ldap.UnboundLDAPConfig;
 import com.synectiks.process.common.security.authservice.ldap.UnboundLDAPConnector;
 import com.synectiks.process.common.security.authservice.test.AuthServiceBackendTestResult;
 import com.synectiks.process.server.security.encryption.EncryptedValue;
+import com.synectiks.process.server.shared.security.AuthenticationServiceUnavailableException;
+import com.unboundid.ldap.sdk.LDAPConnection;
+import com.unboundid.ldap.sdk.LDAPException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,8 +28,10 @@ import javax.annotation.Nullable;
 import javax.inject.Inject;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class LDAPAuthServiceBackend implements AuthServiceBackend {
     public static final String TYPE_NAME = "ldap";
@@ -63,7 +56,7 @@ public class LDAPAuthServiceBackend implements AuthServiceBackend {
     }
 
     @Override
-    public Optional<UserDetails> authenticateAndProvision(AuthServiceCredentials authCredentials, ProvisionerService provisionerService) {
+    public Optional<AuthenticationDetails> authenticateAndProvision(AuthServiceCredentials authCredentials, ProvisionerService provisionerService) {
         try (final LDAPConnection connection = ldapConnector.connect(config.getLDAPConnectorConfig())) {
             if (connection == null) {
                 return Optional.empty();
@@ -95,13 +88,13 @@ public class LDAPAuthServiceBackend implements AuthServiceBackend {
                     .defaultRoles(backend.defaultRoles())
                     .build());
 
-            return Optional.of(userDetails);
+            return Optional.of(AuthenticationDetails.builder().userDetails(userDetails).build());
         } catch (GeneralSecurityException e) {
             LOG.error("Error setting up TLS connection", e);
-            return Optional.empty();
+            throw new AuthenticationServiceUnavailableException("Error setting up TLS connection", e);
         } catch (LDAPException e) {
             LOG.error("LDAP error", e);
-            return Optional.empty();
+            throw new AuthenticationServiceUnavailableException("LDAP error", e);
         }
     }
 
@@ -171,14 +164,41 @@ public class LDAPAuthServiceBackend implements AuthServiceBackend {
     public AuthServiceBackendTestResult testConnection(@Nullable AuthServiceBackendDTO existingBackendConfig) {
         final LDAPAuthServiceBackendConfig testConfig = buildTestConfig(existingBackendConfig);
 
-        try (final LDAPConnection connection = ldapConnector.connect(testConfig.getLDAPConnectorConfig())) {
+        final LDAPConnectorConfig config = testConfig.getLDAPConnectorConfig();
+
+        if (config.serverList().size() == 1) {
+            return testSingleConnection(config, config.serverList().get(0));
+        }
+
+        // Test each server separately, so we can see the result for each
+        final List<AuthServiceBackendTestResult> testResults = config.serverList().stream().map(server -> testSingleConnection(config, server)).collect(Collectors.toList());
+
+        if (testResults.stream().anyMatch(res -> !res.isSuccess())) {
+            return AuthServiceBackendTestResult
+                    .createFailure("Test failure",
+                            testResults.stream().map(r -> {
+                                if (r.isSuccess()) {
+                                    return r.message();
+                                } else {
+                                    return r.message() + " : " + String.join(",", r.errors());
+                                }
+                            }).collect(Collectors.toList()));
+        } else {
+            return AuthServiceBackendTestResult.createSuccess("Successfully connected to " + config.serverList());
+        }
+    }
+
+    private AuthServiceBackendTestResult testSingleConnection(LDAPConnectorConfig config, LDAPConnectorConfig.LDAPServer server) {
+        final LDAPConnectorConfig singleServerConfig = config.toBuilder().serverList(ImmutableList.of(server)).build();
+
+        try (final LDAPConnection connection = ldapConnector.connect(singleServerConfig)) {
             if (connection == null) {
-                return AuthServiceBackendTestResult.createFailure("Couldn't establish connection to " + testConfig.servers());
+                return AuthServiceBackendTestResult.createFailure("Couldn't establish connection to " + server);
             }
-            return AuthServiceBackendTestResult.createSuccess("Successfully connected to " + testConfig.servers());
+            return AuthServiceBackendTestResult.createSuccess("Successfully connected to " + server);
         } catch (Exception e) {
             return AuthServiceBackendTestResult.createFailure(
-                    "Couldn't establish connection to " + testConfig.servers(),
+                    "Couldn't establish connection to " + server,
                     Collections.singletonList(e.getMessage())
             );
         }

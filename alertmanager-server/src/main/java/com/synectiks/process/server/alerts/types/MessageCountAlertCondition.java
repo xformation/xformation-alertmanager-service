@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.alerts.types;
 
 import com.google.common.collect.Lists;
@@ -37,6 +23,7 @@ import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteR
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.InvalidRangeParametersException;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.RelativeRange;
 import com.synectiks.process.server.plugin.streams.Stream;
+
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -111,7 +98,7 @@ public class MessageCountAlertCondition extends AbstractAlertCondition {
         public Descriptor() {
             super(
                 "Message Count Alert Condition",
-                "https://www.graylog.org/",
+                "Synectiks/",
                 "This condition is triggered when the number of messages is higher/lower than a defined threshold in a given time range."
             );
         }
@@ -172,7 +159,6 @@ public class MessageCountAlertCondition extends AbstractAlertCondition {
             // search requests. (count and find messages)
             // This is needed because the RelativeRange computes the range from NOW on every invocation of getFrom() and
             // getTo().
-            // See: https://github.com/Graylog2/graylog2-server/issues/2382
             final RelativeRange relativeRange = RelativeRange.create(time * 60);
             final AbsoluteRange range = AbsoluteRange.create(relativeRange.getFrom(), relativeRange.getTo());
 

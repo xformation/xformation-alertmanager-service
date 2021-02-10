@@ -1,27 +1,15 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.storage.versionprobe;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
+import com.synectiks.process.server.plugin.Version;
+
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import com.synectiks.process.server.plugin.Version;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Response;
@@ -97,21 +85,12 @@ public class VersionProbe {
     }
 
     private Optional<Version> parseVersion(String versionString) {
-        final String[] versionParts = versionString.split("\\.");
-        if (versionParts.length != 3) {
-            LOG.error("Unable to parse version retrieved from Elasticsearch node: " + versionString);
-            return Optional.empty();
-        }
         try {
-            final int major = Integer.parseUnsignedInt(versionParts[0]);
-            final int minor = Integer.parseUnsignedInt(versionParts[1]);
-            final int patch = Integer.parseUnsignedInt(versionParts[2]);
-
-            final Version version = Version.from(major, minor, patch);
-
-            return Optional.of(version);
-        } catch (NumberFormatException e) {
-            throw new ElasticsearchProbeException("Unable to parse version retrieved from Elasticsearch node: " + versionString, e);
+            final com.github.zafarkhaja.semver.Version version = com.github.zafarkhaja.semver.Version.valueOf(versionString);
+            return Optional.of(new Version(version));
+        } catch (Exception e) {
+            LOG.error("Unable to parse version retrieved from Elasticsearch node: <{}>", versionString, e);
+            return Optional.empty();
         }
     }
 

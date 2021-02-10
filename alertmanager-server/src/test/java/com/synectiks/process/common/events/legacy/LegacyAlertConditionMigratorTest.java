@@ -1,25 +1,13 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.legacy;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.synectiks.process.common.events.JobSchedulerTestClock;
 import com.synectiks.process.common.events.conditions.Expr;
+import com.synectiks.process.common.events.legacy.LegacyAlarmCallbackEventNotificationConfig;
+import com.synectiks.process.common.events.legacy.LegacyAlertConditionMigrator;
 import com.synectiks.process.common.events.notifications.DBNotificationService;
 import com.synectiks.process.common.events.notifications.EventNotification;
 import com.synectiks.process.common.events.notifications.EventNotificationExecutionJob;
@@ -46,6 +34,7 @@ import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.plugin.system.NodeId;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
 import com.synectiks.process.server.shared.users.UserService;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Before;
@@ -193,8 +182,8 @@ public class LegacyAlertConditionMigratorTest {
         assertThat(emailNotification.config()).isInstanceOf(LegacyAlarmCallbackEventNotificationConfig.class);
         assertThat((LegacyAlarmCallbackEventNotificationConfig) emailNotification.config()).satisfies(config -> {
             assertThat(config.callbackType()).isEqualTo("com.synectiks.process.server.alarmcallbacks.EmailAlarmCallback");
-            assertThat(config.configuration().get("sender")).isEqualTo("graylog@example.org");
-            assertThat(config.configuration().get("subject")).isEqualTo("Graylog alert for stream: ${stream.title}: ${check_result.resultDescription}");
+            assertThat(config.configuration().get("sender")).isEqualTo("perfmanager@example.org");
+            assertThat(config.configuration().get("subject")).isEqualTo("perfmanager alert for stream: ${stream.title}: ${check_result.resultDescription}");
             assertThat((String) config.configuration().get("body")).contains("Alert Description: ${check_result.resultDescription}\nDate: ");
             assertThat(config.configuration().get("user_receivers")).isEqualTo(Collections.emptyList());
             assertThat(config.configuration().get("email_receivers")).isEqualTo(Collections.singletonList("jane@example.org"));
@@ -212,12 +201,12 @@ public class LegacyAlertConditionMigratorTest {
         assertThat((LegacyAlarmCallbackEventNotificationConfig) slackNotification.config()).satisfies(config -> {
             assertThat(config.callbackType()).isEqualTo("com.synectiks.process.server.plugins.slack.callback.SlackAlarmCallback");
             assertThat(config.configuration().get("icon_url")).isEqualTo("");
-            assertThat(config.configuration().get("graylog2_url")).isEqualTo("");
+            assertThat(config.configuration().get("perfmanager2_url")).isEqualTo("");
             assertThat(config.configuration().get("link_names")).isEqualTo(true);
             assertThat(config.configuration().get("webhook_url")).isEqualTo("http://example.com/slack-hook");
             assertThat(config.configuration().get("color")).isEqualTo("#FF0000");
             assertThat(config.configuration().get("icon_emoji")).isEqualTo("");
-            assertThat(config.configuration().get("user_name")).isEqualTo("Graylog");
+            assertThat(config.configuration().get("user_name")).isEqualTo("perfmanager");
             assertThat(config.configuration().get("backlog_items")).isEqualTo(5);
             assertThat(config.configuration().get("custom_fields")).isEqualTo("");
             assertThat(config.configuration().get("proxy_address")).isEqualTo("");

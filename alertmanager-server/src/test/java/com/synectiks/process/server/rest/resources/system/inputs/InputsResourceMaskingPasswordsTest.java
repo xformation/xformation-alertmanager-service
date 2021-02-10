@@ -1,24 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.system.inputs;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import org.apache.shiro.subject.Subject;
 import com.synectiks.process.server.database.NotFoundException;
 import com.synectiks.process.server.inputs.Input;
 import com.synectiks.process.server.inputs.InputService;
@@ -27,9 +12,12 @@ import com.synectiks.process.server.plugin.configuration.fields.ConfigurationFie
 import com.synectiks.process.server.plugin.configuration.fields.TextField;
 import com.synectiks.process.server.rest.models.system.inputs.responses.InputSummary;
 import com.synectiks.process.server.rest.models.system.inputs.responses.InputsList;
+import com.synectiks.process.server.rest.resources.system.inputs.InputsResource;
 import com.synectiks.process.server.shared.inputs.InputDescription;
 import com.synectiks.process.server.shared.inputs.MessageInputFactory;
 import com.synectiks.process.server.shared.security.RestPermissions;
+
+import org.apache.shiro.subject.Subject;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Rule;

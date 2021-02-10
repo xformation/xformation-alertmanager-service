@@ -1,25 +1,24 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin.journal;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Strings.isNullOrEmpty;
+import com.synectiks.process.server.uuid.UUID;
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.UninitializedMessageException;
+import com.synectiks.process.server.plugin.ResolvableInetSocketAddress;
+import com.synectiks.process.server.plugin.Tools;
+import com.synectiks.process.server.plugin.configuration.Configuration;
+import com.synectiks.process.server.plugin.system.NodeId;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.InetAddress;
@@ -29,27 +28,13 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.synectiks.process.server.plugin.ResolvableInetSocketAddress;
-import com.synectiks.process.server.plugin.Tools;
-import com.synectiks.process.server.plugin.configuration.Configuration;
-import com.synectiks.process.server.plugin.journal.JournalMessages.JournalMessage;
-import com.synectiks.process.server.plugin.system.NodeId;
-import com.synectiks.process.server.uuid.UUID;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.base.MoreObjects;
-import com.google.common.collect.Lists;
-import com.google.protobuf.ByteString;
-import com.google.protobuf.UninitializedMessageException;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.synectiks.process.server.plugin.journal.JournalMessages.JournalMessage;
 
 /**
- * A raw message is the unparsed data Graylog was handed by an input.
+ * A raw message is the unparsed data perfmanager was handed by an input.
  * <p>
  * Typically this is a copy of the exact bytes received over the network, after all de-chunking, removal of transport
  * headers, etc has been performed, but before any parsing, decoding, checking of the actual payload has been performed.

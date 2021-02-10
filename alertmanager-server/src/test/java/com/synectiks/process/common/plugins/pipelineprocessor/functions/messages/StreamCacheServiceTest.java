@@ -1,30 +1,18 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.functions.messages;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.eventbus.EventBus;
-import org.bson.types.ObjectId;
+import com.synectiks.process.common.plugins.pipelineprocessor.functions.messages.StreamCacheService;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.shared.SuppressForbidden;
 import com.synectiks.process.server.streams.StreamImpl;
 import com.synectiks.process.server.streams.StreamService;
+
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,9 +21,9 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.Executors;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.synectiks.process.server.streams.StreamImpl.FIELD_INDEX_SET_ID;
 import static com.synectiks.process.server.streams.StreamImpl.FIELD_TITLE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.notifications.types;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,11 +7,6 @@ import com.floreysoft.jmte.Engine;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailConstants;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
 import com.synectiks.process.common.events.notifications.EventBacklogService;
 import com.synectiks.process.common.events.notifications.EventNotificationContext;
 import com.synectiks.process.common.events.notifications.EventNotificationModelData;
@@ -38,6 +19,13 @@ import com.synectiks.process.server.notifications.NotificationService;
 import com.synectiks.process.server.plugin.MessageSummary;
 import com.synectiks.process.server.plugin.alarms.transports.TransportConfigurationException;
 import com.synectiks.process.server.plugin.system.NodeId;
+
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.EmailConstants;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -104,6 +92,15 @@ public class EmailSender {
         return this.templateEngine.transform(template, model);
     }
 
+    @VisibleForTesting
+    private String buildHtmlBody(EmailEventNotificationConfig config, Map<String, Object> model) {
+        return this.templateEngine.transform(config.htmlBodyTemplate(), model);
+    }
+
+    private String formatHtmlBody(String bodyContent) {
+        return "<html><body>" + bodyContent + "</body></html>";
+    }
+
     private Map<String, Object> getModel(EventNotificationContext ctx, ImmutableList<MessageSummary> backlog) {
         final EventNotificationModelData modelData = EventNotificationModelData.of(ctx, backlog);
         return objectMapper.convertValue(modelData, TypeReferences.MAP_STRING_OBJECT);
@@ -115,7 +112,7 @@ public class EmailSender {
             throw new TransportConfigurationException("Email transport is not enabled in server configuration file!");
         }
 
-        final Email email = new SimpleEmail();
+        final Email email = createEmailWithBody(config, model);
         email.setCharset(EmailConstants.UTF_8);
 
         if (isNullOrEmpty(emailConfig.getHostname())) {
@@ -145,10 +142,22 @@ public class EmailSender {
         email.setSSLOnConnect(emailConfig.isUseSsl());
         email.setStartTLSEnabled(emailConfig.isUseTls());
         email.setSubject(buildSubject(config, model));
-        email.setMsg(buildBody(config, model));
         email.addTo(emailAddress);
 
         email.send();
+    }
+
+    Email createEmailWithBody(EmailEventNotificationConfig config, Map<String, Object> model) throws EmailException {
+        if (!isNullOrEmpty(config.htmlBodyTemplate())) {
+            HtmlEmail email = new HtmlEmail();
+            email.setTextMsg(buildBody(config, model));
+            email.setHtmlMsg(buildHtmlBody(config, model));
+            return email;
+        } else {
+            SimpleEmail email = new SimpleEmail();
+            email.setMsg(buildBody(config, model));
+            return email;
+        }
     }
 
     // TODO: move EmailRecipients class to events code

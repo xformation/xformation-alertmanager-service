@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.system.processing;
 
 import com.github.joschi.jadconfig.util.Duration;
@@ -21,13 +7,14 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
-import org.bson.types.ObjectId;
 import com.synectiks.process.common.scheduler.clock.JobSchedulerClock;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.database.MongoDBUpsertRetryer;
 import com.synectiks.process.server.plugin.BaseConfiguration;
 import com.synectiks.process.server.plugin.system.NodeId;
+
+import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.mongojack.DBCursor;
@@ -37,11 +24,12 @@ import org.mongojack.JacksonDBCollection;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import static com.synectiks.process.server.system.processing.ProcessingStatusDto.FIELD_UPDATED_AT;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import static com.synectiks.process.server.system.processing.ProcessingStatusDto.FIELD_UPDATED_AT;
 
 /**
  * Manages the database collection for processing status.
@@ -94,7 +82,6 @@ public class DBProcessingStatusService {
 
         // Use a custom index name to avoid the automatically generated index name which will be pretty long and
         // might cause errors due to the 127 character index name limit. (e.g. when using a long database name)
-        // See: https://github.com/Graylog2/graylog2-server/issues/6322
         db.createIndex(new BasicDBObject(FIELD_UPDATED_AT, 1)
                 .append(FIELD_UNCOMMITTED_ENTRIES, 1)
                 .append(FIELD_WRITTEN_MESSAGES_1M, 1), new BasicDBObject("name", "compound_0"));
@@ -119,7 +106,7 @@ public class DBProcessingStatusService {
     }
 
     /**
-     * Returns the earliest post-indexing receive timestamp of all active Graylog nodes in the cluster.
+     * Returns the earliest post-indexing receive timestamp of all active perfmanager nodes in the cluster.
      * This can be used to find out if a certain timerange is already searchable in Elasticsearch.
      * <p>
      * Beware: This only takes the message receive time into account. It doesn't help when log sources send their

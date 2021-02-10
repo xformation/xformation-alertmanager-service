@@ -1,27 +1,15 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.rotation.strategies;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
+import com.synectiks.process.server.indexer.rotation.strategies.TimeBasedRotationStrategyConfig;
 import com.synectiks.process.server.plugin.indexer.rotation.RotationStrategyConfig;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+
 import org.joda.time.Period;
 import org.junit.Test;
 
@@ -43,14 +31,14 @@ public class TimeBasedRotationStrategyConfigTest {
         final String json = objectMapper.writeValueAsString(config);
 
         final Object document = Configuration.defaultConfiguration().jsonProvider().parse(json);
-        assertThat((String) JsonPath.read(document, "$.type")).isEqualTo("com.synectiks.process.server.indexer.rotation.strategies.TimeBasedRotationStrategyConfig");
+        assertThat((String) JsonPath.read(document, "$.type")).isEqualTo("org.graylog2.indexer.rotation.strategies.TimeBasedRotationStrategyConfig");
         assertThat((String) JsonPath.read(document, "$.rotation_period")).isEqualTo("P1D");
     }
 
     @Test
     public void testDeserialization() throws IOException {
         final ObjectMapper objectMapper = new ObjectMapperProvider().get();
-        final String json = "{ \"type\": \"com.synectiks.process.server.indexer.rotation.strategies.TimeBasedRotationStrategyConfig\", \"rotation_period\": \"P1D\" }";
+        final String json = "{ \"type\": \"org.graylog2.indexer.rotation.strategies.TimeBasedRotationStrategyConfig\", \"rotation_period\": \"P1D\" }";
         final RotationStrategyConfig config = objectMapper.readValue(json, RotationStrategyConfig.class);
 
         assertThat(config).isInstanceOf(TimeBasedRotationStrategyConfig.class);

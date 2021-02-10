@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.facades;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -35,12 +21,13 @@ import com.synectiks.process.server.system.urlwhitelist.UrlWhitelistService;
 import com.synectiks.process.server.system.urlwhitelist.WhitelistEntry;
 
 import javax.inject.Inject;
+
+import static com.synectiks.process.server.contentpacks.model.ModelTypes.URL_WHITELIST_ENTRY_V1;
+
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static com.synectiks.process.server.contentpacks.model.ModelTypes.URL_WHITELIST_ENTRY_V1;
 
 public class UrlWhitelistFacade implements EntityFacade<WhitelistEntry> {
     public static final ModelType TYPE_V1 = URL_WHITELIST_ENTRY_V1;

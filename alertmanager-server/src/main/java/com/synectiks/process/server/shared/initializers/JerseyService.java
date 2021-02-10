@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.initializers;
 
 import com.codahale.metrics.InstrumentedExecutorService;
@@ -25,16 +11,6 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.net.HostAndPort;
 import com.google.common.util.concurrent.AbstractIdleService;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import org.glassfish.grizzly.http.CompressionConfig;
-import org.glassfish.grizzly.http.server.ErrorPageGenerator;
-import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.grizzly.http.server.NetworkListener;
-import org.glassfish.grizzly.ssl.SSLContextConfigurator;
-import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
-import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.ServerProperties;
-import org.glassfish.jersey.server.model.Resource;
 import com.synectiks.process.common.security.UserContextBinder;
 import com.synectiks.process.server.Configuration;
 import com.synectiks.process.server.audit.PluginAuditEventTypes;
@@ -63,6 +39,17 @@ import com.synectiks.process.server.shared.security.ShiroRequestHeadersBinder;
 import com.synectiks.process.server.shared.security.ShiroSecurityContextFilter;
 import com.synectiks.process.server.shared.security.tls.KeyStoreUtils;
 import com.synectiks.process.server.shared.security.tls.PemKeyStore;
+
+import org.glassfish.grizzly.http.CompressionConfig;
+import org.glassfish.grizzly.http.server.ErrorPageGenerator;
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.grizzly.http.server.NetworkListener;
+import org.glassfish.grizzly.ssl.SSLContextConfigurator;
+import org.glassfish.grizzly.ssl.SSLEngineConfigurator;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
+import org.glassfish.jersey.server.model.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,8 +88,8 @@ public class JerseyService extends AbstractIdleService {
     private static final Logger LOG = LoggerFactory.getLogger(JerseyService.class);
     private static final String RESOURCE_PACKAGE_WEB = "com.synectiks.process.server.web.resources";
 
-    private final HttpConfiguration configuration;
-    private final Configuration graylogConfiguration;
+    private final HttpConfiguration httpConfiguration;
+    private final Configuration configuration;
     private final Map<String, Set<Class<? extends PluginRestResource>>> pluginRestResources;
     private final Set<RestControllerPackage> restControllerPackages;
 
@@ -118,8 +105,8 @@ public class JerseyService extends AbstractIdleService {
     private HttpServer apiHttpServer = null;
 
     @Inject
-    public JerseyService(final HttpConfiguration configuration,
-                         Configuration graylogConfiguration, Set<Class<? extends DynamicFeature>> dynamicFeatures,
+    public JerseyService(final HttpConfiguration httpConfiguration,
+                         Configuration configuration, Set<Class<? extends DynamicFeature>> dynamicFeatures,
                          Set<Class<? extends ContainerResponseFilter>> containerResponseFilters,
                          Set<Class<? extends ExceptionMapper>> exceptionMappers,
                          @Named("additionalJerseyComponents") final Set<Class> additionalComponents,
@@ -129,8 +116,8 @@ public class JerseyService extends AbstractIdleService {
                          ObjectMapper objectMapper,
                          MetricRegistry metricRegistry,
                          ErrorPageGenerator errorPageGenerator) {
-        this.configuration = requireNonNull(configuration, "configuration");
-        this.graylogConfiguration = graylogConfiguration;
+        this.httpConfiguration = requireNonNull(httpConfiguration, "httpConfiguration");
+        this.configuration = configuration;
         this.dynamicFeatures = requireNonNull(dynamicFeatures, "dynamicFeatures");
         this.containerResponseFilters = requireNonNull(containerResponseFilters, "containerResponseFilters");
         this.exceptionMappers = requireNonNull(exceptionMappers, "exceptionMappers");
@@ -153,7 +140,7 @@ public class JerseyService extends AbstractIdleService {
 
     @Override
     protected void shutDown() throws Exception {
-        shutdownHttpServer(apiHttpServer, configuration.getHttpBindAddress());
+        shutdownHttpServer(apiHttpServer, httpConfiguration.getHttpBindAddress());
     }
 
     private void shutdownHttpServer(HttpServer httpServer, HostAndPort bindAddress) {
@@ -173,16 +160,16 @@ public class JerseyService extends AbstractIdleService {
 
         final Set<Resource> pluginResources = prefixPluginResources(PLUGIN_PREFIX, pluginRestResources);
 
-        final SSLEngineConfigurator sslEngineConfigurator = configuration.isHttpEnableTls() ?
+        final SSLEngineConfigurator sslEngineConfigurator = httpConfiguration.isHttpEnableTls() ?
                 buildSslEngineConfigurator(
-                        configuration.getHttpTlsCertFile(),
-                        configuration.getHttpTlsKeyFile(),
-                        configuration.getHttpTlsKeyPassword()) : null;
+                        httpConfiguration.getHttpTlsCertFile(),
+                        httpConfiguration.getHttpTlsKeyFile(),
+                        httpConfiguration.getHttpTlsKeyPassword()) : null;
 
-        final HostAndPort bindAddress = configuration.getHttpBindAddress();
-        final String contextPath = configuration.getHttpPublishUri().getPath();
+        final HostAndPort bindAddress = httpConfiguration.getHttpBindAddress();
+        final String contextPath = httpConfiguration.getHttpPublishUri().getPath();
         final URI listenUri = new URI(
-                configuration.getUriScheme(),
+                httpConfiguration.getUriScheme(),
                 null,
                 bindAddress.getHost(),
                 bindAddress.getPort(),
@@ -194,18 +181,17 @@ public class JerseyService extends AbstractIdleService {
         apiHttpServer = setUp(
                 listenUri,
                 sslEngineConfigurator,
-                configuration.getHttpThreadPoolSize(),
-                configuration.getHttpSelectorRunnersCount(),
-                configuration.getHttpMaxHeaderSize(),
-                configuration.isHttpEnableGzip(),
-                configuration.isHttpEnableCors(),
+                httpConfiguration.getHttpThreadPoolSize(),
+                httpConfiguration.getHttpSelectorRunnersCount(),
+                httpConfiguration.getHttpMaxHeaderSize(),
+                httpConfiguration.isHttpEnableGzip(),
+                httpConfiguration.isHttpEnableCors(),
                 pluginResources,
-                resourcePackages.toArray(new String[0]),
-                configuration.isEnableWebFramework());
+                resourcePackages.toArray(new String[0]));
 
         apiHttpServer.start();
 
-        LOG.info("Started REST API at <{}>", configuration.getHttpBindAddress());
+        LOG.info("Started REST API at <{}>", httpConfiguration.getHttpBindAddress());
     }
 
     private Set<Resource> prefixPluginResources(String pluginPrefix, Map<String, Set<Class<? extends PluginRestResource>>> pluginResourceMap) {
@@ -236,8 +222,7 @@ public class JerseyService extends AbstractIdleService {
 
     private ResourceConfig buildResourceConfig(final boolean enableCors,
                                                final Set<Resource> additionalResources,
-                                               final String[] controllerPackages,
-                                               boolean enableWebFramework) {
+                                               final String[] controllerPackages) {
         final Map<String, String> packagePrefixes = new HashMap<>();
         for (String resourcePackage : controllerPackages) {
             packagePrefixes.put(resourcePackage, HttpConfiguration.PATH_API);
@@ -266,8 +251,8 @@ public class JerseyService extends AbstractIdleService {
                         NodeIdResponseFilter.class,
                         RequestIdFilter.class,
                         XHRFilter.class,
-                        NotAuthorizedResponseFilter.class)//,
-                        //WebAppNotFoundResponseFilter.class)
+                        NotAuthorizedResponseFilter.class,
+                        WebAppNotFoundResponseFilter.class)
                 .register(new ContextResolver<ObjectMapper>() {
                     @Override
                     public ObjectMapper getContext(Class<?> type) {
@@ -284,11 +269,6 @@ public class JerseyService extends AbstractIdleService {
         containerResponseFilters.forEach(rc::registerClasses);
         additionalComponents.forEach(rc::registerClasses);
 
-        if (enableWebFramework) {
-            LOG.info("Enabling WEB framework");
-            rc.registerClasses(WebAppNotFoundResponseFilter.class);
-        }
-        
         if (enableCors) {
             LOG.info("Enabling CORS for HTTP endpoint");
             rc.registerClasses(CORSFilter.class);
@@ -309,14 +289,12 @@ public class JerseyService extends AbstractIdleService {
                              boolean enableGzip,
                              boolean enableCors,
                              Set<Resource> additionalResources,
-                             String[] controllerPackages,
-                             boolean enableWebFramework)
+                             String[] controllerPackages)
             throws GeneralSecurityException, IOException {
         final ResourceConfig resourceConfig = buildResourceConfig(
                 enableCors,
                 additionalResources,
-                controllerPackages,
-                enableWebFramework
+                controllerPackages
         );
 
         final HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(
@@ -336,7 +314,7 @@ public class JerseyService extends AbstractIdleService {
         listener.getTransport().setWorkerThreadPool(workerThreadPoolExecutor);
 
         // The Grizzly default value is equal to `Runtime.getRuntime().availableProcessors()` which doesn't make
-        // sense for Graylog because we are not mainly a web server.
+        // sense for perfmanager because we are not mainly a web server.
         // See "Selector runners count" at https://grizzly.java.net/bestpractices.html for details.
         listener.getTransport().setSelectorRunnersCount(selectorRunnersCount);
 
@@ -369,8 +347,8 @@ public class JerseyService extends AbstractIdleService {
 
         final SSLContext sslContext = sslContextConfigurator.createSSLContext(true);
         final SSLEngineConfigurator sslEngineConfigurator = new SSLEngineConfigurator(sslContext, false, false, false);
-        if (!graylogConfiguration.getEnabledTlsProtocols().isEmpty()) {
-            sslEngineConfigurator.setEnabledProtocols(graylogConfiguration.getEnabledTlsProtocols().toArray(new String[0]));
+        if (!configuration.getEnabledTlsProtocols().isEmpty()) {
+            sslEngineConfigurator.setEnabledProtocols(configuration.getEnabledTlsProtocols().toArray(new String[0]));
         }
         return sslEngineConfigurator;
     }

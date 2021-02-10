@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.users;
 
 import com.google.common.collect.Collections2;
@@ -22,10 +8,6 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.inject.assistedinject.Assisted;
 import com.google.inject.assistedinject.AssistedInject;
-import org.apache.shiro.authz.Permission;
-import org.apache.shiro.authz.permission.AllPermission;
-import org.apache.shiro.authz.permission.WildcardPermission;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.Configuration;
 import com.synectiks.process.server.database.CollectionName;
 import com.synectiks.process.server.database.ObjectIdStringFunction;
@@ -41,6 +23,11 @@ import com.synectiks.process.server.plugin.security.PasswordAlgorithm;
 import com.synectiks.process.server.rest.models.users.requests.Startpage;
 import com.synectiks.process.server.security.PasswordAlgorithmFactory;
 import com.synectiks.process.server.shared.security.Permissions;
+
+import org.apache.shiro.authz.Permission;
+import org.apache.shiro.authz.permission.AllPermission;
+import org.apache.shiro.authz.permission.WildcardPermission;
+import org.bson.types.ObjectId;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

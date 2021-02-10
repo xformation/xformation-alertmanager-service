@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.search;
 
 import com.google.auto.value.AutoValue;
@@ -35,6 +21,7 @@ import com.synectiks.process.server.indexer.searches.Sorting;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.TimeRange;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.streams.StreamService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -149,7 +136,6 @@ public class MoreSearch {
 
     public Set<Stream> loadStreams(Set<String> streamIds) {
         // TODO: Use method from `StreamService` which loads a collection of ids (when implemented) to prevent n+1.
-        // Track https://github.com/Graylog2/graylog2-server/issues/4897 for progress.
         Set<Stream> streams = new HashSet<>();
         for (String streamId : streamIds) {
             try {

@@ -1,38 +1,19 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.search.views;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableSet;
-import org.graylog.autovalue.WithBeanGetter;
-import com.synectiks.process.common.plugins.views.search.Search;
 import com.synectiks.process.server.contentpacks.ContentPackable;
 import com.synectiks.process.server.contentpacks.EntityDescriptorIds;
-import com.synectiks.process.server.contentpacks.model.ModelId;
-import com.synectiks.process.server.contentpacks.model.entities.EntityDescriptor;
-import com.synectiks.process.server.contentpacks.model.entities.EntityV1;
-import com.synectiks.process.server.contentpacks.model.entities.SearchEntity;
 import com.synectiks.process.server.contentpacks.model.entities.ViewEntity;
 import com.synectiks.process.server.contentpacks.model.entities.ViewStateEntity;
 import com.synectiks.process.server.contentpacks.model.entities.references.ValueReference;
+
+import org.graylog.autovalue.WithBeanGetter;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.mongojack.Id;
@@ -42,7 +23,7 @@ import javax.annotation.Nullable;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -198,7 +179,7 @@ public abstract class ViewDTO implements ContentPackable<ViewEntity.Builder> {
 
     @Override
     public ViewEntity.Builder toContentPackEntity(EntityDescriptorIds entityDescriptorIds) {
-        final Map<String, ViewStateEntity> viewStateMap = new HashMap<>(this.state().size());
+        final Map<String, ViewStateEntity> viewStateMap = new LinkedHashMap<>(this.state().size());
         for (Map.Entry<String, ViewStateDTO> entry : this.state().entrySet()) {
             final ViewStateDTO viewStateDTO = entry.getValue();
             final ViewStateEntity viewStateEntity = viewStateDTO.toContentPackEntity(entityDescriptorIds);

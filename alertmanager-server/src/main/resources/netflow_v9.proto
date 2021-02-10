@@ -6,7 +6,7 @@ package com.synectiks.process.common.plugins.netflow.v9;
 // install protobuf compiler (this was generated with 3.0.0)
 // protoc --java_out=src/main/java src/main/resources/netflow_v9.proto
 
-option java_package = "org.graylog.plugins.netflow.v9";
+option java_package = "com.synectiks.process.common.plugins.netflow.v9";
 option java_outer_classname = "NetFlowV9Journal";
 
 message RawNetflowV9 {

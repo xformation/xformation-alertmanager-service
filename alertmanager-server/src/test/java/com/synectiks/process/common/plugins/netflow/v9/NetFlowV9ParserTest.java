@@ -1,25 +1,19 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.netflow.v9;
 
 import com.google.common.collect.Maps;
 import com.google.common.io.Resources;
-import io.netty.buffer.Unpooled;
 import com.synectiks.process.common.plugins.netflow.flows.EmptyTemplateException;
+import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9BaseRecord;
+import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9FieldDef;
+import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9FieldTypeRegistry;
+import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Packet;
+import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Parser;
+import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Template;
+
+import io.netty.buffer.Unpooled;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

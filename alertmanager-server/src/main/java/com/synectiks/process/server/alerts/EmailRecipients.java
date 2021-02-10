@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.alerts;
 
 import com.google.common.base.Splitter;
@@ -64,7 +50,6 @@ public class EmailRecipients {
 
             if (user != null && !isNullOrEmpty(user.getEmail())) {
                 // LDAP users might have multiple email addresses defined.
-                // See: https://github.com/Graylog2/graylog2-server/issues/1439
                 final Iterable<String> addresses = Splitter.on(",").omitEmptyStrings().trimResults().split(user.getEmail());
                 emails.addAll(addresses);
             }

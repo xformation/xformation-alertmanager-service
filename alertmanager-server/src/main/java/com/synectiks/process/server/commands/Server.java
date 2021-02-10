@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.commands;
 
 import com.github.rvesse.airline.annotations.Command;
@@ -85,10 +71,14 @@ import com.synectiks.process.server.shared.system.activities.ActivityWriter;
 import com.synectiks.process.server.storage.VersionAwareStorageModule;
 import com.synectiks.process.server.system.processing.ProcessingStatusConfig;
 import com.synectiks.process.server.system.shutdown.GracefulShutdown;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+
+import static com.synectiks.process.server.audit.AuditEventTypes.NODE_SHUTDOWN_INITIATE;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumSet;
@@ -96,9 +86,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static com.synectiks.process.server.audit.AuditEventTypes.NODE_SHUTDOWN_INITIATE;
-
-@Command(name = "server", description = "Start the AlertManager server")
+@Command(name = "server", description = "Start the perfmanager server")
 public class Server extends ServerBootstrap {
     private static final Logger LOG = LoggerFactory.getLogger(Server.class);
 
@@ -121,7 +109,7 @@ public class Server extends ServerBootstrap {
         super("server", configuration);
     }
 
-    @Option(name = {"-l", "--local"}, description = "Run Graylog in local mode. Only interesting for Graylog developers.")
+    @Option(name = {"-l", "--local"}, description = "Run perfmanager in local mode. Only interesting for perfmanager developers.")
     private boolean local = false;
 
     public boolean isLocal() {

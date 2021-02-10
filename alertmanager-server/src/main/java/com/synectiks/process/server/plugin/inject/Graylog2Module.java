@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.plugin.inject;
 
 import com.fasterxml.jackson.databind.jsontype.NamedType;
@@ -26,8 +12,6 @@ import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.multibindings.OptionalBinder;
 import com.google.inject.name.Names;
-import org.apache.shiro.realm.AuthenticatingRealm;
-import org.apache.shiro.realm.AuthorizingRealm;
 import com.synectiks.process.server.audit.AuditEventSender;
 import com.synectiks.process.server.audit.AuditEventType;
 import com.synectiks.process.server.audit.PluginAuditEventTypes;
@@ -52,6 +36,9 @@ import com.synectiks.process.server.plugin.lookup.LookupDataAdapterConfiguration
 import com.synectiks.process.server.plugin.outputs.MessageOutput;
 import com.synectiks.process.server.plugin.security.PasswordAlgorithm;
 import com.synectiks.process.server.plugin.security.PluginPermissions;
+
+import org.apache.shiro.realm.AuthenticatingRealm;
+import org.apache.shiro.realm.AuthorizingRealm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -241,7 +228,7 @@ public abstract class Graylog2Module extends AbstractModule {
         installInput(inputMapBinder, target, factoryClass);
     }
 
-    // This should only be used by plugins that have been built before Graylog 3.0.1.
+    // This should only be used by plugins that have been built before perfmanager 3.0.1.
     // See comments in MessageOutput.Factory and MessageOutput.Factory2 for details
     protected MapBinder<String, MessageOutput.Factory<? extends MessageOutput>> outputsMapBinder() {
         return MapBinder.newMapBinder(binder(),
@@ -250,7 +237,7 @@ public abstract class Graylog2Module extends AbstractModule {
                 });
     }
 
-    // This should only be used by plugins that have been built before Graylog 3.0.1.
+    // This should only be used by plugins that have been built before perfmanager 3.0.1.
     // See comments in MessageOutput.Factory and MessageOutput.Factory2 for details
     protected <T extends MessageOutput> void installOutput(MapBinder<String, MessageOutput.Factory<? extends MessageOutput>> outputMapBinder,
                                                            Class<T> target,

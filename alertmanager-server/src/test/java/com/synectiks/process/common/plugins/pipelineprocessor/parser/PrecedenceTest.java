@@ -1,20 +1,9 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.parser;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.synectiks.process.common.plugins.pipelineprocessor.BaseParserTest;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.Rule;
@@ -29,10 +18,11 @@ import com.synectiks.process.common.plugins.pipelineprocessor.ast.functions.Func
 import com.synectiks.process.common.plugins.pipelineprocessor.codegen.CodeGenerator;
 import com.synectiks.process.common.plugins.pipelineprocessor.codegen.compiler.JavaCompiler;
 import com.synectiks.process.common.plugins.pipelineprocessor.functions.conversion.StringConversion;
+import com.synectiks.process.common.plugins.pipelineprocessor.parser.FunctionRegistry;
+import com.synectiks.process.common.plugins.pipelineprocessor.parser.ParseException;
+import com.synectiks.process.common.plugins.pipelineprocessor.parser.PipelineRuleParser;
 import com.synectiks.process.server.plugin.Message;
 import com.synectiks.process.server.plugin.Tools;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.util.Map;
 

@@ -1,27 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.periodical;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.net.HttpHeaders;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import com.synectiks.process.server.configuration.VersionCheckConfiguration;
 import com.synectiks.process.server.notifications.Notification;
 import com.synectiks.process.server.notifications.NotificationService;
@@ -31,6 +14,11 @@ import com.synectiks.process.server.plugin.system.NodeId;
 import com.synectiks.process.server.shared.ServerVersion;
 import com.synectiks.process.server.versioncheck.VersionCheckResponse;
 import com.synectiks.process.server.versioncheck.VersionResponse;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +33,7 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 
 public class VersionCheckThread extends Periodical {
     private static final Logger LOG = LoggerFactory.getLogger(VersionCheckThread.class);
-    private static final String USER_AGENT = String.format(Locale.ENGLISH, "alertmanager-server (%s, %s, %s, %s)",
+    private static final String USER_AGENT = String.format(Locale.ENGLISH, "perfmanager2-server (%s, %s, %s, %s)",
             System.getProperty("java.vendor"), System.getProperty("java.version"),
             System.getProperty("os.name"), System.getProperty("os.version"));
 

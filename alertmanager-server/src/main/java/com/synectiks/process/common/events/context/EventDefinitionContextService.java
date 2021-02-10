@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.events.context;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,6 +13,7 @@ import com.synectiks.process.common.scheduler.JobDefinitionDto;
 import com.synectiks.process.common.scheduler.JobTriggerData;
 import com.synectiks.process.common.scheduler.JobTriggerDto;
 import com.synectiks.process.common.scheduler.JobTriggerStatus;
+
 import org.joda.time.DateTime;
 
 import javax.inject.Inject;
@@ -39,7 +26,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Collects additional information for {@link org.graylog.events.processor.EventDefinition event definitions} like
+ * Collects additional information for {@link com.synectiks.process.common.events.processor.EventDefinition event definitions} like
  * scheduler information. This allows us to return additional information for event definitions without modifying
  * their DTOs.
  */

@@ -1,27 +1,8 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.shared.rest.resources.system;
 
 import com.codahale.metrics.annotation.Timed;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.synectiks.process.server.audit.AuditEventTypes;
 import com.synectiks.process.server.audit.jersey.AuditEvent;
 import com.synectiks.process.server.plugin.ServerStatus;
@@ -29,6 +10,12 @@ import com.synectiks.process.server.plugin.lifecycles.LoadBalancerStatus;
 import com.synectiks.process.server.rest.TooManyRequestsStatus;
 import com.synectiks.process.server.shared.rest.resources.RestResource;
 import com.synectiks.process.server.shared.security.RestPermissions;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 
 import javax.inject.Inject;
 import javax.ws.rs.BadRequestException;
@@ -61,7 +48,7 @@ public class LoadBalancerStatusResource extends RestResource {
     @GET
     @Timed
     @Produces(MediaType.TEXT_PLAIN)
-    @ApiOperation(value = "Get status of this Graylog server node for load balancers. " +
+    @ApiOperation(value = "Get status of this perfmanager server node for load balancers. " +
             "Returns ALIVE with HTTP 200, DEAD with HTTP 503, or THROTTLED with HTTP 429.")
     public Response status() {
         final LoadBalancerStatus lbStatus = serverStatus.getLifecycle().getLoadbalancerStatus();
@@ -88,7 +75,7 @@ public class LoadBalancerStatusResource extends RestResource {
     @RequiresAuthentication
     @RequiresPermissions(RestPermissions.LBSTATUS_CHANGE)
     @Produces(MediaType.APPLICATION_JSON)
-    @ApiOperation(value = "Override load balancer status of this Graylog server node. Next lifecycle " +
+    @ApiOperation(value = "Override load balancer status of this perfmanager server node. Next lifecycle " +
             "change will override it again to its default. Set to ALIVE, DEAD, or THROTTLED.")
     @Path("/override/{status}")
     @AuditEvent(type = AuditEventTypes.LOAD_BALANCER_STATUS_UPDATE)

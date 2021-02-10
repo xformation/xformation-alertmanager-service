@@ -1,29 +1,7 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.migrations;
 
-import com.synectiks.process.common.events.notifications.DBNotificationService;
-import com.synectiks.process.server.lookup.adapters.HTTPJSONPathDataAdapter;
-import com.synectiks.process.server.lookup.db.DBDataAdapterService;
-import com.synectiks.process.server.lookup.dto.DataAdapterDto;
-import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
-import com.synectiks.process.server.system.urlwhitelist.RegexHelper;
-import com.synectiks.process.server.system.urlwhitelist.UrlWhitelist;
-import com.synectiks.process.server.system.urlwhitelist.UrlWhitelistService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -31,6 +9,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
+
+import com.synectiks.process.common.events.notifications.DBNotificationService;
+import com.synectiks.process.server.lookup.adapters.HTTPJSONPathDataAdapter;
+import com.synectiks.process.server.lookup.db.DBDataAdapterService;
+import com.synectiks.process.server.lookup.dto.DataAdapterDto;
+import com.synectiks.process.server.migrations.V20191129134600_CreateInitialUrlWhitelist;
+import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
+import com.synectiks.process.server.system.urlwhitelist.RegexHelper;
+import com.synectiks.process.server.system.urlwhitelist.UrlWhitelist;
+import com.synectiks.process.server.system.urlwhitelist.UrlWhitelistService;
 
 import java.util.Collections;
 

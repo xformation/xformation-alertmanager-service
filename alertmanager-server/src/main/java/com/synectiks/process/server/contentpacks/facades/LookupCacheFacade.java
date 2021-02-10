@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.facades;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -41,13 +27,14 @@ import com.synectiks.process.server.plugin.PluginMetaData;
 import com.synectiks.process.server.plugin.lookup.LookupCacheConfiguration;
 
 import javax.inject.Inject;
+
+import static com.synectiks.process.server.contentpacks.model.entities.references.ReferenceMapUtils.toReferenceMap;
+import static com.synectiks.process.server.contentpacks.model.entities.references.ReferenceMapUtils.toValueMap;
+
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static com.synectiks.process.server.contentpacks.model.entities.references.ReferenceMapUtils.toReferenceMap;
-import static com.synectiks.process.server.contentpacks.model.entities.references.ReferenceMapUtils.toValueMap;
 
 public class LookupCacheFacade implements EntityFacade<CacheDto> {
     public static final ModelType TYPE_V1 = ModelTypes.LOOKUP_CACHE_V1;

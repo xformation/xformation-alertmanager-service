@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.periodical;
 
 import com.codahale.metrics.Counting;
@@ -25,6 +11,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.synectiks.process.server.plugin.GlobalMetricNames;
 import com.synectiks.process.server.plugin.periodical.Periodical;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +30,7 @@ public class ThroughputCalculator extends Periodical {
 
     private final MetricRegistry metricRegistry;
 
-    protected static final Pattern incomingMessagesPattern = Pattern.compile("org\\.graylog2\\.plugin\\.streams\\.Stream\\..*?\\.incomingMessages");
+    protected static final Pattern incomingMessagesPattern = Pattern.compile("com\\.synectiks\\.process\\.server\\.plugin\\.streams\\.Stream\\..*?\\.incomingMessages");
     protected static final MetricFilter streamMetricFilter = new MetricFilter() {
         @Override
         public boolean matches(String name, Metric metric) {

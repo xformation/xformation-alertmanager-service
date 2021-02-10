@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer.searches;
 
 import com.codahale.metrics.Histogram;
@@ -41,12 +27,16 @@ import com.synectiks.process.server.indexer.retention.strategies.DeletionRetenti
 import com.synectiks.process.server.indexer.retention.strategies.DeletionRetentionStrategyConfig;
 import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategy;
 import com.synectiks.process.server.indexer.rotation.strategies.MessageCountRotationStrategyConfig;
+import com.synectiks.process.server.indexer.searches.Searches;
+import com.synectiks.process.server.indexer.searches.SearchesConfig;
+import com.synectiks.process.server.indexer.searches.Sorting;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.AbsoluteRange;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.KeywordRange;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.RelativeRange;
 import com.synectiks.process.server.plugin.indexer.searches.timeranges.TimeRange;
 import com.synectiks.process.server.plugin.streams.Stream;
 import com.synectiks.process.server.streams.StreamService;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Before;
@@ -66,8 +56,8 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.synectiks.process.server.indexer.searches.ScrollCommand.NO_BATCHSIZE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.joda.time.DateTimeZone.UTC;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyCollection;
@@ -77,8 +67,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public abstract class SearchesIT extends ElasticsearchBaseTest {
-    private static final String REQUEST_TIMER_NAME = "com.synectiks.process.server.indexer.searches.Searches.elasticsearch.requests";
-    private static final String RANGES_HISTOGRAM_NAME = "com.synectiks.process.server.indexer.searches.Searches.elasticsearch.ranges";
+    private static final String REQUEST_TIMER_NAME = "org.graylog2.indexer.searches.Searches.elasticsearch.requests";
+    private static final String RANGES_HISTOGRAM_NAME = "org.graylog2.indexer.searches.Searches.elasticsearch.ranges";
 
     @Rule
     public final MockitoRule mockitoRule = MockitoJUnit.rule();

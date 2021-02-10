@@ -1,31 +1,18 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.persistence;
 
 import com.google.common.eventbus.EventBus;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import org.apache.shiro.event.Subscribe;
-import org.bson.types.ObjectId;
 import com.synectiks.process.server.bindings.providers.MongoJackObjectMapperProvider;
 import com.synectiks.process.server.database.MongoConnection;
 import com.synectiks.process.server.database.NotFoundException;
 import com.synectiks.process.server.inputs.InputService;
 import com.synectiks.process.server.rest.models.system.inputs.responses.InputDeleted;
+
+import org.apache.shiro.event.Subscribe;
+import org.bson.types.ObjectId;
 import org.mongojack.JacksonDBCollection;
 import org.mongojack.WriteResult;
 import org.slf4j.Logger;
@@ -87,7 +74,7 @@ public class MongoInputStatusService implements InputStatusService {
     /**
      * Clean up MongoDB records when Inputs are deleted
      *
-     * At the moment, Graylog uses the InputDeleted event both when an Input is stopped
+     * At the moment, perfmanager uses the InputDeleted event both when an Input is stopped
      * and when it is deleted.
      *
      * @param event ID of the input being deleted
@@ -98,7 +85,6 @@ public class MongoInputStatusService implements InputStatusService {
 
         // The input system is currently sending an "InputDeleted" event when an input gets deleted AND when an
         // input gets stopped. Check the database if the input was only stopped or actually deleted.
-        // TODO: Remove this workaround once https://github.com/Graylog2/graylog2-server/issues/7812 is fixed
         try {
             inputService.find(event.id());
             // The input still exists so it only has been stopped. Don't do anything.

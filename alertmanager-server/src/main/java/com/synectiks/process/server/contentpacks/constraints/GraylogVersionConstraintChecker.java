@@ -1,47 +1,33 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.contentpacks.constraints;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableSet;
-import com.vdurmont.semver4j.Requirement;
-import com.vdurmont.semver4j.Semver;
 import com.synectiks.process.server.contentpacks.model.constraints.Constraint;
 import com.synectiks.process.server.contentpacks.model.constraints.ConstraintCheckResult;
 import com.synectiks.process.server.contentpacks.model.constraints.GraylogVersionConstraint;
+import com.synectiks.process.server.semver4j.Requirement;
+import com.synectiks.process.server.semver4j.Semver;
 
 import java.util.Collection;
 import java.util.Set;
 
 public class GraylogVersionConstraintChecker implements ConstraintChecker {
-    private final Semver graylogVersion;
+    private final Semver serverVersion;
 
     public GraylogVersionConstraintChecker() {
         this(com.synectiks.process.server.plugin.Version.CURRENT_CLASSPATH.toString());
     }
 
     @VisibleForTesting
-    GraylogVersionConstraintChecker(String graylogVersion) {
-        this(new Semver(graylogVersion));
+    GraylogVersionConstraintChecker(String serverVersion) {
+        this(new Semver(serverVersion));
     }
 
     @VisibleForTesting
-    GraylogVersionConstraintChecker(Semver graylogVersion) {
-        this.graylogVersion = graylogVersion;
+    GraylogVersionConstraintChecker(Semver serverVersion) {
+        this.serverVersion = serverVersion;
     }
 
 
@@ -52,7 +38,7 @@ public class GraylogVersionConstraintChecker implements ConstraintChecker {
             if (constraint instanceof GraylogVersionConstraint) {
                 final GraylogVersionConstraint versionConstraint = (GraylogVersionConstraint) constraint;
                 final Requirement requiredVersion = versionConstraint.version();
-                if (requiredVersion.isSatisfiedBy(graylogVersion.withClearedSuffixAndBuild())) {
+                if (requiredVersion.isSatisfiedBy(serverVersion.withClearedSuffixAndBuild())) {
                     fulfilledConstraints.add(constraint);
                 }
             }
@@ -68,7 +54,7 @@ public class GraylogVersionConstraintChecker implements ConstraintChecker {
                 final GraylogVersionConstraint versionConstraint = (GraylogVersionConstraint) constraint;
                 final Requirement requiredVersion = versionConstraint.version();
                 final ConstraintCheckResult constraintCheckResult = ConstraintCheckResult.create(versionConstraint,
-                        requiredVersion.isSatisfiedBy(graylogVersion.withClearedSuffixAndBuild()));
+                        requiredVersion.isSatisfiedBy(serverVersion.withClearedSuffixAndBuild()));
                 fulfilledConstraints.add(constraintCheckResult);
             }
         }

@@ -1,23 +1,10 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.indexer;
 
 import com.google.auto.value.AutoValue;
 import com.synectiks.process.server.indexer.indexset.IndexSetConfig;
+
 import org.joda.time.Duration;
 
 import javax.inject.Inject;
@@ -40,9 +27,9 @@ public class IndexSetValidator {
         }
 
         // Check if an existing index set has a more generic index prefix.
-        // Example: new=graylog_foo existing=graylog => graylog is more generic so this is an error
-        // Example: new=gray        existing=graylog => gray    is more generic so this is an error
-        // This avoids problems with wildcard matching like "graylog_*".
+        // Example: new=perfmanager_foo existing=perfmanager => perfmanager is more generic so this is an error
+        // Example: new=perfmanager        existing=perfmanager => gray    is more generic so this is an error
+        // This avoids problems with wildcard matching like "perfmanager_*".
         for (final IndexSet indexSet : indexSetRegistry) {
             if (newConfig.indexPrefix().startsWith(indexSet.getIndexPrefix()) || indexSet.getIndexPrefix().startsWith(newConfig.indexPrefix())) {
                 return Optional.of(Violation.create("Index prefix \"" + newConfig.indexPrefix() + "\" would conflict with existing index set prefix \"" + indexSet.getIndexPrefix() + "\""));

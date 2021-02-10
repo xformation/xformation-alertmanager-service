@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.periodical;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -34,6 +20,7 @@ import com.synectiks.process.server.notifications.Notification;
 import com.synectiks.process.server.notifications.NotificationService;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.plugin.periodical.Periodical;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,7 +36,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * A {@link Periodical} to check if index ranges need to be recalculated and notify the administrators about it.
  *
- * @see <a href="https://github.com/Graylog2/graylog2-server/pull/1274">Refactor index ranges handling (#1274)</a>
  * @since 1.2.0
  */
 public class IndexRangesMigrationPeriodical extends Periodical {
@@ -81,7 +67,7 @@ public class IndexRangesMigrationPeriodical extends Periodical {
     public void doRun() {
         final MongoIndexRangesMigrationComplete migrationComplete = clusterConfigService.get(MongoIndexRangesMigrationComplete.class);
         if (migrationComplete != null && migrationComplete.complete) {
-            LOG.debug("Migration of index ranges (pre Graylog 1.2.2) already complete. Skipping migration process.");
+            LOG.debug("Migration of index ranges (pre perfmanager 1.2.2) already complete. Skipping migration process.");
             return;
         }
 

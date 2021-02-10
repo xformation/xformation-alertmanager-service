@@ -1,28 +1,11 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.netflow.codecs;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
 import com.google.inject.assistedinject.Assisted;
 import com.google.protobuf.InvalidProtocolBufferException;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
-import io.netty.buffer.Unpooled;
 import com.synectiks.process.common.plugins.netflow.flows.FlowException;
 import com.synectiks.process.common.plugins.netflow.flows.NetFlowFormatter;
 import com.synectiks.process.common.plugins.netflow.v5.NetFlowV5Packet;
@@ -49,6 +32,11 @@ import com.synectiks.process.server.plugin.inputs.codecs.MultiMessageCodec;
 import com.synectiks.process.server.plugin.inputs.transports.NettyTransport;
 import com.synectiks.process.server.plugin.journal.RawMessage;
 import com.synectiks.process.server.shared.utilities.ExceptionUtils;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.buffer.Unpooled;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,32 +1,20 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.views.migrations;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoCollection;
-import org.bson.Document;
-import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
+import com.synectiks.process.common.plugins.views.migrations.V20200409083200_RemoveRootQueriesFromMigratedDashboards;
 import com.synectiks.process.common.testing.mongodb.MongoDBFixtures;
 import com.synectiks.process.common.testing.mongodb.MongoDBInstance;
 import com.synectiks.process.server.migrations.Migration;
 import com.synectiks.process.server.plugin.cluster.ClusterConfigService;
 import com.synectiks.process.server.shared.bindings.providers.ObjectMapperProvider;
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Rule;
@@ -42,8 +30,8 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import static com.mongodb.client.model.Filters.eq;
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.synectiks.process.common.plugins.views.migrations.V20200409083200_RemoveRootQueriesFromMigratedDashboards.MigrationCompleted;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -107,8 +95,8 @@ public class V20200409083200_RemoveRootQueriesFromMigratedDashboardsTest {
         assertThat(rootQueryStrings("5dad673d6131be4f08ceea77")).allMatch(String::isEmpty);
         assertThat(rootQueryStrings("5dbbf604799412036075d78f")).allMatch(String::isEmpty);
 
-        assertThat(rootQueryStrings("5da9bbb944300ca38bc5da3e")).containsExactlyInAnyOrder("author:\"$author$\" AND project:\"graylog2-server\"", "author:\"$author$\"");
-        assertThat(rootQueryStrings("5da9bbba12993f3904b41217")).containsExactlyInAnyOrder("author:\"$author$\" AND project:\"graylog2-server\"", "author:\"$author$\"");
+        assertThat(rootQueryStrings("5da9bbb944300ca38bc5da3e")).containsExactlyInAnyOrder("author:\"$author$\" AND project:\"perfmanager2-server\"", "author:\"$author$\"");
+        assertThat(rootQueryStrings("5da9bbba12993f3904b41217")).containsExactlyInAnyOrder("author:\"$author$\" AND project:\"perfmanager2-server\"", "author:\"$author$\"");
     }
 
     private MongoCollection<Document> afterSearchesCollection() {

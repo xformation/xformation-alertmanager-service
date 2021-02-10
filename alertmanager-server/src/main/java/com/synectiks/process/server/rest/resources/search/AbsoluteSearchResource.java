@@ -1,29 +1,8 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.search;
 
 import com.codahale.metrics.annotation.Timed;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.glassfish.jersey.server.ChunkedOutput;
 import com.synectiks.process.server.decorators.DecoratorProcessor;
 import com.synectiks.process.server.indexer.results.ScrollResult;
 import com.synectiks.process.server.indexer.searches.Searches;
@@ -36,6 +15,14 @@ import com.synectiks.process.server.plugin.indexer.searches.timeranges.TimeRange
 import com.synectiks.process.server.rest.MoreMediaTypes;
 import com.synectiks.process.server.rest.resources.search.responses.SearchResponse;
 import com.synectiks.process.server.shared.security.RestPermissions;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.glassfish.jersey.server.ChunkedOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -164,7 +151,7 @@ public class AbsoluteSearchResource extends SearchResource {
             @ApiParam(name = "fields", value = "Comma separated list of fields to return", required = true)
             @QueryParam("fields") @NotEmpty String fields) {
         checkSearchPermission(filter, RestPermissions.SEARCHES_ABSOLUTE);
-        final String filename = "graylog-search-result-absolute-" + from + "-" + to + ".csv";
+        final String filename = "perfmanager-search-result-absolute-" + from + "-" + to + ".csv";
         return Response
             .ok(searchAbsoluteChunked(query, from, to, limit, offset, batchSize, filter, fields))
             .header("Content-Disposition", "attachment; filename=" + filename)

@@ -1,29 +1,16 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.pipelineprocessor.functions.dates.periods;
+
+import static com.synectiks.process.common.plugins.pipelineprocessor.ast.functions.ParameterDescriptor.object;
+
+import org.joda.time.Period;
 
 import com.synectiks.process.common.plugins.pipelineprocessor.EvaluationContext;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.functions.AbstractFunction;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.functions.FunctionArgs;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.functions.FunctionDescriptor;
 import com.synectiks.process.common.plugins.pipelineprocessor.ast.functions.ParameterDescriptor;
-import org.joda.time.Period;
-
-import static com.synectiks.process.common.plugins.pipelineprocessor.ast.functions.ParameterDescriptor.object;
 
 public class IsPeriod extends AbstractFunction<Boolean> {
     public static final String NAME = "is_period";

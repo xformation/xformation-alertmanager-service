@@ -1,27 +1,11 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.bindings;
 
 import com.floreysoft.jmte.Engine;
 import com.google.inject.Scopes;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.multibindings.Multibinder;
-import org.apache.shiro.mgt.DefaultSecurityManager;
-import org.glassfish.grizzly.http.server.ErrorPageGenerator;
 import com.synectiks.process.server.Configuration;
 import com.synectiks.process.server.alerts.AlertSender;
 import com.synectiks.process.server.alerts.EmailRecipients;
@@ -86,6 +70,9 @@ import com.synectiks.process.server.users.RoleService;
 import com.synectiks.process.server.users.RoleServiceImpl;
 import com.synectiks.process.server.users.StartPageCleanupListener;
 import com.synectiks.process.server.users.UserImpl;
+
+import org.apache.shiro.mgt.DefaultSecurityManager;
+import org.glassfish.grizzly.http.server.ErrorPageGenerator;
 
 import javax.ws.rs.container.DynamicFeature;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -165,6 +152,8 @@ public class ServerBindings extends Graylog2Module {
 
         registerRestControllerPackage("com.synectiks.process.server.rest.resources");
         registerRestControllerPackage("com.synectiks.process.server.shared.rest.resources");
+        // Register Xformation rest controller
+        registerRestControllerPackage("com.synectiks.process.server.xformation.rest");
     }
 
     private void bindInterfaces() {

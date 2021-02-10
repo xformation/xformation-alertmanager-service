@@ -1,27 +1,8 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.rest.resources.cluster;
 
 import com.codahale.metrics.annotation.Timed;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.synectiks.process.server.audit.jersey.NoAuditEvent;
 import com.synectiks.process.server.cluster.Node;
 import com.synectiks.process.server.cluster.NodeNotFoundException;
@@ -30,6 +11,12 @@ import com.synectiks.process.server.rest.RemoteInterfaceProvider;
 import com.synectiks.process.server.shared.rest.resources.ProxiedResource;
 import com.synectiks.process.server.shared.rest.resources.system.RemoteLoadBalancerStatusResource;
 import com.synectiks.process.server.shared.security.RestPermissions;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Response;
@@ -68,7 +55,7 @@ public class ClusterLoadBalancerStatusResource extends ProxiedResource {
     @Timed
     @RequiresAuthentication
     @RequiresPermissions(RestPermissions.LBSTATUS_CHANGE)
-    @ApiOperation(value = "Override load balancer status of this graylog-server node. Next lifecycle " +
+    @ApiOperation(value = "Override load balancer status of this perfmanager-server node. Next lifecycle " +
             "change will override it again to its default. Set to ALIVE, DEAD, or THROTTLED.")
     @Path("/override/{status}")
     @NoAuditEvent("this is a proxy resource, the audit event will be emitted on the target node")

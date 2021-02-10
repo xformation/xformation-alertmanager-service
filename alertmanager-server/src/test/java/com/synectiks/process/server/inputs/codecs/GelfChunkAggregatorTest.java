@@ -1,28 +1,17 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.server.inputs.codecs;
 
 import com.codahale.metrics.Metric;
 import com.codahale.metrics.MetricFilter;
 import com.codahale.metrics.MetricRegistry;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
+import com.synectiks.process.server.inputs.codecs.GelfChunkAggregator;
 import com.synectiks.process.server.plugin.InstantMillisProvider;
 import com.synectiks.process.server.plugin.inputs.codecs.CodecAggregator;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;
@@ -37,7 +26,6 @@ import org.mockito.junit.MockitoRule;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static com.synectiks.process.server.inputs.codecs.GelfChunkAggregator.CHUNK_COUNTER;
 import static com.synectiks.process.server.inputs.codecs.GelfChunkAggregator.COMPLETE_MESSAGES;
 import static com.synectiks.process.server.inputs.codecs.GelfChunkAggregator.ChunkEntry;
@@ -45,6 +33,7 @@ import static com.synectiks.process.server.inputs.codecs.GelfChunkAggregator.DUP
 import static com.synectiks.process.server.inputs.codecs.GelfChunkAggregator.EXPIRED_CHUNKS;
 import static com.synectiks.process.server.inputs.codecs.GelfChunkAggregator.EXPIRED_MESSAGES;
 import static com.synectiks.process.server.inputs.codecs.GelfChunkAggregator.WAITING_MESSAGES;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;

@@ -1,19 +1,5 @@
 /*
- * Copyright (C) 2020 Graylog, Inc.
- *
- 
- * it under the terms of the Server Side Public License, version 1,
- * as published by MongoDB, Inc.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * Server Side Public License for more details.
- *
- * You should have received a copy of the Server Side Public License
- * along with this program. If not, see
- * <http://www.mongodb.com/licensing/server-side-public-license>.
- */
+ * */
 package com.synectiks.process.common.plugins.netflow.codecs;
 
 import com.github.joschi.jadconfig.util.Size;
@@ -21,13 +7,15 @@ import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.RemovalListener;
 import com.google.protobuf.ByteString;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufUtil;
-import io.netty.buffer.Unpooled;
 import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Journal;
 import com.synectiks.process.common.plugins.netflow.v9.NetFlowV9Parser;
 import com.synectiks.process.common.plugins.netflow.v9.RawNetFlowV9Packet;
 import com.synectiks.process.server.shared.utilities.ExceptionUtils;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufUtil;
+import io.netty.buffer.Unpooled;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
