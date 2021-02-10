@@ -105,9 +105,9 @@ public abstract class IndexFieldTypePollerIT extends ElasticsearchBaseTest {
                 FieldTypeDTO.create("http_status", "keyword"),
                 FieldTypeDTO.create("http_response_time", "long"),
                 FieldTypeDTO.create("timestamp", "date"),
-                FieldTypeDTO.create("xfperf_receive_timestamp", "date"),
-                FieldTypeDTO.create("xfperf_processing_timestamp", "date"),
-                FieldTypeDTO.create("xfperf_accounted_message_size", "long"),
+                FieldTypeDTO.create("xfalert_receive_timestamp", "date"),
+                FieldTypeDTO.create("xfalert_processing_timestamp", "date"),
+                FieldTypeDTO.create("xfalert_accounted_message_size", "long"),
                 FieldTypeDTO.create("streams", "keyword")
         );
     }
@@ -129,9 +129,9 @@ public abstract class IndexFieldTypePollerIT extends ElasticsearchBaseTest {
                 FieldTypeDTO.create("http_status", "keyword"),
                 FieldTypeDTO.create("http_response_time", "long"),
                 FieldTypeDTO.create("timestamp", "date"),
-                FieldTypeDTO.create("xfperf_receive_timestamp", "date"),
-                FieldTypeDTO.create("xfperf_processing_timestamp", "date"),
-                FieldTypeDTO.create("xfperf_accounted_message_size", "long"),
+                FieldTypeDTO.create("xfalert_receive_timestamp", "date"),
+                FieldTypeDTO.create("xfalert_processing_timestamp", "date"),
+                FieldTypeDTO.create("xfalert_accounted_message_size", "long"),
                 FieldTypeDTO.create("streams", "keyword")
         );
     }

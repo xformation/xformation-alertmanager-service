@@ -168,7 +168,7 @@ public abstract class ElasticsearchExportBackendITBase extends ElasticsearchBase
         Set<String> allFieldsInResult = actualFieldNamesFrom(totalResult);
 
         assertThat(allFieldsInResult).containsExactlyInAnyOrder(
-                "xfperf_message_id",
+                "xfalert_message_id",
                 "source",
                 "message",
                 "timestamp",

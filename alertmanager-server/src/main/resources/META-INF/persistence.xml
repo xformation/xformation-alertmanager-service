@@ -17,6 +17,7 @@
 		            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 		            <property name="eclipselink.logging.level" value="FINE"/>
 		            <property name="eclipselink.logging.parameters" value="true"/>
+		            
              	</properties>
              </persistence-unit>
 </persistence>
