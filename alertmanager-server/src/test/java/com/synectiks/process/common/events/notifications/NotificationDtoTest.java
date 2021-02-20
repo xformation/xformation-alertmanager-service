@@ -32,11 +32,11 @@ public class NotificationDtoTest {
                 .title("Foobar")
                 .description("")
                 .config(EmailEventNotificationConfig.Builder.create()
-                        .sender("foo@perfmanager.org")
+                        .sender("foo@alertmanager.org")
                         .subject("foo")
                         .bodyTemplate("bar")
                         .htmlBodyTemplate("baz")
-                        .emailRecipients(Sets.newHashSet("foo@perfmanager.org"))
+                        .emailRecipients(Sets.newHashSet("foo@alertmanager.org"))
                         .build())
                 .build();
     }

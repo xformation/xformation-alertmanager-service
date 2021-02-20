@@ -69,22 +69,22 @@ public class V20190705071400_AddEventIndexSetsMigration extends Migration {
     @Override
     public void upgrade() {
         ensureEventsStreamAndIndexSet(
-                "perfmanager Events",
-                "Stores perfmanager events.",
+                "alertmanager Events",
+                "Stores alertmanager events.",
                 elasticsearchConfiguration.getDefaultEventsIndexPrefix(),
                 ElasticsearchConfiguration.DEFAULT_EVENTS_INDEX_PREFIX,
                 Stream.DEFAULT_EVENTS_STREAM_ID,
                 "All events",
-                "Stream containing all events created by perfmanager"
+                "Stream containing all events created by alertmanager"
         );
         ensureEventsStreamAndIndexSet(
-                "perfmanager System Events",
-                "Stores perfmanager system events.",
+                "alertmanager System Events",
+                "Stores alertmanager system events.",
                 elasticsearchConfiguration.getDefaultSystemEventsIndexPrefix(),
                 ElasticsearchConfiguration.DEFAULT_SYSTEM_EVENTS_INDEX_PREFIX,
                 Stream.DEFAULT_SYSTEM_EVENTS_STREAM_ID,
                 "All system events",
-                "Stream containing all system events created by perfmanager"
+                "Stream containing all system events created by alertmanager"
         );
     }
 

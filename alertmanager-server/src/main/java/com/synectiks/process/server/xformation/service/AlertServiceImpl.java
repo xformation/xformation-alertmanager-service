@@ -47,7 +47,7 @@ public class AlertServiceImpl implements AlertService {
 	@Override
 	public Alert getAlert(Long alertId) {
 		LOG.info("Start service getAlert(Long alertId)");
-		String query = "select a from Alert a where a.id =: alertId";
+		String query = "select a from Alert a where a.id = :alertId";
 		Alert alert = entityManager.createQuery(query, Alert.class).setParameter("alertId", alertId).getSingleResult();
 		LOG.debug("Alert: " + alert.toString());
 		LOG.info("Start service getAlert(Long alertId)");
@@ -57,7 +57,7 @@ public class AlertServiceImpl implements AlertService {
 	@Override
 	public Alert getAlert(String guid) {
 		LOG.info("Start service getAlert(String guid)");
-		String query = "select a from Alert a where a.guid =: guid";
+		String query = "select a from Alert a where a.guid = :guid";
 		Alert alert = entityManager.createQuery(query, Alert.class).setParameter("guid", guid).getSingleResult();
 		LOG.debug("Alert: " + alert.toString());
 		LOG.info("Start service getAlert(String guid)");

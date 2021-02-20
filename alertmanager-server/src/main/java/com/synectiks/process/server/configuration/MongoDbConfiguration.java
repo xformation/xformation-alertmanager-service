@@ -18,7 +18,7 @@ public class MongoDbConfiguration {
     private int threadsAllowedToBlockMultiplier = 5;
 
     @Parameter(value = "mongodb_uri", required = true, validator = StringNotBlankValidator.class)
-    private String uri = "mongodb://localhost/perfmanager";
+    private String uri = "mongodb://localhost/alertmanager";
 
 
     public int getMaxConnections() {

@@ -20,7 +20,7 @@ import bindings from './bindings';
 
 jest.mock('util/AppConfig', () => ({
   xfalertServerUrl: () => 'localhost:9000/api/',
-  xfalertAppPathPrefix: jest.fn(() => '/xfperf/'),
+  xfalertAppPathPrefix: jest.fn(() => '/xfalert/'),
 }));
 
 describe('bindings.routes', () => {

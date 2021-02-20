@@ -79,7 +79,7 @@ public class Message implements Messages, Indexable {
     public static final String FIELD_STREAMS = "streams";
 
     /**
-     * perfmanager is writing internal metadata to messages using this field prefix. Users must not use this prefix for
+     * alertmanager is writing internal metadata to messages using this field prefix. Users must not use this prefix for
      * custom message fields.
      */
     public static final String INTERNAL_FIELD_PREFIX = "xfalert_";

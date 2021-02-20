@@ -36,8 +36,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RequiresAuthentication
-@Api(value = "Xformation/Alerts", description = "Manage all xformation alerts")
-@Path("/xformation/alerts")
+@Api(value = "Xformation/Alert", description = "Manage all xformation alerts")
+@Path("/xformation/alert")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class AlertController extends RestResource {
@@ -55,20 +55,20 @@ public class AlertController extends RestResource {
     }
     
     @GET
-    @Path("/{alertId}")
-    @ApiOperation("Get an alert on alert id")
-    public Alert getAlert(@ApiParam(name = "alertId") @PathParam("alertId") @NotBlank Long alertId) {
-    	LOG.info("Start controller getAlert. Alert id: "+alertId);
+    @Path("/{id}")
+    @ApiOperation("Get an alert for a given alert id")
+    public Alert getAlert(@ApiParam(name = "id") @PathParam("id") @NotBlank Long id) {
+    	LOG.info("Start controller getAlert. Alert id: "+id);
 //        checkPermission(RestPermissions.EVENT_NOTIFICATIONS_READ, alertId);
     	AlertService cs = GuiceInjectorHolder.getInjector().getInstance(AlertService.class);
-    	Alert alert = cs.getAlert(alertId);
-    	LOG.info("End controller getAlert. Alert id: "+alertId);
+    	Alert alert = cs.getAlert(id);
+    	LOG.info("End controller getAlert. Alert id: "+id);
     	return alert;
     }
     
     @GET
     @Path("/{guid}")
-    @ApiOperation("Get an alert on guid")
+    @ApiOperation("Get an alert for a given guid")
     public Alert getAlert(@ApiParam(name = "guid") @PathParam("guid") @NotBlank String guid) {
     	LOG.info("Start controller getAlert. Alert guid: "+guid);
     	AlertService cs = GuiceInjectorHolder.getInjector().getInstance(AlertService.class);

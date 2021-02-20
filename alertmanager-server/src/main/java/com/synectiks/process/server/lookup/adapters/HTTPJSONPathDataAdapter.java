@@ -273,7 +273,7 @@ public class HTTPJSONPathDataAdapter extends LookupDataAdapter {
                     .type(NAME)
                     .url("")
                     .singleValueJSONPath("$.value")
-                    .userAgent("perfmanager Lookup - https://www.perfmanager.org/")
+                    .userAgent("alertmanager Lookup - https://www.alertmanager.org/")
                     .headers(Collections.emptyMap())
                     .build();
         }

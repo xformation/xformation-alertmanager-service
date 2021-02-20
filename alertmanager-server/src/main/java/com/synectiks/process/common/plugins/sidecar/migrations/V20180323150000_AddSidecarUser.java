@@ -47,7 +47,7 @@ public class V20180323150000_AddSidecarUser extends Migration {
                 sidecarUser,
                 UUID.randomUUID().toString(),
                 "Sidecar System User (built-in)",
-                "sidecar@perfmanager.local",
+                "sidecar@alertmanager.local",
                 Sets.newHashSet(
                         roleId,
                         roleService.getReaderRoleObjectId()));

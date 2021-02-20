@@ -196,7 +196,7 @@ public class CSVFileDataAdapter extends LookupDataAdapter {
         public Config defaultConfiguration() {
             return Config.builder()
                     .type(NAME)
-                    .path("/opt/perfmanager/lookup-table.csv")
+                    .path("/opt/alertmanager/lookup-table.csv")
                     .separator(",")
                     .quotechar("\"")
                     .keyColumn("key")

@@ -38,7 +38,7 @@ public class GRNRegistry {
     }
 
     /**
-     * Returns a registry that has been initialized with the builtin perfmanager GRN types.
+     * Returns a registry that has been initialized with the builtin alertmanager GRN types.
      *
      * @return the registry
      */
