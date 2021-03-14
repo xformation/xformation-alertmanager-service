@@ -84,10 +84,10 @@ public class ElasticsearchConfiguration {
     private Duration indexFieldTypePeriodicalInterval = Duration.hours(1L);
 
     @Parameter(value = DEFAULT_EVENTS_INDEX_PREFIX, validators = StringNotBlankValidator.class)
-    private String defaultEventsIndexPrefix = "gl-events";
+    private String defaultEventsIndexPrefix = "xfalert-events";
 
     @Parameter(value = DEFAULT_SYSTEM_EVENTS_INDEX_PREFIX, validators = StringNotBlankValidator.class)
-    private String defaultSystemEventsIndexPrefix = "gl-system-events";
+    private String defaultSystemEventsIndexPrefix = "xfalert-system-events";
 
     public boolean isDisableVersionCheck() {
         return disableVersionCheck;

@@ -666,12 +666,12 @@ proxied_requests_thread_pool_size = 32
 #processing_status_journal_write_rate_threshold = 1
 
 # Configures the prefix used for alertmanager event indices
-# Default: gl-events
-#default_events_index_prefix = gl-events
+# Default: xfalert-events
+#default_events_index_prefix = xfalert-events
 
 # Configures the prefix used for alertmanager system event indices
-# Default: gl-system-events
-#default_system_events_index_prefix = gl-system-events
+# Default: xfalert-system-events
+#default_system_events_index_prefix = xfalert-system-events
 
 # Automatically load content packs in "content_packs_dir" on the first start of Alertmanager.
 #content_packs_loader_enabled = false

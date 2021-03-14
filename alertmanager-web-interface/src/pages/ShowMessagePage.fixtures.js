@@ -126,7 +126,7 @@ export const event = {
     fields: { ssh_target: '10.0.0.82' },
     timestamp: '2019-07-17T09:50:12.886Z',
   },
-  index: 'gl-events_0',
+  index: 'xfalert-events_0',
   stream_ids: [],
   highlight_ranges: {},
 };

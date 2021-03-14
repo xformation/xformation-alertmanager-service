@@ -8,6 +8,7 @@
         <module>alertmanager-plugin-archetype</module>
         <module>alertmanager-storage-elasticsearch6</module>
         <module>alertmanager-storage-elasticsearch7</module>
+        <!-- <module>alertmanager-storage-postgresdb</module> -->
         <module>alertmanager-distribution</module>
     </modules>
 

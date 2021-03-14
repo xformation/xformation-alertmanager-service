@@ -67,6 +67,11 @@
                 <artifactId>alertmanager-storage-elasticsearch7</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <!-- <dependency>
+                <groupId>com.synectiks.alertmanager</groupId>
+                <artifactId>alertmanager-storage-postgresdb</artifactId>
+                <version>${project.version}</version>
+            </dependency> -->
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -80,5 +85,10 @@
             <artifactId>alertmanager-storage-elasticsearch7</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- <dependency>
+            <groupId>com.synectiks.alertmanager</groupId>
+            <artifactId>alertmanager-storage-postgresdb</artifactId>
+            <version>${project.version}</version>
+        </dependency> -->
     </dependencies>
 </project>

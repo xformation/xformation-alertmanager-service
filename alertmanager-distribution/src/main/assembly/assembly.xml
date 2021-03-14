@@ -66,5 +66,9 @@
             <source>${project.basedir}/../alertmanager-storage-elasticsearch7/target/alertmanager-storage-elasticsearch7-${project.version}.jar</source>
             <outputDirectory>plugin/</outputDirectory>
         </file>
+        <!-- <file>
+            <source>${project.basedir}/../alertmanager-storage-postgresdb/target/alertmanager-storage-postgresdb-${project.version}.jar</source>
+            <outputDirectory>plugin/</outputDirectory>
+        </file> -->
     </files>
 </assembly>

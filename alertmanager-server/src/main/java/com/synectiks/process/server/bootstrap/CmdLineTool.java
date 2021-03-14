@@ -66,7 +66,6 @@ import com.synectiks.process.server.shared.plugins.PluginLoader;
 import com.synectiks.process.server.shared.utilities.ExceptionUtils;
 import com.synectiks.process.server.storage.UnsupportedElasticsearchException;
 import com.synectiks.process.server.storage.versionprobe.ElasticsearchProbeException;
-import com.synectiks.process.server.xformation.module.PostGsJpaModule;
 
 import io.netty.util.internal.logging.InternalLoggerFactory;
 import io.netty.util.internal.logging.Slf4JLoggerFactory;
@@ -78,7 +77,7 @@ public abstract class CmdLineTool implements CliCommand {
     }
 
     private static final Logger LOG = LoggerFactory.getLogger(CmdLineTool.class);
-
+    
     protected static final Version version = Version.CURRENT_CLASSPATH;
     protected static final String FILE_SEPARATOR = System.getProperty("file.separator");
     protected static final String TMPDIR = System.getProperty("java.io.tmpdir", "/tmp");
@@ -268,8 +267,11 @@ public abstract class CmdLineTool implements CliCommand {
         final Set<Plugin> plugins = loadPlugins(pluginPath, classLoader);
         final PluginBindings pluginBindings = new PluginBindings(plugins);
         for (final Plugin plugin : plugins) {
+        	System.out.println("PLUGIN :::: "+plugin.getClass().getName());
             for (final PluginModule pluginModule : plugin.modules()) {
+            	System.out.println("PLUGIN MODULES :::: "+pluginModule.getClass().getName());
                 for (final PluginConfigBean configBean : pluginModule.getConfigBeans()) {
+                	System.out.println("PLUGIN MODULES CONFIGBEAN:::: "+configBean.getClass().getName());
                     jadConfig.addConfigurationBean(configBean);
                 }
             }
@@ -290,8 +292,10 @@ public abstract class CmdLineTool implements CliCommand {
 
         final PluginLoader pluginLoader = new PluginLoader(pluginPath.toFile(), chainingClassLoader);
         for (Plugin plugin : pluginLoader.loadPlugins()) {
+        	LOG.info("Check plugin: {}", plugin);
             final PluginMetaData metadata = plugin.metadata();
             if (capabilities().containsAll(metadata.getRequiredCapabilities())) {
+            	LOG.info("Capabilities check plugin: {}", plugin);
                 if (version.sameOrHigher(metadata.getRequiredVersion())) {
                     LOG.info("Loaded plugin: {}", plugin);
                     plugins.add(plugin);
@@ -299,7 +303,7 @@ public abstract class CmdLineTool implements CliCommand {
                     LOG.error("Plugin \"" + metadata.getName() + "\" requires version " + metadata.getRequiredVersion() + " - not loading!");
                 }
             } else {
-                LOG.debug("Skipping plugin \"{}\" because some capabilities are missing ({}).",
+                LOG.warn("Skipping plugin \"{}\" because some capabilities are missing ({}).",
                         metadata.getName(),
                         Sets.difference(plugin.metadata().getRequiredCapabilities(), capabilities()));
             }
@@ -373,14 +377,7 @@ public abstract class CmdLineTool implements CliCommand {
                     binder.bind(String.class).annotatedWith(Names.named("BootstrapCommand")).toInstance(commandName);
                 }
             });
-            modules.add(new PostGsJpaModule());
-//            modules.add(new Module() {
-//                @Override
-//                public void configure(Binder binder) {
-//                    binder.bind(CollectorController.class);
-//                }
-//            },new JpaPersistModule("db_manager"));
-            
+//            modules.add(new PostGsJpaModule());
             return GuiceInjectorHolder.createInjector(modules.build());
         } catch (CreationException e) {
             annotateInjectorCreationException(e);
