@@ -79,12 +79,24 @@ public class MessagesAdapterES6 implements MessagesAdapter {
         if (!result.isSucceeded()) {
             throw new DocumentNotFoundException(index, messageId);
         }
-
+//        new io.searchbox.core.Index.Builder(result).index(index).id(messageId).build()
         @SuppressWarnings("unchecked") final Map<String, Object> message = (Map<String, Object>) result.getSourceAsObject(Map.class, false);
 
         return ResultMessage.parseFromSource(result.getId(), result.getIndex(), message);
     }
 
+    @Override
+    public ResultMessage updateDocument(Object msg, String indexName, String documentId) throws IOException, DocumentNotFoundException {
+    	Index index = new Index.Builder(msg).index(indexName).type(IndexMapping.TYPE_MESSAGE).id(documentId).build();
+    	final DocumentResult result = client.execute(index);
+    	
+        if (!result.isSucceeded()) {
+            throw new DocumentNotFoundException(indexName, documentId);
+        }
+        @SuppressWarnings("unchecked") final Map<String, Object> message = (Map<String, Object>) result.getSourceAsObject(Map.class, false);
+        return ResultMessage.parseFromSource(result.getId(), result.getIndex(), message);
+    }
+    
     @Override
     public List<String> analyze(String toAnalyze, String index, String analyzer) throws IOException {
         final Analyze analyze = new Analyze.Builder().index(index).analyzer(analyzer).text(toAnalyze).build();

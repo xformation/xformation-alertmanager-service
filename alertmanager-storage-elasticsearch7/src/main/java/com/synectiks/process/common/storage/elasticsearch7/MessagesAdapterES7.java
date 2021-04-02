@@ -3,33 +3,8 @@
  */
 package com.synectiks.process.common.storage.elasticsearch7;
 
-import com.codahale.metrics.Meter;
-import com.codahale.metrics.MetricRegistry;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Iterables;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.ElasticsearchException;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.bulk.BulkItemResponse;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.bulk.BulkRequest;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.bulk.BulkResponse;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.get.GetRequest;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.get.GetResponse;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.index.IndexRequest;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.AnalyzeRequest;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.AnalyzeResponse;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.common.xcontent.XContentType;
-import org.graylog.shaded.elasticsearch7.org.elasticsearch.rest.RestStatus;
-import com.synectiks.process.server.indexer.messages.ChunkedBulkIndexer;
-import com.synectiks.process.server.indexer.messages.DocumentNotFoundException;
-import com.synectiks.process.server.indexer.messages.Indexable;
-import com.synectiks.process.server.indexer.messages.IndexingRequest;
-import com.synectiks.process.server.indexer.messages.Messages;
-import com.synectiks.process.server.indexer.messages.MessagesAdapter;
-import com.synectiks.process.server.indexer.results.ResultMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.codahale.metrics.MetricRegistry.name;
 
-import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,7 +15,38 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.codahale.metrics.MetricRegistry.name;
+import javax.inject.Inject;
+
+import org.dom4j.io.DocumentResult;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.ElasticsearchException;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.bulk.BulkItemResponse;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.bulk.BulkRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.bulk.BulkResponse;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.get.GetRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.get.GetResponse;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.index.IndexRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.update.UpdateRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.update.UpdateResponse;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.AnalyzeRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.AnalyzeResponse;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.common.xcontent.XContentType;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.rest.RestStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.codahale.metrics.Meter;
+import com.codahale.metrics.MetricRegistry;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Iterables;
+import com.synectiks.process.server.indexer.IndexMapping;
+import com.synectiks.process.server.indexer.messages.ChunkedBulkIndexer;
+import com.synectiks.process.server.indexer.messages.DocumentNotFoundException;
+import com.synectiks.process.server.indexer.messages.Indexable;
+import com.synectiks.process.server.indexer.messages.IndexingRequest;
+import com.synectiks.process.server.indexer.messages.Messages;
+import com.synectiks.process.server.indexer.messages.MessagesAdapter;
+import com.synectiks.process.server.indexer.results.ResultMessage;
 
 public class MessagesAdapterES7 implements MessagesAdapter {
     private static final Logger LOG = LoggerFactory.getLogger(MessagesAdapterES7.class);
@@ -76,6 +82,14 @@ public class MessagesAdapterES7 implements MessagesAdapter {
         return ResultMessage.parseFromSource(messageId, index, result.getSource());
     }
 
+    @Override
+    public ResultMessage updateDocument(Object msg, String indexName, String documentId) throws IOException, DocumentNotFoundException {
+    	UpdateRequest updateRequest = new UpdateRequest(indexName, documentId).doc(msg);
+    	UpdateResponse result = this.client.execute((c, requestOptions) -> c.update(updateRequest, requestOptions));
+    	result.setForcedRefresh(true);
+        return get(documentId, indexName);
+    }
+    
     @Override
     public List<String> analyze(String toAnalyze, String index, String analyzer) {
         final AnalyzeRequest analyzeRequest = AnalyzeRequest.withIndexAnalyzer(index, analyzer, toAnalyze);

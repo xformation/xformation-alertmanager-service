@@ -61,7 +61,7 @@ export const input = {
   name: 'Syslog UDP',
   content_pack: null,
   created_at: '2019-07-15T07:25:12.397Z',
-  type: 'org.graylog2.inputs.syslog.udp.SyslogUDPInput',
+  type: 'com.synectiks.process.server.inputs.syslog.udp.SyslogUDPInput',
   creator_user_id: 'admin',
   attributes: {
     expand_structured_data: false,
