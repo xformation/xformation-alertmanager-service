@@ -14,5 +14,5 @@ public interface MessagesAdapter {
 
     List<Messages.IndexingError> bulkIndex(final List<IndexingRequest> messageList) throws IOException;
     
-    ResultMessage updateDocument(Object msg, String indexName, String documentId) throws IOException, DocumentNotFoundException;
+    ResultMessage updateDocument(String status, String indexName, String documentId) throws IOException, DocumentNotFoundException;
 }

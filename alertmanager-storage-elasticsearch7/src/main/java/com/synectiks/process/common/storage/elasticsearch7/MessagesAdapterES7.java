@@ -29,6 +29,7 @@ import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.update.UpdateR
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.update.UpdateResponse;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.AnalyzeRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.AnalyzeResponse;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.CreateIndexRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.common.xcontent.XContentType;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.rest.RestStatus;
 import org.slf4j.Logger;
@@ -37,7 +38,9 @@ import org.slf4j.LoggerFactory;
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Iterables;
 import com.synectiks.process.server.indexer.IndexMapping;
 import com.synectiks.process.server.indexer.messages.ChunkedBulkIndexer;
@@ -83,11 +86,26 @@ public class MessagesAdapterES7 implements MessagesAdapter {
     }
 
     @Override
-    public ResultMessage updateDocument(Object msg, String indexName, String documentId) throws IOException, DocumentNotFoundException {
-    	UpdateRequest updateRequest = new UpdateRequest(indexName, documentId).doc(msg);
-    	UpdateResponse result = this.client.execute((c, requestOptions) -> c.update(updateRequest, requestOptions));
-    	result.setForcedRefresh(true);
-        return get(documentId, indexName);
+    public ResultMessage updateDocument(String status, String indexName, String documentId) throws IOException, DocumentNotFoundException {
+    	LOG.info("Updating a document: ");
+    	final GetRequest getRequest = new GetRequest(indexName, documentId);
+    	final GetResponse result = this.client.execute((c, requestOptions) -> c.get(getRequest, requestOptions));
+    	LOG.info("Index: "+indexName+", Document id: "+ documentId+", status: "+status);
+    	
+    	Map<String, Object> objMap = result.getSource();
+    	String strObj = objectMapper.writeValueAsString(result.getSource());
+    	JsonNode jn = objectMapper.readValue(strObj.getBytes(), JsonNode.class);
+    	
+    	String src = jn.get("message").asText();
+    	src = src.replaceAll("New",status);
+
+    	ObjectNode on = ((ObjectNode)jn).put("message", src);
+    	
+    	UpdateRequest updateRequest = new UpdateRequest(indexName, documentId).doc(on.toString(), XContentType.JSON);
+    	UpdateResponse updateResponse = this.client.execute((u, reqOptions) -> u.update(updateRequest, reqOptions));
+    	
+    	LOG.info("Document updated successfully: "+updateResponse.status());
+    	return get(documentId, indexName);
     }
     
     @Override

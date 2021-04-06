@@ -3,9 +3,29 @@
  */
 package com.synectiks.process.common.storage.elasticsearch6;
 
+import static com.codahale.metrics.MetricRegistry.name;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.apache.http.client.config.RequestConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Iterables;
 import com.synectiks.process.common.storage.elasticsearch6.jest.JestUtils;
 import com.synectiks.process.server.indexer.IndexMapping;
@@ -16,6 +36,8 @@ import com.synectiks.process.server.indexer.messages.IndexingRequest;
 import com.synectiks.process.server.indexer.messages.Messages;
 import com.synectiks.process.server.indexer.messages.MessagesAdapter;
 import com.synectiks.process.server.indexer.results.ResultMessage;
+import com.synectiks.process.server.plugin.Message;
+import com.synectiks.process.server.plugin.Tools;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
@@ -25,22 +47,6 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Get;
 import io.searchbox.core.Index;
 import io.searchbox.indices.Analyze;
-import org.apache.http.client.config.RequestConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import static com.codahale.metrics.MetricRegistry.name;
 
 public class MessagesAdapterES6 implements MessagesAdapter {
     private static final Logger LOG = LoggerFactory.getLogger(MessagesAdapterES6.class);
@@ -86,15 +92,29 @@ public class MessagesAdapterES6 implements MessagesAdapter {
     }
 
     @Override
-    public ResultMessage updateDocument(Object msg, String indexName, String documentId) throws IOException, DocumentNotFoundException {
-    	Index index = new Index.Builder(msg).index(indexName).type(IndexMapping.TYPE_MESSAGE).id(documentId).build();
+    public ResultMessage updateDocument(String status, String indexName, String documentId) throws IOException, DocumentNotFoundException {
+    	LOG.info("Updating a document: ");
+    	
+    	final Get get = new Get.Builder(indexName, documentId).type(IndexMapping.TYPE_MESSAGE).build();
+        final DocumentResult dr = client.execute(get);
+        
+    	LOG.info("Index: "+indexName+", Document id: "+ documentId+", status: "+status);
+    	
+    	JsonNode jn = dr.getJsonObject();
+    	String src = jn.findValue("_source").get("message").asText();
+    	src = src.replaceAll("New",status);
+
+    	ObjectNode on = ((ObjectNode)jn.findValue("_source")).put("message", src);
+    	
+    	Index index = new Index.Builder(on).index(indexName).type(IndexMapping.TYPE_MESSAGE).id(documentId).build();
     	final DocumentResult result = client.execute(index);
     	
         if (!result.isSucceeded()) {
+        	LOG.error("Document update failed.");
             throw new DocumentNotFoundException(indexName, documentId);
         }
-        @SuppressWarnings("unchecked") final Map<String, Object> message = (Map<String, Object>) result.getSourceAsObject(Map.class, false);
-        return ResultMessage.parseFromSource(result.getId(), result.getIndex(), message);
+        LOG.info("Document updated successfully: "+result.isSucceeded() );
+        return get(documentId, indexName);
     }
     
     @Override
