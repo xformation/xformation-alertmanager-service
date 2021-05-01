@@ -102,9 +102,23 @@ public class MessagesAdapterES6 implements MessagesAdapter {
     	
     	JsonNode jn = dr.getJsonObject();
     	String src = jn.findValue("_source").get("message").asText();
-    	src = src.replaceAll("New",status);
-
-    	ObjectNode on = ((ObjectNode)jn.findValue("_source")).put("message", src);
+    	LOG.info("Org msg : "+src);
+    	
+    	ObjectMapper om = new ObjectMapper();
+    	String dt = src.substring(0,20);
+    	LOG.info("Org msg date part : "+dt);
+    	
+    	String orgMsgPart = src.substring(20, src.length());
+    	LOG.info("Org msg part : "+orgMsgPart);
+    	ObjectNode msg = (ObjectNode)om.readValue(orgMsgPart.getBytes(),  JsonNode.class);
+    	
+    	msg.put("alert_state", status);
+    	LOG.info("Org msg json after alert state change: "+msg.toString());
+//    	src = src.replaceAll("New",status);
+    	
+    	
+    	ObjectNode on = ((ObjectNode)jn.findValue("_source")).put("message", dt+" "+msg.toString());
+    	LOG.info("Final object node going in elastic : "+on.toString());
     	
     	Index index = new Index.Builder(on).index(indexName).type(IndexMapping.TYPE_MESSAGE).id(documentId).build();
     	final DocumentResult result = client.execute(index);

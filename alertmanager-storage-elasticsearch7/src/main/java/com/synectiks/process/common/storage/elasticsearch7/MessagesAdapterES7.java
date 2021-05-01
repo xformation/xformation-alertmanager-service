@@ -97,9 +97,14 @@ public class MessagesAdapterES7 implements MessagesAdapter {
     	JsonNode jn = objectMapper.readValue(strObj.getBytes(), JsonNode.class);
     	
     	String src = jn.get("message").asText();
-    	src = src.replaceAll("New",status);
-
-    	ObjectNode on = ((ObjectNode)jn).put("message", src);
+    	String dt = src.substring(0,20);
+    	src = src.substring(20);
+    	
+//    	src = src.replaceAll("New",status);
+    	ObjectNode msg = objectMapper.readValue(src.getBytes(), ObjectNode.class);
+    	msg.put("alert_state", status); 
+    	
+    	ObjectNode on = ((ObjectNode)jn).put("message", dt+" "+src);
     	
     	UpdateRequest updateRequest = new UpdateRequest(indexName, documentId).doc(on.toString(), XContentType.JSON);
     	UpdateResponse updateResponse = this.client.execute((u, reqOptions) -> u.update(updateRequest, reqOptions));
