@@ -120,7 +120,7 @@ http_bind_address = 34.199.12.114:7035
 #
 # Default: http://$http_bind_address/
 #http_publish_uri = http://192.168.1.1:9000/
-http_publish_uri = http://100.64.108.25:7035/
+http_publish_uri = http://34.199.12.114:7035/
 
 #### External Alertmanager URI
 #
