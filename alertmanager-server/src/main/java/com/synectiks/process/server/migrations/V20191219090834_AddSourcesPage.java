@@ -54,7 +54,7 @@ public class V20191219090834_AddSourcesPage extends Migration {
             return;
         }
 
-        try {
+        /*try {
             final URL contentPackURL = V20191219090834_AddSourcesPage.class
                     .getResource("V20191219090834_AddSourcesPage_Content_Pack.json");
             final ContentPack contentPack = this.objectMapper.readValue(contentPackURL, ContentPack.class);
@@ -69,7 +69,7 @@ public class V20191219090834_AddSourcesPage extends Migration {
             configService.write(V20191219090834_AddSourcesPage.MigrationCompleted.create(pack.id().toString()));
         } catch (Exception e) {
             throw new RuntimeException("Could not install Source Page Content Pack.", e);
-        }
+        }*/
     }
 
     @JsonAutoDetect
